@@ -24,7 +24,7 @@ import operator
 # Third party modules.
 
 # Local modules.
-from pattern import PN_BASE
+from pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
 
@@ -49,12 +49,20 @@ class _Component(object):
             * :attr:`revision`: two characters revision
             * :attr:`details`: further details/description
             * :attr:`partnumber` or :attr:`pn`: part number (e.g. BR-00001-AA)
+            
             * :attr:`materials`: list of materials
             * :attr:`processes`: list of processes
             * :attr:`fasteners`: list of fasteners
             * :attr:`toolings`: list of toolings
+            
             * :attr:`drawings`: list of drawings (paths of files)
             * :attr:`pictures`: list of pictures (paths of files)
+            
+            * :attr:`parents`: parent assemblies of this component
+            * :attr:`components`: parts or assemblies of this component
+            
+            * :attr:`quantity`: quantity of this component in the whole system
+            * :attr:`unitcost`: cost for one of this component
         
         **Notes**:
         
@@ -62,19 +70,9 @@ class _Component(object):
         """
         # arguments
         self.filepath = filepath
-
-        if len(system_label) != 2:
-            raise ValueError, "The system label (%s) must be two characters." % system_label
         self._system_label = system_label.upper()
-
         self.name = name
-
-        if not self._validate_pn_base(pn_base):
-            raise ValueError, "Invalid part number base (%s)." % pn_base
         self.pn_base = pn_base.upper()
-
-        if len(revision) != 2:
-            raise ValueError, "The revision (%s) must be two characters." % revision
         self.revision = revision.upper()
 
         self.details = details
@@ -82,6 +80,7 @@ class _Component(object):
         # extras
         self._quantity = 0
         self.parents = set()
+        self.components = {}
 
         self.materials = []
         self.processes = []
@@ -91,6 +90,9 @@ class _Component(object):
         self.drawings = []
         self.pictures = []
 
+        # check
+        self._validate_pn()
+
     def __str__(self):
         return self.name
 
@@ -98,7 +100,10 @@ class _Component(object):
         return "<%s '%s'>" % (self.__class__.__name__, self.pn)
 
     def __eq__(self, other):
-        return self.partnumber == other.partnumber
+        return self.pn == other.pn
+
+    def __ne__(self, other):
+        return not self.pn == other.pn
 
     def __cmp__(self, other):
         # system label
@@ -115,7 +120,7 @@ class _Component(object):
 
         # designation
         if self.pn_base[1] != other.pn_base[1]:
-            if self.pn_base[1] == 0:
+            if self.pn_base[1] == '0':
                 return - 1
             else:
                 return cmp(self.pn_base[1] , other.pn_base[1])
@@ -136,8 +141,10 @@ class _Component(object):
     def __hash__(self):
         return hash(self.partnumber)
 
-    def _validate_pn_base(self, pn_base):
-        return bool(PN_BASE.match(pn_base))
+    def _validate_pn(self):
+        return SYS_ASSY_PN.match(self.pn) or \
+                SUB_ASSY_PN.match(self.pn) or \
+                PART_PN.match(self.pn)
 
     @property
     def partnumber(self):
@@ -170,7 +177,18 @@ class _Component(object):
         cost += sum(map(subtotal_getter, self.fasteners))
         cost += sum(map(subtotal_getter, self.toolings))
 
+        for component, quantity in self.components.iteritems():
+            cost += component.unitcost * quantity
+
         return cost
+
+    def get_hierarchy(self):
+        hierarchy = [self]
+
+        for component in sorted(self.components.keys(), reverse=True):
+            hierarchy.extend(component.get_hierarchy())
+
+        return hierarchy
 
 class Part(_Component):
     """
@@ -182,61 +200,4 @@ class Assembly(_Component):
     """
     An assembly.
     """
-
-    def __init__(self, filepath, system_label, name, pn_base, revision, details=''):
-        """
-        Creates a component.
-        
-        :arg system_label: label of the system in which the component is in
-        :arg name: full name
-        :arg pn_base: part number base (e.g. 00001 in BR-00001-AA)
-        :arg revision: two characters revision
-        :arg details: further details/description
-        
-        **Attributes**:
-        
-            * :attr:`name`: full name
-            * :attr:`pn_base`: part number base (e.g. 00001 in BR-00001-AA)
-            * :attr:`revision`: two characters revision
-            * :attr:`details`: further details/description
-            * :attr:`partnumber` or :attr:`pn`: part number (e.g. BR-00001-AA)
-            * :attr:`quantity`: overall quantity of the components
-            * :attr:`materials`: list of materials
-            * :attr:`processes`: list of processes
-            * :attr:`fasteners`: list of fasteners
-            * :attr:`toolings`: list of toolings
-            * :attr:`drawings`: list of drawings (paths of files)
-            * :attr:`pictures`: list of pictures (paths of files)
-            * :attr:`components`: dictionary of this assembly's parts.
-                The keys are the component objects and the values the quantity
-                of each part.
-        
-        **Notes**:
-        
-            * Two components are equal if their part number is equal.
-        """
-        _Component.__init__(self, filepath, system_label, name, pn_base, revision, details)
-
-        # extras
-        self.components = {}
-        self._quantity = 0
-
-    @property
-    def unitcost(self):
-        """
-        Returns the unit cost of the component by adding the subtotal of the
-        materials, processes, fasteners and toolings.
-        """
-        subtotal_getter = operator.attrgetter('subtotal')
-
-        cost = 0.0
-
-        cost += sum(map(subtotal_getter, self.materials))
-        cost += sum(map(subtotal_getter, self.processes))
-        cost += sum(map(subtotal_getter, self.fasteners))
-        cost += sum(map(subtotal_getter, self.toolings))
-
-        for component, quantity in self.components.iteritems():
-            cost += component.unitcost * quantity
-
-        return cost
+    pass

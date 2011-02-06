@@ -57,6 +57,9 @@ class Test_Component(unittest.TestCase):
         self.assertTrue(c1 > c2)
         self.assertTrue(c3 > c1)
         self.assertTrue(c3 > c2)
+        self.assertTrue(c2 < c1)
+        self.assertTrue(c1 < c3)
+        self.assertTrue(c2 < c3)
 
         # category
         c1 = ComponentMock("TM", "00100", "AA")

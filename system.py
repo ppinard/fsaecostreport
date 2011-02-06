@@ -82,6 +82,21 @@ class System(object):
     def clear_components(self):
         self._components = {}
 
+    def get_hierarchy(self):
+        orphans = []
+        for component in self._components.values():
+            if not component.parents:
+                orphans.append(component)
+
+        hierarchy = []
+        for orphan in sorted(orphans, reverse=True):
+            for component in orphan.get_hierarchy():
+                if component not in hierarchy:
+                    hierarchy.append(component)
+
+        return hierarchy
+
+
 BR = System("BR", "Brake System", "A", (153, 204, 255))
 EN = System("EN", "Engine & Drivetrain", "B", (204, 255, 204))
 FR = System("FR", "Frame & Body", "C", (255, 153, 204))
