@@ -101,8 +101,37 @@ class _Component(object):
         return self.partnumber == other.partnumber
 
     def __cmp__(self, other):
-        #TODO: component comparison
-        return cmp(self.partnumber, other.partnumber)
+        # system label
+        c = cmp(self._system_label, other._system_label) * -1
+        if c != 0:
+            return c
+
+        # assembly or part number
+        if self.pn_base[0] != other.pn_base[0]:
+            if self.pn_base[0] == 'A':
+                return 1
+            else:
+                return - 1
+
+        # designation
+        if self.pn_base[1] != other.pn_base[1]:
+            if self.pn_base[1] == 0:
+                return - 1
+            else:
+                return cmp(self.pn_base[1] , other.pn_base[1])
+
+        # category
+        c = cmp(self.pn_base[2], other.pn_base[2])
+        if c != 0:
+            return c
+
+        # counter
+        c = cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
+        if c != 0:
+            return c
+
+        # revision
+        return cmp(self.revision, other.revision)
 
     def __hash__(self):
         return hash(self.partnumber)
