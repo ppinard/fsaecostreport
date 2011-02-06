@@ -386,6 +386,11 @@ class SystemReader(object):
             if not system.has_component(pn):
                 AssemblyReader().read(file, system)
 
+        # check
+        self._check_unread_components(basepath, system)
+        self._check_unread_drawings(basepath, system)
+        self._check_unread_pictures(basepath, system)
+
         return system
 
     def _check_dir_structure(self, system_dir):
@@ -399,6 +404,53 @@ class SystemReader(object):
 
         if not PICTURES_DIR in ls:
             raise ValueError, "Directory 'pictures' is missing from %s" % system_dir
+
+    def _check_unread_components(self, basepath, system):
+        filepath_getter = operator.attrgetter('filepath')
+
+        expected = map(filepath_getter, system._components.values())
+        actual = glob.glob(os.path.join(basepath, COMPONENTS_DIR, "*.csv"))
+
+        diff = set(actual) - set(expected)
+
+        if diff:
+            msg = "The following components were not read:\n"
+            for filepath in diff:
+                msg += "  - %s\n" % filepath
+
+            raise ValueError, msg
+
+    def _check_unread_drawings(self, basepath, system):
+        expected = []
+        for component in system._components.values():
+            expected.extend(component.drawings)
+
+        actual = glob.glob(os.path.join(basepath, DRAWINGS_DIR, "*.pdf"))
+
+        diff = set(actual) - set(expected)
+
+        if diff:
+            msg = "The following drawings were not read:\n"
+            for filepath in diff:
+                msg += "  - %s\n" % filepath
+
+            raise ValueError, msg
+
+    def _check_unread_pictures(self, basepath, system):
+        expected = []
+        for component in system._components.values():
+            expected.extend(component.pictures)
+
+        actual = glob.glob(os.path.join(basepath, PICTURES_DIR, "*.jpg"))
+
+        diff = set(actual) - set(expected)
+
+        if diff:
+            msg = "The following drawings were not read:\n"
+            for filepath in diff:
+                msg += "  - %s\n" % filepath
+
+            raise ValueError, msg
 
     def _find_components(self, components_dir, pattern):
         components = []

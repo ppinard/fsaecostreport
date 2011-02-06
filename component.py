@@ -154,6 +154,9 @@ class _Component(object):
 
     @property
     def quantity(self):
+        """
+        Returns the overall quantity of this component in a system.
+        """
         if not self.parents:
             return self._quantity
         else:
@@ -183,6 +186,9 @@ class _Component(object):
         return cost
 
     def get_hierarchy(self):
+        """
+        Returns an ordered list of this component and its sub-components.
+        """
         hierarchy = [self]
 
         for component in sorted(self.components.keys(), reverse=True):
