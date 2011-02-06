@@ -50,6 +50,7 @@ class TestPartReader(unittest.TestCase):
         self.assertEqual('', self.part.details)
         self.assertEqual('TM-00001-AA', self.part.partnumber)
         self.assertEqual('TM-00001-AA', self.part.pn)
+        self.assertEqual(0, self.part.quantity)
 
     def testmaterials(self):
         self.assertEqual(2, len(self.part.materials))
@@ -174,6 +175,7 @@ class TestAssemblyReader(unittest.TestCase):
         self.assertEqual('', self.assy.details)
         self.assertEqual('TM-A0001-AA', self.assy.partnumber)
         self.assertEqual('TM-A0001-AA', self.assy.pn)
+        self.assertEqual(2, self.assy.quantity)
 
     def testcomponents(self):
         self.assertEqual(1, len(self.assy.components))
@@ -296,6 +298,8 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual(assy2, assy1.components.keys()[0])
         self.assertEqual(2, assy1.components.values()[0])
         self.assertEqual(1, assy1.quantity)
+        self.assertEqual(0, len(assy1.parents))
+        self.assertEqual(1, assy1.quantity)
 
         self.assertEqual('Push bar', assy2.name)
         self.assertEqual('A0001', assy2.pn_base)
@@ -306,7 +310,9 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual(1, len(assy2.components))
         self.assertEqual(part, assy2.components.keys()[0])
         self.assertEqual(2, assy2.components.values()[0])
-        self.assertRaises(ValueError, assy2.__getattribute__, 'quantity')
+        self.assertEqual(1, len(assy2.parents))
+        self.assertEqual(assy1, list(assy2.parents)[0])
+        self.assertEqual(2, assy2.quantity)
 
         self.assertEqual('Cart', assy3.name)
         self.assertEqual('A0002', assy3.pn_base)
@@ -318,6 +324,8 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual(part, assy3.components.keys()[0])
         self.assertEqual(3, assy3.components.values()[0])
         self.assertEqual(1, assy3.quantity)
+        self.assertEqual(0, len(assy3.parents))
+        self.assertEqual(1, assy3.quantity)
 
         self.assertEqual('Cup holder', part.name)
         self.assertEqual('00001', part.pn_base)
@@ -325,7 +333,11 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual('', part.details)
         self.assertEqual('TM-00001-AA', part.partnumber)
         self.assertEqual('TM-00001-AA', part.pn)
+        self.assertEqual(2, len(part.parents))
+        self.assertTrue(assy2 in part.parents)
+        self.assertTrue(assy3 in part.parents)
+        self.assertEqual(7, part.quantity)
 
 if __name__ == '__main__': #pragma: no cover
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.INFO)
     unittest.main()

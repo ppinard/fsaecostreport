@@ -30,3 +30,4 @@ import re
 PART_PN = re.compile('([A-Z][A-Z])\-(00\d\d\d)\-([A-Z][A-Z])')
 SUB_ASSY_PN = re.compile('([A-Z][A-Z])\-(A0\d\d\d)\-([A-Z][A-Z])')
 SYS_ASSY_PN = re.compile('([A-Z][A-Z])\-(A\d\d00)\-([A-Z][A-Z])')
+PN_BASE = re.compile('([\dA]\d\d\d\d)')

@@ -29,7 +29,7 @@ import glob
 
 # Local modules.
 from costtable import Material, Process, Fastener, Tooling
-from system import Part, Assembly
+from component import Part, Assembly
 from pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
@@ -38,6 +38,17 @@ DRAWINGS_DIR = "drawings"
 PICTURES_DIR = "pictures"
 
 class _ComponentReader(object):
+    def _read(self, component, lines):
+        self._check_filename(component.filepath, component.pn)
+
+        component.materials = self._read_materials(lines)
+        component.processes = self._read_processes(lines)
+        component.fasteners = self._read_fasteners(lines)
+        component.toolings = self._read_toolings(lines)
+
+        component.drawings = self._read_drawings(component.filepath)
+        component.pictures = self._read_pictures(component.filepath)
+
     def _get_lines(self, filepath):
         logging.debug("Reading csv")
         reader = csv.reader(open(filepath, 'r'))
@@ -249,17 +260,8 @@ class PartReader(_ComponentReader):
         header = self._read_header(lines)
         header['system_label'] = system.label
 
-        part = Part(**header)
-
-        self._check_filename(filepath, part.pn)
-
-        part.materials = self._read_materials(lines)
-        part.processes = self._read_processes(lines)
-        part.fasteners = self._read_fasteners(lines)
-        part.toolings = self._read_toolings(lines)
-
-        part.drawings = self._read_drawings(filepath)
-        part.pictures = self._read_pictures(filepath)
+        part = Part(filepath, **header)
+        self._read(part, lines)
 
         system.add_component(part)
 
@@ -287,24 +289,16 @@ class AssemblyReader(_ComponentReader):
         header = self._read_header(lines)
         header['system_label'] = system.label
 
-        assembly = Assembly(**header)
-
-        self._check_filename(filepath, assembly.pn)
-
-        assembly.components = self._read_parts(lines, filepath, system)
-        assembly.materials = self._read_materials(lines)
-        assembly.processes = self._read_processes(lines)
-        assembly.fasteners = self._read_fasteners(lines)
-        assembly.toolings = self._read_toolings(lines)
-
-        assembly.drawings = self._read_drawings(filepath)
-        assembly.pictures = self._read_pictures(filepath)
+        assembly = Assembly(filepath, **header)
+        self._read(assembly, lines)
 
         # store assembly own quantity in case it does not have any parent
         # in this case, the system reader will take this quantity as being
         # the assembly quantity, otherwise, the parent (system assembly)
         # will determine the assembly quantity
-        assembly._user_quantity = self._read_quantity(lines)
+        assembly._quantity = self._read_quantity(lines)
+
+        assembly.components = self._read_parts(lines, assembly, system)
 
         system.add_component(assembly)
 
@@ -326,7 +320,7 @@ class AssemblyReader(_ComponentReader):
     def _read_quantity(self, lines):
         return int(lines[1][7])
 
-    def _read_parts(self, lines, filepath, system):
+    def _read_parts(self, lines, assembly, system):
         logging.debug("Reading parts ...")
 
         firstline_index = self._find_line('Parts', lines) + 2
@@ -336,7 +330,7 @@ class AssemblyReader(_ComponentReader):
             if not line[0].strip():
                 break
 
-            component, quantity = self._read_part(line, filepath, system)
+            component, quantity = self._read_part(line, assembly, system)
 
             if component in parts:
                 raise ValueError, "Duplicate of component (%s)" % component
@@ -346,7 +340,7 @@ class AssemblyReader(_ComponentReader):
         logging.debug("Reading parts ... DONE")
         return parts
 
-    def _read_part(self, line, assy_filepath, system):
+    def _read_part(self, line, assembly, system):
         pn = line[0]
         quantity = int(line[3])
 
@@ -354,7 +348,7 @@ class AssemblyReader(_ComponentReader):
             component = system.get_component(pn)
         else: # load component
             filename = pn + ".csv"
-            filepath = os.path.join(os.path.dirname(assy_filepath), filename)
+            filepath = os.path.join(os.path.dirname(assembly.filepath), filename)
             if not os.path.exists(filepath):
                 raise ValueError, "Missing component (%s)" % pn
 
@@ -364,6 +358,8 @@ class AssemblyReader(_ComponentReader):
                 component = AssemblyReader().read(filepath, system)
             else:
                 raise ValueError, "Unknown type of P/N (%s)" % pn
+
+        component.parents.add(assembly)
 
         # check
         unitcost = component.unitcost
@@ -383,14 +379,12 @@ class SystemReader(object):
         system.clear_components() # reset
 
         for file in self._find_components(components_dir, SYS_ASSY_PN):
-            assy = AssemblyReader().read(file, system)
-            assy._quantity = 1
+            AssemblyReader().read(file, system)
 
         for file in self._find_components(components_dir, SUB_ASSY_PN):
             pn = os.path.splitext(os.path.basename(file))[0]
             if not system.has_component(pn):
-                assy = AssemblyReader().read(file, system)
-                assy._quantity = assy._user_quantity
+                AssemblyReader().read(file, system)
 
         return system
 
