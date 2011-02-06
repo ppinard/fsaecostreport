@@ -37,7 +37,7 @@ COMPONENTS_DIR = "components"
 DRAWINGS_DIR = "drawings"
 PICTURES_DIR = "pictures"
 
-class _ComponentReader(object):
+class _ComponentFileReader(object):
     def _read(self, component, lines):
         self._check_filename(component.filepath, component.pn)
 
@@ -250,7 +250,7 @@ class _ComponentReader(object):
         logging.debug("Reading pictures... DONE")
         return pictures
 
-class PartReader(_ComponentReader):
+class PartFileReader(_ComponentFileReader):
 
     def read(self, filepath, system):
         logging.debug("Reading part %s ..." % filepath)
@@ -280,7 +280,7 @@ class PartReader(_ComponentReader):
         return {'name': name, 'pn_base': pn_base, 'revision': revision,
                 'details': details}
 
-class AssemblyReader(_ComponentReader):
+class AssemblyFileReader(_ComponentFileReader):
     def read(self, filepath, system):
         logging.debug("Reading assembly %s ..." % filepath)
 
@@ -353,9 +353,9 @@ class AssemblyReader(_ComponentReader):
                 raise ValueError, "Missing component (%s)" % pn
 
             if PART_PN.match(pn):
-                component = PartReader().read(filepath, system)
+                component = PartFileReader().read(filepath, system)
             elif SUB_ASSY_PN.match(pn):
-                component = AssemblyReader().read(filepath, system)
+                component = AssemblyFileReader().read(filepath, system)
             else:
                 raise ValueError, "Unknown type of P/N (%s)" % pn
 
@@ -368,7 +368,7 @@ class AssemblyReader(_ComponentReader):
 
         return component, quantity
 
-class SystemReader(object):
+class SystemFileReader(object):
 
     def read(self, basepath, system):
         system_dir = os.path.join(basepath, system.label)
@@ -379,12 +379,12 @@ class SystemReader(object):
         system.clear_components() # reset
 
         for file in self._find_components(components_dir, SYS_ASSY_PN):
-            AssemblyReader().read(file, system)
+            AssemblyFileReader().read(file, system)
 
         for file in self._find_components(components_dir, SUB_ASSY_PN):
             pn = os.path.splitext(os.path.basename(file))[0]
             if not system.has_component(pn):
-                AssemblyReader().read(file, system)
+                AssemblyFileReader().read(file, system)
 
         # check
         self._check_unread_components(basepath, system)

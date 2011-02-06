@@ -21,7 +21,7 @@ import os.path
 
 # Local modules.
 from system import System
-from reader import PartReader, AssemblyReader, SystemReader
+from reader import PartFileReader, AssemblyFileReader, SystemFileReader
 
 # Globals and constants variables.
 TM = System("TM", "Random stuff", "Z", (255, 0, 0))
@@ -35,7 +35,7 @@ class TestPartReader(unittest.TestCase):
 
         testdata = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
         filepath = os.path.join(testdata, 'TM', 'components', 'TM-00001-AA.csv')
-        self.part = PartReader().read(filepath, TM)
+        self.part = PartFileReader().read(filepath, TM)
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)
@@ -160,7 +160,7 @@ class TestAssemblyReader(unittest.TestCase):
 
         testdata = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
         filepath = os.path.join(testdata, 'TM', 'components', 'TM-A0001-AA.csv')
-        self.assy = AssemblyReader().read(filepath, TM)
+        self.assy = AssemblyFileReader().read(filepath, TM)
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)
@@ -272,7 +272,7 @@ class TestSystemReader(unittest.TestCase):
         unittest.TestCase.setUp(self)
 
         basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        self.system = SystemReader().read(basepath, TM)
+        self.system = SystemFileReader().read(basepath, TM)
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)

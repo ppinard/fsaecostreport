@@ -21,7 +21,7 @@ import os.path
 
 # Local modules.
 from system import System
-from reader import SystemReader
+from reader import SystemFileReader
 
 # Globals and constants variables.
 TM = System("TM", "Random stuff", "Z", (255, 0, 0))
@@ -32,7 +32,7 @@ class TestSystem(unittest.TestCase):
         unittest.TestCase.setUp(self)
 
         basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        self.system = SystemReader().read(basepath, TM)
+        self.system = SystemFileReader().read(basepath, TM)
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)
