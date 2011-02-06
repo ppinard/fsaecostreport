@@ -1,0 +1,67 @@
+University,McGill University,,Car #,046,,Asm Cost,95.57,,
+System,Random Stuff,,,,,Qty,1,,
+Assembly,Pusher,,,,,,,,
+P/N Base,A1000,,,,,Extended Cost,95.57,,
+Suffix,AA,,,,,,,,
+Details,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Parts,,,,,,,,,
+ItemOrder,Part,Part Cost,Quantity,Sub Total,,,,,
+TM-A0001-AA,Push bar,47.785,2,95.57,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,Sub Total,95.57,,,,,
+,,,,,,,,,
+Materials,,,,,,,,,
+ID,Material,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,0
+,,,,,,,,,
+Processes,,,,,,,,,
+ID,Process,Use,UnitCost,Unit,Quantity,Multiplier ID,Mult. Val.,Sub Total,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,Sub Total,0,
+,,,,,,,,,
+Fasteners,,,,,,,,,
+ID,Fastener,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,0
+,,,,,,,,,
+Tooling,,,,,,,,,
+ID,Tooling,Use,UnitCost,Unit,Quantity,PVF,FracIncld,Sub Total,
+,,Weld,,,,3000,,0,
+,,,,,,3000,,0,
+,,,,,,,Sub Total,0,
+,,,,,,,,,
+,,,,,,,,,

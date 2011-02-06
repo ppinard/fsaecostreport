@@ -1,0 +1,67 @@
+University,McGill University,,Car #,046,,Asm Cost,67.77833333,,
+System,Random Stuff,,,,,Qty,1,,
+Assembly,Cart,,,,,,,,
+P/N Base,A0002,,,,,Extended Cost,67.77833333,,
+Suffix,AA,,,,,,,,
+Details,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Parts,,,,,,,,,
+ItemOrder,Part,Part Cost,Quantity,Sub Total,,,,,
+TM-00001-AA,Cup holder,19.99333333,3,59.98,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,Sub Total,59.98,,,,,
+,,,,,,,,,
+Materials,,,,,,,,,
+ID,Material,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
+752,"Steel, Mild (per kg)",Tube,1.125,0.5,kg,,,1,1.125
+752,"Steel, Mild (per kg)",Handle,0.9,0.4,kg,,,1,0.9
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,2.025
+,,,,,,,,,
+Processes,,,,,,,,,
+ID,Process,Use,UnitCost,Unit,Quantity,Multiplier ID,Mult. Val.,Sub Total,
+150,Weld - Round Tubing,Weld handle to main tube,0.38,cm,5,,,1.9,
+150,Weld - Round Tubing,Weld cup holder to tube,0.38,cm,4,22,2,3.04,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,Sub Total,4.94,
+,,,,,,,,,
+Fasteners,,,,,,,,,
+ID,Fastener,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,0
+,,,,,,,,,
+Tooling,,,,,,,,,
+ID,Tooling,Use,UnitCost,Unit,Quantity,PVF,FracIncld,Sub Total,
+11,Welds - Welding Fixture,Weld,500,point,5,3000,,0.833333333,
+,,,,,,3000,,0,
+,,,,,,,Sub Total,0.833333333,
+,,,,,,,,,
+,,,,,,,,,
