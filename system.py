@@ -64,6 +64,21 @@ class System(object):
         # extras
         self._components = {}
 
+    def __str__(self):
+        return self.name
+
+    def __eq__(self, other):
+        return self.label == other.label
+
+    def __ne__(self, other):
+        return not self.label == other.label
+
+    def __hash__(self):
+        return hash(self.label)
+
+    def __cmp__(self, other):
+        return cmp(self.letter, other.letter)
+
     def add_component(self, component):
         """
         Adds a component. 
