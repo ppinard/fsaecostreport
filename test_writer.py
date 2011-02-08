@@ -20,8 +20,8 @@ import os
 # Third party modules.
 
 # Local modules.
-from writer import _ComponentLaTeXWriter, AssemblyLaTeXWriter
-from reader import AssemblyFileReader, PartFileReader
+from writer import CostReportLaTeXWriter
+from reader import SystemFileReader, read_year, read_introduction
 from system import System
 
 # Globals and constants variables.
@@ -34,14 +34,13 @@ class Test_ComponentLaTeXWriter(unittest.TestCase):
 
         TM.clear_components()
 
-        testdata = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        filepath = os.path.join(testdata, 'TM', 'components', 'TM-A0001-AA.csv')
-        self.assy = AssemblyFileReader().read(filepath, TM)
+        self.testdata = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
+        SystemFileReader().read(self.testdata, TM)
 
-#        filepath = os.path.join(testdata, 'TM', 'components', 'TM-00001-AA.csv')
-#        self.assy = PartFileReader().read(filepath, TM)
+        year = read_year(self.testdata)
+        introduction = read_introduction(self.testdata)
 
-        self.writer = AssemblyLaTeXWriter()
+        self.writer = CostReportLaTeXWriter([TM], year, introduction)
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)
@@ -50,8 +49,7 @@ class Test_ComponentLaTeXWriter(unittest.TestCase):
         self.assertTrue(True)
 
     def testwrite_materials(self):
-        for line in self.writer.write_costtables(self.assy):
-            print line
+        self.writer.write(self.testdata)
 
 
 if __name__ == '__main__': #pragma: no cover

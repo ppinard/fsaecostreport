@@ -33,9 +33,8 @@ from component import Part, Assembly
 from pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
-COMPONENTS_DIR = "components"
-DRAWINGS_DIR = "drawings"
-PICTURES_DIR = "pictures"
+from constants import \
+    COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, YEAR_FILE, INTRODUCTION_FILE
 
 class _ComponentFileReader(object):
     def _read(self, component, lines):
@@ -462,3 +461,11 @@ class SystemFileReader(object):
                 components.append(file)
 
         return components
+
+def read_year(basepath):
+    with open(os.path.join(basepath, YEAR_FILE), 'r') as f:
+        return int(f.readline().strip())
+
+def read_introduction(basepath):
+    with open(os.path.join(basepath, INTRODUCTION_FILE), 'r') as f:
+        return f.readlines()

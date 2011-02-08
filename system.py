@@ -94,6 +94,9 @@ class System(object):
     def get_component(self, pn):
         return self._components[pn]
 
+    def get_components(self):
+        return self._components.values()
+
     def clear_components(self):
         self._components = {}
 

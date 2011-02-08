@@ -20,13 +20,19 @@ __license__ = "GPL v3"
 
 # Standard library modules.
 import operator
+import posixpath
+import os.path
 
 # Third party modules.
 
 # Local modules.
+from misctools.format import humanjoin
+
 from latex import create_tabular, escape as e
+from component import Part, Assembly
 
 # Globals and constants variables.
+from constants import DRAWINGS_DIR, PICTURES_DIR, LOGO_FILE
 SUBTOTAL = operator.attrgetter('subtotal')
 
 def decimal(number):
@@ -42,31 +48,250 @@ def capitalize(value):
         return value
 
 class CostReportLaTeXWriter(object):
-    def write(self, config):
-        pass
+    def __init__(self, systems, year, introduction):
+        self._systems = systems
+        self._year = year
+        self._introduction = introduction
 
-    def write_frontmatter(self):
+    def write(self, basepath):
+        filename = 'costreport%i.tex' % self._year
+        lines = self._write(self._systems, self._year, self._introduction)
+
+        with open(os.path.join(basepath, filename), 'w') as out:
+            for line in lines:
+                out.write(line + "\n")
+        out.close()
+
+    def _write(self, systems, year, introduction):
+        lines = []
+
+        lines += self.write_header(year)
+        lines += ['']
+
+        lines += [r'\begin{document}']
+        lines += ['']
+
+        lines += self.write_fancy_header(year)
+        lines += ['']
+        lines += self.write_renewcommand()
+        lines += ['']
+        lines += self.write_colors(systems)
+        lines += ['']
+
+        # content
+        lines += self.write_frontmatter(systems, introduction)
+        lines += ['']
+
+        lines += self.write_systems(systems)
+        lines += ['']
+
+        lines += self.write_backmatter()
+        lines += ['']
+
+        lines += [r'\end{document}']
+
+        return lines
+
+    def write_header(self, year):
+        lines = []
+
+        lines += [r'\documentclass[letterpaper,landscape]{report}']
+
+        lines += [r'\usepackage[top=3cm, bottom=3cm, right=1cm, left=1cm]{geometry}']
+        lines += [r'\usepackage{graphicx}']
+        lines += [r'\usepackage{multirow}']
+        lines += [r'\usepackage{url}']
+        lines += [r'\usepackage{amsmath}']
+        lines += [r'\usepackage{longtable}']
+        lines += [r'\usepackage{titlesec}']
+        lines += [r'\usepackage{array}']
+        lines += [r'\usepackage{colortbl}']
+        lines += [r'\usepackage{multicol}']
+        lines += [r'\usepackage{setspace}']
+        lines += [r'\usepackage[final]{pdfpages}']
+        lines += [r'\usepackage[english]{babel}']
+        lines += [r'\usepackage[latin1]{inputenc}']
+        lines += [r'\usepackage{fancyhdr}']
+        lines += [r'\usepackage[pdftitle={Cost Report %i}, ' % year,
+                  r'pdfsubject={Formula SAE Competition Michigan}, ',
+                  r'pdfauthor={McGill Racing Team}, ',
+                  r'colorlinks=true, ',
+                  r'linkcolor=blue, ',
+                  r'pdfborder = 0 0 0, ',
+                  r'pdfhighlight = /I, ',
+                  r'pdfpagelabels]{hyperref}']
+
+        return lines
+
+    def write_fancy_header(self, year):
+        lines = []
+
+        lines += [r'\pagestyle{fancy}']
+        lines += [r'\fancyhf{}']
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} McGill Racing Team -- %i Cost Report}' % (LOGO_FILE, year)]
+        lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
+        lines += [r'\rfoot{\thepage}']
+        lines += [r'\fancypagestyle{plain}{']
+        lines += [r'\fancyhf{}']
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} McGill Racing Team -- %i Cost Report}' % (LOGO_FILE, year)]
+        lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
+        lines += [r'\rfoot{\thepage}}']
+
+        return lines
+
+    def write_renewcommand(self):
+        lines = []
+
+        lines += [r'\renewcommand{\chaptername}{\sffamily System}']
+        lines += [r'\renewcommand{\thechapter}{\Alph{chapter}}']
+        lines += [r'\titleformat*{\section}{\Large\sffamily\raggedright}']
+        lines += [r'\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter:\ #1}{}}']
+        lines += [r'\titlespacing{\subsubsection}{0pt}{*1}{*-1}']
+
+        return lines
+
+    def write_colors(self, systems):
+        lines = []
+
+        for system in sorted(systems):
+            r = system.colour[0] / 255.0
+            g = system.colour[1] / 255.0
+            b = system.colour[2] / 255.0
+            lines += [r'\definecolor{color%s}{rgb}{%f,%f,%f}' % \
+                        (system.letter, r, g, b)]
+
+        return lines
+
+    def write_frontmatter(self, systems, introduction):
+        lines = []
+
+        lines += [r'\pagenumbering{roman}']
+        lines += ['']
+
+        lines += self.write_introduction(introduction)
+        lines += [r'\newpage', '']
+
+        lines += self.write_cost_summary(systems)
+        lines += [r'\newpage', '']
+
+        lines += self.write_standard_partnumbering()
+        lines += [r'\newpage', '']
+
+        lines += self.write_toc()
+        lines += [r'\newpage', '']
+
+        lines += [r'\pagenumbering{arabic}']
+
+        return lines
+
+    def write_introduction(self, introduction):
+        lines = []
+
+        lines += [r'\section{Introduction}']
+        lines += [r'\begin{multicols}{2}]']
+
+        lines += introduction
+
+        lines += [r'\end{multicols}']
+
+        return lines
+
+    def write_cost_summary(self, systems):
+        lines = []
+
+        lines += [r'\section{Cost Summary}']
+        lines += [r'\renewcommand{\arraystretch}{1.5}']
+
+        data = self._create_cost_summary_lines(systems)
+        lines += \
+            create_tabular(data, environment='longtable',
+                               tableparameters='l',
+                               tablespec=r'p{20em} | p{8em} | p{8em} | p{8em} | p{8em} | p{12em}',
+                               format_before_tabular=r'\rowcolor[gray]{0}',
+                               format_after_header=r'\hline\endhead',
+                               format_between_rows=r'\hline', header_endrow=1)
+        lines += [r'\renewcommand{\arraystretch}{1}']
+
+        return lines
+
+    def _create_cost_summary_lines(self, systems):
+        rows = []
+
+        header = [r'\color{white} System',
+                  r'\color{white}\centering Materials',
+                  r'\color{white}\centering Processes',
+                  r'\color{white}\centering Fasteners',
+                  r'\color{white}\centering Tooling',
+                  r'\color{white}\centering Total']
+        rows.append(header)
+
+        materials_totalcost = 0.0
+        processes_totalcost = 0.0
+        fasteners_totalcost = 0.0
+        toolings_totalcost = 0.0
+        systems_totalcost = 0.0
+
+        for system in sorted(systems):
+            materials_cost = 0.0
+            processes_cost = 0.0
+            fasteners_cost = 0.0
+            toolings_cost = 0.0
+            system_cost = 0.0
+
+            for component in system.get_components():
+                qty = component.quantity
+                materials_cost += sum(map(SUBTOTAL, component.materials)) * qty
+                processes_cost += sum(map(SUBTOTAL, component.processes)) * qty
+                fasteners_cost += sum(map(SUBTOTAL, component.fasteners)) * qty
+                toolings_cost += sum(map(SUBTOTAL, component.toolings)) * qty
+                system_cost += component.unitcost * qty
+
+
+            row = [r'\rowcolor{color%s}\raggedright %s' % (system.letter, system.name),
+                   r'\centering\$ %4.2f' % materials_cost,
+                   r'\centering\$ %4.2f' % processes_cost,
+                   r'\centering\$ %4.2f' % fasteners_cost,
+                   r'\centering\$ %4.2f' % toolings_cost,
+                   r'\centering\$ %4.2f' % system_cost]
+            rows.append(row)
+
+            materials_totalcost += materials_cost
+            processes_totalcost += processes_cost
+            fasteners_totalcost += fasteners_cost
+            toolings_totalcost += toolings_cost
+            systems_totalcost += system_cost
+
+
+        row = [r'\hline\raggedright\textbf{ % s}' % 'Total Vehicle',
+               r'\centering\textbf{\$ %4.2f}' % materials_totalcost,
+               r'\centering\textbf{\$ %4.2f}' % processes_totalcost,
+               r'\centering\textbf{\$ %4.2f}' % fasteners_totalcost,
+               r'\centering\textbf{\$ %4.2f}' % toolings_totalcost,
+               r'\centering\textbf{\$ %4.2f}' % toolings_totalcost]
+        rows.append(row)
+
+        return rows
+
+    def write_standard_partnumbering(self):
         return []
 
-    def _create_toc_lines(self):
+    def write_toc(self):
         lines = []
 
         lines += [r'\setcounter{tocdepth}{1}']
         lines += [r'\tableofcontents']
         lines += [r'\pdfbookmark[0]{Contents}{contents}']
-        lines += [r'\newpage', '']
+        lines += [r'\newpage']
         lines += [r'\setcounter{tocdepth}{4}']
-        lines += [r'\pagenumbering{arabic}']
         lines += ['']
 
         return lines
 
     def write_systems(self, systems):
         lines = []
-        writer = SystemLaTeXWriter()
 
         for system in sorted(systems):
-            lines += writer.write(system)
+            lines += SystemLaTeXWriter().write(system)
             lines += ['']
 
         return lines
@@ -77,52 +302,167 @@ class CostReportLaTeXWriter(object):
         lines += [r'\renewcommand{\listfigurename}{List of Drawings}']
         lines += [r'\listoffigures']
         lines += [r'\pdfbookmark[0]{List of Drawings}{listofdd}']
-        lines += [r'\newpage', '']
 
         return lines
 
 
 class SystemLaTeXWriter(object):
     def write(self, system):
+        hierarchy = system.get_hierarchy()
+
         lines = []
 
         lines += [r'\chapter{%s}' % system.name]
         lines += [r'\newpage', '']
 
         # BOM
-        lines += [r'\section{BOM}']
-        lines += self.write_bom(system)
+        lines += self.write_bom(system, hierarchy)
         lines += [r'\newpage', '']
 
         # cost tables
-        lines += [r'\section{Cost Tables}']
-        lines += self.write_costtables(system)
+        lines += self.write_costtables(system, hierarchy)
         lines += [r'\newpage', '']
 
         # drawings
-        lines += [r'\section{Technical Drawings}']
-        lines += ['The technical drawings are in the following pages.']
-        lines += self.write_drawings(system)
+        lines += self.write_drawings(system, hierarchy)
         lines += [r'\newpage', '']
 
         # pictures
-        lines += [r'\section{Pictures}']
-        lines += self.write_pictures(system)
+        lines += self.write_pictures(system, hierarchy)
         lines += [r'\newpage', '']
 
         return lines
 
-    def write_bom(self, system):
-        return []
+    def write_bom(self, system, hierarchy):
+        lines = []
 
-    def write_costtables(self, system):
-        return []
+        lines += [r'\section{BOM}']
+        lines += [r'\renewcommand{\arraystretch}{1.1}']
 
-    def write_drawings(self, system):
-        return []
+        data = self._create_bom_lines(system, hierarchy)
+        lines += \
+            create_tabular(data, environment='longtable',
+                               tableparameters='l',
+                               tablespec=r'p{10em} | p{3em} | p{2em} | p{7em} | p{13em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em} | p{5em}',
+                               format_before_tabular=r'\rowcolor[gray]{0}',
+                               format_after_header=r'\hline\endhead',
+                               format_between_rows=r'\hline', header_endrow=1)
 
-    def write_pictures(self, system):
-        return []
+        lines += [r'\renewcommand{\arraystretch}{1}']
+
+        return lines
+
+    def _create_bom_lines(self, system, hierarchy):
+        rows = []
+
+        header = [r'\color{white} Component',
+                  r'\color{white}\centering Asm / Prt \#',
+                  r'\color{white}\centering Rev.',
+                  r'\color{white}\centering Assembly',
+                  r'\color{white} Description',
+                  r'\color{white}\centering Qty',
+                  r'\color{white}\centering Unit\\ Cost',
+                  r'\color{white}\centering Cost',
+                  r'\color{white}\centering Cost\\ Table',
+                  r'\color{white}\centering Drawing(s)',
+                  r'\color{white}\centering Photo(s)']
+        rows.append(header)
+
+
+        for component in hierarchy:
+            if len(component.drawings) == 1:
+                drawings = r'\pageref{dwg:%s-0}' % component.pn
+            elif len(component.drawings) > 1:
+                drawings = r'\pageref{dwg:%s-0}--\pageref{dwg:%s-%i}' % \
+                        (component.pn, component.pn, len(component.drawings) - 1)
+            else:
+                drawings = ''
+
+            if len(component.pictures) == 1:
+                pictures = r'\pageref{img:%s-0}' % component.pn
+            elif len(component.pictures) > 1:
+                pictures = r'\pageref{img:%s-0}--\pageref{img:%s-%i}' % \
+                        (component.pn, component.pn, len(component.pictures) - 1)
+            else:
+                pictures = ''
+
+            unitcost = component.unitcost
+            quantity = component.quantity
+            totalcost = unitcost * quantity
+
+            names = [e(capitalize(parent.name)) for parent in component.parents]
+            assembly = humanjoin(names, andchr=r'\&')
+
+            if isinstance(component, Assembly):
+                row = [r'\hline\emph{%s}' % e(capitalize(component.name))]
+            elif isinstance(component, Part):
+                row = [r'%s' % e(capitalize(component.name))]
+
+            row += [r'\centering %s' % component.pn_base,
+                    r'\centering %s' % component.revision,
+                    r'\centering %s' % assembly,
+                    r'\raggedright %s' % e(capitalize(component.details)),
+                    r'\centering %i' % quantity,
+                    r'\raggedleft\$ %4.2f' % unitcost,
+                    r'\raggedleft\$ %4.2f' % totalcost,
+                    r'\centering\pageref{ct:%s}' % component.pn,
+                    r'\centering%s' % drawings,
+                    r'\centering%s' % pictures]
+            rows.append(row)
+
+        return rows
+
+    def write_costtables(self, system, hierarchy):
+        lines = []
+
+        lines += [r'\section{Cost Tables}']
+
+        for component in hierarchy:
+            if isinstance(component, Assembly):
+                lines += AssemblyLaTeXWriter().write_costtables(component)
+            elif isinstance(component, Part):
+                lines += PartLaTeXWriter().write_costtables(component)
+
+        return lines
+
+    def write_drawings(self, system, hierarchy):
+        lines = []
+
+        lines += [r'\section{Technical Drawings}']
+        lines += ['The technical drawings are in the following pages.']
+
+        for component in hierarchy:
+            name = component.name.replace(',', '')
+            pn = component.pn
+
+            for index, drawing in enumerate(component.drawings):
+                path = posixpath.join(system.label, DRAWINGS_DIR, os.path.basename(drawing))
+                lines += [r'\includepdf[pages={1}, addtolist={1,figure,%s (%s),dwg:%s-%i}]{%s}' % \
+                          (name, pn, pn, index, path)]
+                lines += [r'\addcontentsline{toc}{subsection}{%s (%s)}' % \
+                          (name, pn)]
+
+        return lines
+
+    def write_pictures(self, system, hierarchy):
+        lines = []
+
+        lines += [r'\section{Pictures}']
+
+        for component in hierarchy:
+            name = component.name
+            pn = component.pn
+
+            for index, picture in enumerate(component.pictures):
+                path = posixpath.join(system.label, PICTURES_DIR, os.path.basename(picture))
+                lines += [r'\subsection{%s (%s)}' % (name, pn)]
+                lines += [r'\label{img:%s-%i}' % (pn, index)]
+                lines += [r'\begin{center}']
+                lines += [r'\includegraphics[height=0.8\textheight]{%s}' % path]
+                lines += [r'\end{center}']
+                lines += [r'\newpage']
+
+        return lines
 
 class _ComponentLaTeXWriter(object):
     def write_costtables(self, component):
