@@ -28,13 +28,15 @@ import glob
 # Third party modules.
 
 # Local modules.
+from metadata import Metadata
 from costtable import Material, Process, Fastener, Tooling
 from component import Part, Assembly
 from pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
 from constants import \
-    COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, YEAR_FILE, INTRODUCTION_FILE
+    (COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, YEAR_FILE, INTRODUCTION_FILE,
+     CAR_NUMBER_FILE, UNIVERSITY_FILE, TEAM_NAME_FILE)
 
 class _ComponentFileReader(object):
     def _read(self, component, lines):
@@ -462,10 +464,35 @@ class SystemFileReader(object):
 
         return components
 
-def read_year(basepath):
-    with open(os.path.join(basepath, YEAR_FILE), 'r') as f:
-        return int(f.readline().strip())
+class MetadataReader(object):
+    def read(self, basepath):
+        year = self.read_year(basepath)
+        car_number = self.read_car_number(basepath)
+        university = self.read_university(basepath)
+        team_name = self.read_team_name(basepath)
+        introduction = self.read_introduction(basepath)
 
-def read_introduction(basepath):
-    with open(os.path.join(basepath, INTRODUCTION_FILE), 'r') as f:
-        return f.readlines()
+        return Metadata(year, car_number, university, team_name, introduction)
+
+    def read_year(self, basepath):
+        with open(os.path.join(basepath, YEAR_FILE), 'r') as f:
+            return int(f.readline().strip())
+
+    def read_car_number(self, basepath):
+        with open(os.path.join(basepath, CAR_NUMBER_FILE), 'r') as f:
+            return int(f.readline().strip())
+
+    def read_university(self, basepath):
+        with open(os.path.join(basepath, UNIVERSITY_FILE), 'r') as f:
+            return str(f.readline().strip())
+
+    def read_team_name(self, basepath):
+        with open(os.path.join(basepath, TEAM_NAME_FILE), 'r') as f:
+            return str(f.readline().strip())
+
+    def read_introduction(self, basepath):
+        lines = []
+        with open(os.path.join(basepath, INTRODUCTION_FILE), 'r') as f:
+            for line in f.readlines():
+                lines.append(line.strip())
+        return lines

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`constants` -- 
+:mod:`metadata` -- 
 ================================================================================
 
-.. module:: constants
+.. module:: metadata
    :synopsis: 
 
-.. inheritance-diagram:: constants
+.. inheritance-diagram:: metadata
 
 """
 
@@ -25,12 +25,11 @@ __license__ = "GPL v3"
 # Local modules.
 
 # Globals and constants variables.
-COMPONENTS_DIR = "components"
-DRAWINGS_DIR = "drawings"
-PICTURES_DIR = "pictures"
-YEAR_FILE = 'year.txt'
-CAR_NUMBER_FILE = "carnumber.txt"
-UNIVERSITY_FILE = "university.txt"
-TEAM_NAME_FILE = "teamname.txt"
-INTRODUCTION_FILE = 'introduction.txt'
-LOGO_FILE = 'logo.jpg'
+
+class Metadata(object):
+    def __init__(self, year, car_number, university, team_name, introduction):
+        self.year = year
+        self.car_number = car_number
+        self.university = university
+        self.team_name = team_name
+        self.introduction = introduction

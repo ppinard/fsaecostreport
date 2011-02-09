@@ -21,7 +21,8 @@ import os.path
 
 # Local modules.
 from system import System
-from reader import PartFileReader, AssemblyFileReader, SystemFileReader
+from reader import \
+    PartFileReader, AssemblyFileReader, SystemFileReader, MetadataReader
 
 # Globals and constants variables.
 TM = System("TM", "Random stuff", "Z", (255, 0, 0))
@@ -337,6 +338,24 @@ class TestSystemReader(unittest.TestCase):
         self.assertTrue(assy2 in part.parents)
         self.assertTrue(assy3 in part.parents)
         self.assertEqual(7, part.quantity)
+
+class TestMetadataReader(unittest.TestCase):
+
+    def setUp(self):
+        unittest.TestCase.setUp(self)
+
+        basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
+        self.metadata = MetadataReader().read(basepath)
+
+    def tearDown(self):
+        unittest.TestCase.tearDown(self)
+
+    def testskeleton(self):
+        self.assertEqual(2011, self.metadata.year)
+        self.assertEqual(49, self.metadata.car_number)
+        self.assertEqual('McGill University', self.metadata.university)
+        self.assertEqual('McGill Racing Team', self.metadata.team_name)
+        self.assertEqual(['Intro', 'BLAH'], self.metadata.introduction)
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.INFO)
