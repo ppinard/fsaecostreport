@@ -23,7 +23,6 @@ __license__ = "GPL v3"
 # Third party modules.
 
 # Local modules.
-from LatexTools.util import escape
 
 # Globals and constants variables.
 
