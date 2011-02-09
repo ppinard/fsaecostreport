@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`reader` -- 
+:mod:`reader` -- File readers for systems, parts, assemblies and metadata
 ================================================================================
 
 .. module:: reader
-   :synopsis: 
+   :synopsis: File readers for systems, parts, assemblies and metadata
 
-.. inheritance-diagram:: reader
+.. inheritance-diagram:: costreport.reader
 
 """
 

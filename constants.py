@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`constants` -- 
+:mod:`constants` -- Constants used by the readers and writers
 ================================================================================
 
 .. module:: constants
-   :synopsis: 
-
-.. inheritance-diagram:: constants
+   :synopsis: Constants used by the readers and writers
 
 """
 

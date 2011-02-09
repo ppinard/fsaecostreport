@@ -1,6 +1,6 @@
 """
 ================================================================================
-:mod:`test_component` -- Unit tests for the module MODULE.
+:mod:`test_component` -- Unit tests for the module :mod:`component`.
 ================================================================================
 
 """

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`component` -- 
+:mod:`component` -- Main objects of the systems: Part and Assembly
 ================================================================================
 
 .. module:: component
-   :synopsis: 
+   :synopsis: Main objects of the systems: Part and Assembly
 
-.. inheritance-diagram:: component
+.. inheritance-diagram:: costreport.component
 
 """
 

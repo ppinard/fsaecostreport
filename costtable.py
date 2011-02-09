@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`costtable` -- 
+:mod:`costtable` -- Items in the cost tables: material, process, etc.
 ================================================================================
 
 .. module:: costtable
-   :synopsis: 
+   :synopsis: Items in the cost tables: material, process, etc.
 
-.. inheritance-diagram:: costtable
+.. inheritance-diagram:: costreport.costtable
 
 """
 

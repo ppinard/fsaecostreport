@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`pattern` -- 
+:mod:`xlscsv` -- Converter of XLS/XLSX files to CSV files
 ================================================================================
 
-.. module:: pattern
-   :synopsis: 
-
-.. inheritance-diagram:: pattern
+.. module:: xlscsv
+   :synopsis: Converter of XLS/XLSX files to CSV files
 
 """
 

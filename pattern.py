@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`pattern` -- 
+:mod:`pattern` -- Regex patterns used to identify part numbers
 ================================================================================
 
 .. module:: pattern
-   :synopsis: 
-
-.. inheritance-diagram:: pattern
+   :synopsis: Regex patterns used to identify part numbers
 
 """
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`system` -- 
+:mod:`system` -- System object for each system of the cost report
 ================================================================================
 
 .. module:: system
-   :synopsis: 
+   :synopsis: System object for each system of the cost report
 
-.. inheritance-diagram:: system
+.. inheritance-diagram:: costreport.system
 
 """
 

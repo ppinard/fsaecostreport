@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`metadata` -- 
+:mod:`metadata` -- Metadata related to the cost report
 ================================================================================
 
 .. module:: metadata
-   :synopsis: 
+   :synopsis: Metadata related to the cost report
 
-.. inheritance-diagram:: metadata
+.. inheritance-diagram:: costreport.metadata
 
 """
 

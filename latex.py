@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`latex` -- 
+:mod:`latex` -- Utilities used to create LaTeX output
 ================================================================================
 
 .. module:: latex
-   :synopsis: 
-
-.. inheritance-diagram:: latex
+   :synopsis: Utilities used to create LaTeX output
 
 """
 

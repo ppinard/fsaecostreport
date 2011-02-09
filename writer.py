@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
 ================================================================================
-:mod:`writer` -- 
+:mod:`writer` -- LaTeX writer of the cost report
 ================================================================================
 
 .. module:: writer
-   :synopsis: 
+   :synopsis: LaTeX writer of the cost report
 
-.. inheritance-diagram:: writer
+.. inheritance-diagram:: costreport.writer
 
 """
 
