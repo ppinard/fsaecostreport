@@ -48,30 +48,25 @@ def capitalize(value):
         return value
 
 class CostReportLaTeXWriter(object):
-    def __init__(self, systems, year, introduction):
-        self._systems = systems
-        self._year = year
-        self._introduction = introduction
-
-    def write(self, basepath):
+    def write(self, basepath, systems, metadata):
         filename = 'costreport%i.tex' % self._year
-        lines = self._write(self._systems, self._year, self._introduction)
+        lines = self._write(systems, metadata)
 
         with open(os.path.join(basepath, filename), 'w') as out:
             for line in lines:
                 out.write(line + "\n")
         out.close()
 
-    def _write(self, systems, year, introduction):
+    def _write(self, systems, metadata):
         lines = []
 
-        lines += self.write_header(year)
+        lines += self.write_header(metadata.year)
         lines += ['']
 
         lines += [r'\begin{document}']
         lines += ['']
 
-        lines += self.write_fancy_header(year)
+        lines += self.write_fancy_header(metadata.year, metadata.team_name)
         lines += ['']
         lines += self.write_renewcommand()
         lines += ['']
@@ -79,7 +74,7 @@ class CostReportLaTeXWriter(object):
         lines += ['']
 
         # content
-        lines += self.write_frontmatter(systems, introduction)
+        lines += self.write_frontmatter(systems, metadata.introduction)
         lines += ['']
 
         lines += self.write_systems(systems)
@@ -123,17 +118,17 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_fancy_header(self, year):
+    def write_fancy_header(self, year, team_name):
         lines = []
 
         lines += [r'\pagestyle{fancy}']
         lines += [r'\fancyhf{}']
-        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} McGill Racing Team -- %i Cost Report}' % (LOGO_FILE, year)]
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} %s -- %i Cost Report}' % (LOGO_FILE, team_name, year)]
         lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
         lines += [r'\rfoot{\thepage}']
         lines += [r'\fancypagestyle{plain}{']
         lines += [r'\fancyhf{}']
-        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} McGill Racing Team -- %i Cost Report}' % (LOGO_FILE, year)]
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} %s -- %i Cost Report}' % (LOGO_FILE, team_name, year)]
         lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
         lines += [r'\rfoot{\thepage}}']
 
@@ -273,6 +268,7 @@ class CostReportLaTeXWriter(object):
         return rows
 
     def write_standard_partnumbering(self):
+        #TODO: Standard part numbering
         return []
 
     def write_toc(self):
@@ -803,4 +799,8 @@ class AssemblyLaTeXWriter(_ComponentLaTeXWriter):
         return rows
 
 class PartLaTeXWriter(_ComponentLaTeXWriter):
+    pass
+
+# TODO: eBOM writer
+class eBOMWriter(object):
     pass
