@@ -29,34 +29,39 @@ from optparse import OptionParser
 # Third party modules.
 
 # Local modules.
-from win32com.client import Dispatch
 
 # Globals and constants variables.
 PATTERN = re.compile('^([A-Z][A-Z])\-')
 
-def xlstocsv(input_file, output_dir):
-    xl = Dispatch('Excel.Application')
-    wb = xl.Workbooks.Open(input_file)
+try:
+    from win32com.client import Dispatch
+except ImportError:
+    def xlstocsv(input_file, output_dir):
+        pass
+else:
+    def xlstocsv(input_file, output_dir):
+        xl = Dispatch('Excel.Application')
+        wb = xl.Workbooks.Open(input_file)
 
-    for sheet in wb.Worksheets:
-        sheetname = sheet.name
+        for sheet in wb.Worksheets:
+            sheetname = sheet.name
 
-        if PATTERN.match(sheetname):
-            logging.debug("Converting %s..." % sheetname)
-            sheet.Activate()
+            if PATTERN.match(sheetname):
+                logging.debug("Converting %s..." % sheetname)
+                sheet.Activate()
 
-            filename = sheetname + '.csv'
-            output_path = os.path.normpath(os.path.join(output_dir, filename))
+                filename = sheetname + '.csv'
+                output_path = os.path.normpath(os.path.join(output_dir, filename))
 
-            if os.path.exists(output_path):
-                os.remove(output_path)
+                if os.path.exists(output_path):
+                    os.remove(output_path)
 
-            sheet.SaveAs(output_path, 6) # 6: FileFormat = xlCSV
+                sheet.SaveAs(output_path, 6) # 6: FileFormat = xlCSV
 
-            logging.debug("Converting %s... DONE" % sheetname)
+                logging.debug("Converting %s... DONE" % sheetname)
 
-    wb.Close(False)
-    xl.Quit
+        wb.Close(False)
+        xl.Quit
 
 if __name__ == '__main__':
     logging.getLogger().setLevel(logging.DEBUG)
