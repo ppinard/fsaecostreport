@@ -49,7 +49,7 @@ def capitalize(value):
 
 class CostReportLaTeXWriter(object):
     def write(self, basepath, systems, metadata):
-        filename = 'costreport%i.tex' % self._year
+        filename = 'costreport%i.tex' % metadata.year
         lines = self._write(systems, metadata)
 
         with open(os.path.join(basepath, filename), 'w') as out:
@@ -803,4 +803,5 @@ class PartLaTeXWriter(_ComponentLaTeXWriter):
 
 # TODO: eBOM writer
 class eBOMWriter(object):
-    pass
+    def write(self, basepath, systems, metadata):
+        pass

@@ -124,3 +124,5 @@ ST = System("ST", "Steering System", "F", (255, 153, 0))
 SU = System("SU", "Suspension System", "G", (255, 255, 0))
 WT = System("WT", "heels, Wheels Bearings & Tires", "H", (204, 255, 255))
 
+SYSTEMS = {'BR': BR, 'EN': EN, 'FR': FR, 'EL': EL,
+           'MS': MS, 'ST': ST, 'SU': SU, 'WT': WT}
