@@ -24,7 +24,7 @@ import operator
 # Third party modules.
 
 # Local modules.
-from pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
+from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
 

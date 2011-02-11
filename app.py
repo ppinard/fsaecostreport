@@ -25,12 +25,12 @@ from optparse import OptionParser
 # Third party modules.
 
 # Local modules.
-from costreport.xlscsv import xlstocsv
-from costreport.reader import SystemFileReader, MetadataReader
-from costreport.writer import CostReportLaTeXWriter, eBOMWriter
+from fsaecostreport.xlscsv import xlstocsv
+from fsaecostreport.reader import SystemFileReader, MetadataReader
+from fsaecostreport.writer import CostReportLaTeXWriter, eBOMWriter
 
 # Globals and constants variables.
-from costreport.system import SYSTEMS
+from fsaecostreport.system import SYSTEMS
 
 logging.getLogger().setLevel(logging.DEBUG)
 

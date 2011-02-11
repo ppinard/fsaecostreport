@@ -28,13 +28,13 @@ import glob
 # Third party modules.
 
 # Local modules.
-from metadata import Metadata
-from costtable import Material, Process, Fastener, Tooling
-from component import Part, Assembly
-from pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
+from fsaecostreport.metadata import Metadata
+from fsaecostreport.costtable import Material, Process, Fastener, Tooling
+from fsaecostreport.component import Part, Assembly
+from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
-from constants import \
+from fsaecostreport.constants import \
     (COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, YEAR_FILE, INTRODUCTION_FILE,
      CAR_NUMBER_FILE, UNIVERSITY_FILE, TEAM_NAME_FILE)
 

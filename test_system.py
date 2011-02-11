@@ -20,8 +20,8 @@ import os.path
 # Third party modules.
 
 # Local modules.
-from system import System
-from reader import SystemFileReader
+from fsaecostreport.system import System
+from fsaecostreport.reader import SystemFileReader
 
 # Globals and constants variables.
 TM = System("TM", "Random stuff", "Z", (255, 0, 0))

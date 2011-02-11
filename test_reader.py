@@ -20,8 +20,8 @@ import os.path
 # Third party modules.
 
 # Local modules.
-from system import System
-from reader import \
+from fsaecostreport.system import System
+from fsaecostreport.reader import \
     PartFileReader, AssemblyFileReader, SystemFileReader, MetadataReader
 
 # Globals and constants variables.

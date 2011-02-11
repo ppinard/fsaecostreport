@@ -28,8 +28,8 @@ import os.path
 # Local modules.
 from misctools.format import humanjoin
 
-from latex import create_tabular, escape as e
-from component import Part, Assembly
+from fsaecostreport.latex import create_tabular, escape as e
+from fsaecostreport.component import Part, Assembly
 
 # Globals and constants variables.
 from constants import DRAWINGS_DIR, PICTURES_DIR, LOGO_FILE

@@ -19,7 +19,7 @@ import logging
 # Third party modules.
 
 # Local modules.
-from component import _Component
+from fsaecostreport.component import _Component
 
 # Globals and constants variables.
 

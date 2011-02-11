@@ -29,7 +29,7 @@ from setuputilities.util import find_package_path, find_packages, find_package_d
 # Globals and constants variables.
 
 class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
-    PROJECT_DIR = find_package_path('costreport')
+    PROJECT_DIR = find_package_path('fsaecostreport')
 
     def __init__(self):
         BaseBuild.__init__(self)
@@ -39,7 +39,7 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
         Py2exeBuild.__init__(self)
 
         # Base Build
-        self.metadata.name = "costreport"
+        self.metadata.name = "fsaecostreport"
         self.metadata.version = "0.1"
         self.metadata.author = "Philippe T. Pinard"
         self.metadata.author_email = "philippe.pinard@gmail.com"
@@ -55,9 +55,9 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
         self.metadata.platforms = "Windows OS"
 
         # Setup Build
-        self.packages = find_packages("costreport",
+        self.packages = find_packages("fsaecostreport",
                                       where=self.PROJECT_DIR)
-        self.package_data = find_package_data(package='costreport',
+        self.package_data = find_package_data(package='fsaecostreport',
                                               where=self.PROJECT_DIR)
 
         # Doc Build
