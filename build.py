@@ -18,8 +18,11 @@ __license__ = "GPL v3"
 
 # Standard library modules.
 import os
+import zipfile
+import shutil
 
 # Third party modules.
+from pkg_resources import to_filename
 
 # Local modules.
 from setuputilities.builder import SetupBuild, BaseBuild, DocBuild, TestBuild
@@ -65,6 +68,41 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
 
         # py2exe
         self.console_script = [os.path.join(self.PROJECT_DIR, 'app.py')]
+
+    def bdist_exe(self):
+        Py2exeBuild.bdist_exe(self)
+
+        # rename app.exe to costreport-app.exe
+        old = os.path.join(self.dest_dir, 'app.exe')
+        new = os.path.join(self.dest_dir, 'costreport-app.exe')
+        os.rename(old, new)
+
+        # zip the dest
+        filename = '%s-%s.zip' % (to_filename(self.metadata.name),
+                                  to_filename(self.metadata.version))
+        zip = zipfile.ZipFile(os.path.join(self.dest_dir, filename), mode='w')
+
+        # walk through the file and folders in dest
+        for root, _dirs, files in os.walk(self.dest_dir):
+            for fn in files:
+                if fn == filename:
+                    continue
+
+                abspath = os.path.join(root, fn)
+                relpath = abspath[len(self.dest_dir) + len(os.sep):]
+                relpath = os.path.join('bin', relpath)
+                zip.write(abspath, relpath)
+
+        zip.close()
+
+        # clean up
+        for name in os.listdir(self.dest_dir):
+            path = os.path.join(self.dest_dir, name)
+
+            if os.path.isdir(path):
+                shutil.rmtree(path)
+            elif os.path.isfile(path) and name != filename:
+                os.remove(path)
 
 if __name__ == '__main__':
     build = Build()
