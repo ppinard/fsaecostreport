@@ -265,6 +265,8 @@ It could be less, for example, the tub for a carbon monocoque.
 In summary
 ----------
 
+.. _costtable_do_dont:
+
 A few points of do and don't:
 
 * Always use the IDs

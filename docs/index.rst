@@ -39,17 +39,26 @@ Reviewers/Editors
 -----------------
 
 .. toctree::
-   :glob:
+   :maxdepth: 1
    
-   editors/*
+   editors/installation.rst
+   editors/folder_structure.rst
+   editors/excel.rst
+   editors/drawings.rst
+   editors/pictures.rst
+   editors/extra_files.rst
+   editors/generate.rst
+   editors/ebom.rst
+   editors/submit.rst
+   editors/bug.rst
    
 Developers
 ----------
 
 .. toctree::
-   :glob:
+   :maxdepth: 1
    
-   fsaecostreport/*
+   developers/api.rst
 
 Indices and tables
 ==================

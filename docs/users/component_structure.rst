@@ -3,6 +3,8 @@ Components' structure
 
 The cost report is composed of 8 systems:
 
+.. _systems:
+
 * A. Brake System (BR)
 * B. Engine & Drivetrain (EN)
 * C. Frame & Body (FR)

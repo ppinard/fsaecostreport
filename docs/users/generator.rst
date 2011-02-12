@@ -26,6 +26,8 @@ represented in the following figure:
 The generator comes in at the 4th and 5th step.
 It converts well organised CSVs, drawings and pictures into a LaTeX document, 
 ready to be compiled to a PDF.
+The LaTeX document is a intermediate document to create the final report.
+It does not need to be edited by the users or editors.
 
 The users are in charge of step 1 to 3. 
 They therefore do not have to use the generator per say. 

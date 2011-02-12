@@ -4,7 +4,7 @@ Where do I start?
 The following documents should be read and understood before you start 
 doing anything:
 
-* Section C3 in the SAE rules about the cost report
+* **IMPORTANT** Section C3 in the SAE rules about the cost report
 * Go over the Cost Report Tutorial 
   (:download:`cost_report_2009.pdf </attachments/cost_report_2009.pdf>`). 
   The most important slides are 8, 12 and 18.
