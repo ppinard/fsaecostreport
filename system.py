@@ -7,7 +7,7 @@
 .. module:: system
    :synopsis: System object for each system of the cost report
 
-.. inheritance-diagram:: costreport.system
+.. inheritance-diagram:: fsaecostreport.system
 
 """
 

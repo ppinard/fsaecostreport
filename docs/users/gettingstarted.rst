@@ -20,9 +20,23 @@ Another somewhat good source of information is the
 `FSAE forum <http://fsae.com>`_. 
 
 After that, continue reading the user section of this documentation.
+Note that a lot of useful information may be at the end of the page.
 Refer to the cost report of previous years while keeping in mind that every
 year small changes were made to the cost report and cost report generator.
 Find an answer to all your questions before you start filling in the cost 
 tables.
 The worst thing possible is to have to change something when you have already
 created 25 parts and assemblies.
+
+Master template
+---------------
+
+The latest version of the master template can be found in the Downloads 
+section of https://launchpad.net/fsaecostreport.
+See the documentation about the :ref:`cost tables <costtable>` for more 
+information on how to fill it.
+
+I found a bug
+-------------
+
+Great! Report it in the `Bugs tracker <https://bugs.launchpad.net/fsaecostreport>`_.

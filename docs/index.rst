@@ -31,6 +31,9 @@ Users
    users/component_structure.rst
    users/partnumbering.rst
    users/costtable.rst
+   users/costtable2.rst
+   users/makebuy.rst
+   users/drawings.rst
    
 Reviewers/Editors
 -----------------
@@ -46,7 +49,7 @@ Developers
 .. toctree::
    :glob:
    
-   costreport/*
+   fsaecostreport/*
 
 Indices and tables
 ==================

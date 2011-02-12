@@ -7,7 +7,7 @@
 .. module:: costtable
    :synopsis: Items in the cost tables: material, process, etc.
 
-.. inheritance-diagram:: costreport.costtable
+.. inheritance-diagram:: fsaecostreport.costtable
 
 """
 

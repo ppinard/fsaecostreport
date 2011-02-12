@@ -7,7 +7,7 @@
 .. module:: component
    :synopsis: Main objects of the systems: Part and Assembly
 
-.. inheritance-diagram:: costreport.component
+.. inheritance-diagram:: fsaecostreport.component
 
 """
 

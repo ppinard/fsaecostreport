@@ -7,7 +7,7 @@
 .. module:: metadata
    :synopsis: Metadata related to the cost report
 
-.. inheritance-diagram:: costreport.metadata
+.. inheritance-diagram:: fsaecostreport.metadata
 
 """
 

@@ -7,7 +7,7 @@
 .. module:: reader
    :synopsis: File readers for systems, parts, assemblies and metadata
 
-.. inheritance-diagram:: costreport.reader
+.. inheritance-diagram:: fsaecostreport.reader
 
 """
 

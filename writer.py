@@ -7,7 +7,7 @@
 .. module:: writer
    :synopsis: LaTeX writer of the cost report
 
-.. inheritance-diagram:: costreport.writer
+.. inheritance-diagram:: fsaecostreport.writer
 
 """
 
