@@ -25,8 +25,8 @@ Refer to the cost report of previous years while keeping in mind that every
 year small changes were made to the cost report and cost report generator.
 Find an answer to all your questions before you start filling in the cost 
 tables.
-The worst thing possible is to have to change something when you have already
-created 25 parts and assemblies.
+The worst thing is to have to change something when you have already created 
+25 parts and assemblies.
 
 Master template
 ---------------

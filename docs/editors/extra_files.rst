@@ -26,7 +26,7 @@ It will automatically be scaled to fit the header, but an image of about
 Note that the logo must be a JPG.
 
 The ``introduction.txt`` is a text file with the text for the introduction 
-page of the cost report
+page of the cost report.
 The introduction should fit on one page once in the cost report, therefore
 it should have between 400 and 500 words.
 The introduction will be interpreted as a LaTeX document.

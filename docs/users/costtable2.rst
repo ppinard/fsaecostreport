@@ -3,9 +3,9 @@ Let's make an assembly
 
 .. epigraph::
 
-   *Not another thing to read!* 
+   *Not another page to read!* 
 
-Well this one is easy, an assembly is cost exactly like a part with two 
+Well this one is easy, an assembly is costed exactly like a part with two 
 exceptions: the header and one more table.
 That's why assemblies have a different template than parts.
 You should therefore copy the assembly template sheet and modified it.
@@ -36,5 +36,5 @@ You can use references for the name and part cost.
 The quantity field is important as it is used by the generator to count the
 number of occurrences of a part.
 Again, the subtotal is automatically calculated by the generator.
-It should be the part cost times the quantity.
+It should always be the part cost times the quantity.
 

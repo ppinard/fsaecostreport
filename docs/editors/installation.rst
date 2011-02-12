@@ -56,8 +56,8 @@ This allows to call MikTeX program more easily.
 * Go in *Advanced System Settings*
 * Click on *Environment Variables* (at the bottom)
 * Under *User variables*, click *New*
-* Enter the variable name as ``PATH``
-* Enter the variable value as ``{{ PATH_TO_MIKTEX }}\miktex\bin``.
+* Enter ``PATH`` as the variable name 
+* Enter ``{{ PATH_TO_MIKTEX }}\miktex\bin`` as the variable value.
   You need to replace the ``{{ PATH_TO_MIKTEX }}`` by the installation 
   directory of MikTeX (usually ``c:\Program Files\MikTeX 2.9``)
 * Press *OK* until all the windows are closed.

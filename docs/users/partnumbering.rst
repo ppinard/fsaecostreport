@@ -9,3 +9,4 @@ Incorrectly numbered parts will raise errors.
 Part numbering table as of February 10th, 2011:
 
 .. image:: /images/partnumbering.png
+   :align: center

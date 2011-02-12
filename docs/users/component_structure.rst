@@ -30,7 +30,7 @@ sub-assemblies together or to install an assembly on the car.
 See cost reports from previous years for examples.
 
 Sub-assemblies group parts together.
-For example, tube A and tube are two parts that need to be welded together to
+For example, tube A and tube B are two parts that need to be welded together to
 create the *Exhaust runner*.
 The *Exhaust runner* assembly details the welding process.
 

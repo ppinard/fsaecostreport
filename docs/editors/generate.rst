@@ -15,8 +15,7 @@ When generating the cost report, the generator will always check for errors.
 However, instead of generating the whole cost report every time you want to
 check for errors, the cost report generator allows you to only check for errors
 in one or many systems without generating the actual report.
-The advantage of this is that you can process one system at the time and fix 
-the errors.
+The advantage is that you can process one system at the time and fix its errors.
 Once a system has no more errors, you can mark it off and move to the next one.
 
 How to do this?
@@ -49,7 +48,7 @@ Generating the LaTeX document
 
 After you are done checking for errors (or you decide to skip that step), it is
 now time to generate the LaTeX document.
-If you did everything right before, this is the easiest step in the world.
+If you did everything right before, this is the easiest step of all.
 
 * Open a command line prompt, change directory to the cost report base path
   and type::
@@ -57,7 +56,7 @@ If you did everything right before, this is the easiest step in the world.
    costreport-app -w
    
 * After a few seconds and a lot of things getting printed in the command line
-  prompt, a text file named ``costreportXXXX.tex``will be generated in the
+  prompt, a text file named ``costreportXXXX.tex`` will be generated in the
   cost report base path (the ``XXXX`` are replaced by the year).
 * Do not move this file, it's fine where it is. Move to the next step.
 
@@ -95,7 +94,7 @@ They will most likely look like this::
 Don't panic, these are normal. 
 You might have to rerun the program once or twice to get rid of them.
 To make the cross-reference (links between pages), LaTeX needs to know what
-the references are first (first pass).
+the references are first.
 
 If some of the warnings do not disappear, report a :ref:`bug <bug>`.
 

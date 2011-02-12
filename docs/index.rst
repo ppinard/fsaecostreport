@@ -58,6 +58,8 @@ Developers
 .. toctree::
    :maxdepth: 1
    
+   developers/requirements.rst
+   developers/distribute.rst
    developers/api.rst
 
 Indices and tables

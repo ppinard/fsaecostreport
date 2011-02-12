@@ -25,7 +25,7 @@ the drawings.
 
 Pictures should be saved as JPG files.
 There is also no point of having a crazy resolution and files of 10 Mb. 
-The cost report is printed on a regular printer that doesn't have very high
+The cost report is printed with a regular printer that doesn't have very high
 dpi.
 Large pictures only makes the PDF of the final report very big.
 Pictures of 1024 x 756 pixels with a resolution of 300 dpi are perfect.

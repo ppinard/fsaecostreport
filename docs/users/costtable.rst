@@ -69,7 +69,7 @@ You should never have to add a column.
 Part template
 -------------
 
-After copying the part template, the first thing should be to renamed the 
+After copying the part template, the first thing should be to rename the 
 sheet with the complete part number (e.g. ``BR-00001-AA``).
 
 The part template is made out of 5 sections:
@@ -136,7 +136,7 @@ Why?
 Because the "size" of this material is 0.126 kg. 
 So it should be under ``Size1`` as the units of ``Size1`` are kg.
 The odd one is the quantity.
-The subtotal is always (check the Excel formula):
+The subtotal of a row is always (check the Excel formula):
 
   subtotal = unitcost * quantity
   
@@ -149,7 +149,7 @@ It makes things a lot simpler if the formula is the same for all items.
    ignored by the cost report generator.
    The generator calculates its own subtotal from the unitcost and quantity
    values.
-   So, even if you replace the formula and put 6 trillions $ as the
+   So, even if you replace the formula and put $6 trillions as the
    subtotal of a material, the subtotal that will appear in the cost report
    will be unitcost * quantity of that material.
    
@@ -161,7 +161,7 @@ Your final row should look like this:
 
 .. image:: /images/materials2.png
 
-Another possibility, you will get when selecting a material is that the 
+Another possibility you will get when selecting a material is that the 
 unitcost of an item will be a formula (e.g. ``[C1]*[Size1]^2+[C2]``) instead 
 of a value.
 
@@ -196,8 +196,8 @@ It is very easy to loose points because someone forgot a
    MRTs per year.
    It does NOT have to reflect the actual process that you use in reality
    to make it.
-   For example, you probably used a ratchet to screw the nut on the bolt, well
-   in a production scenario you would probably use a power tool for that 
+   For example, you probably used a ratchet to screw the nut on the bolt.
+   In a production scenario you would probably use a power tool for that 
    (if the bolt is easily accessible).
 
 All the instructions given for the Materials table are valid for the 
@@ -267,7 +267,7 @@ In summary
 
 .. _costtable_do_dont:
 
-A few points of do and don't:
+A few important do and don't:
 
 * Always use the IDs
 * You should never have to erase a formula. 

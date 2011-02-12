@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.47 r22583"
    sodipodi:docname="structure.svg"
-   inkscape:export-filename="/home/ppinard/documents/workspace/pydev/costreport/docs/images/structure.png"
+   inkscape:export-filename="/home/ppinard/documents/workspace/pydev/fsaecostreport/docs/images/structure.png"
    inkscape:export-xdpi="100.14545"
    inkscape:export-ydpi="100.14545">
   <defs
@@ -104,6 +104,20 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2874"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2874-0"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -113,7 +127,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="394.23125"
+     inkscape:cx="385.67795"
      inkscape:cy="87.786738"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -300,7 +314,7 @@
              y="558.57379"
              x="778.88507"
              sodipodi:role="line"
-             id="tspan4077">Part B</tspan></text>
+             id="tspan4077">Part C</tspan></text>
         <rect
            transform="translate(394.28571,179.69629)"
            y="357.20605"
@@ -323,7 +337,7 @@
              y="558.57379"
              x="778.88507"
              id="tspan3766-6"
-             sodipodi:role="line">Part C</tspan></text>
+             sodipodi:role="line">Part D</tspan></text>
         <rect
            transform="translate(394.28571,179.69629)"
            y="357.20605"
@@ -347,7 +361,7 @@
            id="tspan3766-28"
            x="778.88507"
            y="558.57379"
-           style="font-size:14px">Part D</tspan></text>
+           style="font-size:14px">Part E</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:2.01936412;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.01936412, 4.03872824;stroke-dashoffset:0"
          id="rect3789-43"
@@ -382,5 +396,38 @@
        style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 601.14287,437.61996 0,63.51952"
        id="path3966" />
+    <g
+       transform="translate(-467.22416,68.28285)"
+       id="g3791-9">
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+         x="778.88507"
+         y="558.57379"
+         id="text3764-2"><tspan
+           sodipodi:role="line"
+           id="tspan3766-5"
+           x="778.88507"
+           y="558.57379"
+           style="font-size:14px">Part B</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:2.01936412;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.01936412, 4.03872824;stroke-dashoffset:0"
+         id="rect3789-40"
+         width="58.588848"
+         height="33.335033"
+         x="376.7869"
+         y="357.20605"
+         transform="translate(394.28571,179.69629)" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 189.28573,61.288808 0,167.244172"
+       id="path2912"
+       transform="translate(141.85714,376.33115)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 459.28573,61.288808 280.00003,124.23944"
+       id="path3686"
+       transform="translate(141.85714,376.33115)" />
   </g>
 </svg>
