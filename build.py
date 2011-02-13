@@ -29,9 +29,11 @@ from setuputilities.builder import SetupBuild, BaseBuild, DocBuild, TestBuild
 from setuputilities.builder.py2exe import Py2exeBuild
 from setuputilities.util import find_package_path, find_packages, find_package_data
 
+from nosetools.builder import CoverageBuild
+
 # Globals and constants variables.
 
-class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
+class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild, CoverageBuild):
     PROJECT_DIR = find_package_path('fsaecostreport')
 
     def __init__(self):
@@ -40,6 +42,7 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
         DocBuild.__init__(self)
         TestBuild.__init__(self)
         Py2exeBuild.__init__(self)
+        CoverageBuild.__init__(self)
 
         # Base Build
         self.metadata.name = "fsaecostreport"
