@@ -64,10 +64,10 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild):
                                               where=self.PROJECT_DIR)
 
         # Doc Build
-        self.doc_dir = os.path.join(self.PROJECT_DIR, 'docs')
+        self.doc_dir = os.path.join(self.PROJECT_DIR, 'doc')
 
         # py2exe
-        self.console_script = [os.path.join(self.PROJECT_DIR, 'app.py')]
+        self.console_scripts = [os.path.join(self.PROJECT_DIR, 'app.py')]
 
     def bdist_exe(self):
         Py2exeBuild.bdist_exe(self)
