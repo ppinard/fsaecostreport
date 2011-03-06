@@ -235,12 +235,15 @@ class CostReportLaTeXWriter(object):
 
             for component in system.get_components():
                 qty = component.quantity
+
                 materials_cost += sum(map(SUBTOTAL, component.materials)) * qty
                 processes_cost += sum(map(SUBTOTAL, component.processes)) * qty
                 fasteners_cost += sum(map(SUBTOTAL, component.fasteners)) * qty
                 toolings_cost += sum(map(SUBTOTAL, component.toolings)) * qty
-                system_cost += component.unitcost * qty
 
+                # use of tablecost instead of unitcost not to include the cost
+                # of parts twice in the system cost
+                system_cost += component.tablecost * qty
 
             row = [r'\rowcolor{color%s}\raggedright %s' % (system.letter, system.name),
                    r'\centering\$ %4.2f' % materials_cost,
@@ -364,7 +367,6 @@ class SystemLaTeXWriter(object):
                   r'\color{white}\centering Photo(s)']
         rows.append(header)
 
-
         for component in hierarchy:
             if len(component.drawings) == 1:
                 drawings = r'\pageref{dwg:%s-0}' % component.pn
@@ -382,7 +384,8 @@ class SystemLaTeXWriter(object):
             else:
                 pictures = ''
 
-            unitcost = component.unitcost
+            # use tablecost instead of unitcost not to include the cost of parts
+            unitcost = component.tablecost
             quantity = component.quantity
             totalcost = unitcost * quantity
 
@@ -722,12 +725,6 @@ class _ComponentLaTeXWriter(object):
         rows.append(row)
 
         return rows
-
-    def write_drawings(self):
-        pass
-
-    def write_pictures(self):
-        pass
 
 class AssemblyLaTeXWriter(_ComponentLaTeXWriter):
     def write_costtables(self, component):

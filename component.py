@@ -169,7 +169,21 @@ class _Component(object):
     def unitcost(self):
         """
         Returns the unit cost of the component by adding the subtotal of the
-        materials, processes, fasteners and toolings.
+        materials, processes, fasteners and toolings as well as the parts
+        for assembly components.
+        """
+        cost = self.tablecost
+
+        for component, quantity in self.components.iteritems():
+            cost += component.unitcost * quantity
+
+        return cost
+
+    @property
+    def tablecost(self):
+        """
+        Returns the cost of the materials, processes, fasteners and toolings.
+        For assemblies, the cost of other parts is NOT included.
         """
         subtotal_getter = operator.attrgetter('subtotal')
 
@@ -179,9 +193,6 @@ class _Component(object):
         cost += sum(map(subtotal_getter, self.processes))
         cost += sum(map(subtotal_getter, self.fasteners))
         cost += sum(map(subtotal_getter, self.toolings))
-
-        for component, quantity in self.components.iteritems():
-            cost += component.unitcost * quantity
 
         return cost
 
