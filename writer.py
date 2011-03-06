@@ -22,13 +22,14 @@ __license__ = "GPL v3"
 import operator
 import posixpath
 import os.path
+import csv
 
 # Third party modules.
 
 # Local modules.
 from misctools.format import humanjoin
 
-from fsaecostreport.latex import create_tabular, escape as e
+from fsaecostreport.latex import create_tabular, escape as e, AuxReader
 from fsaecostreport.component import Part, Assembly
 
 # Globals and constants variables.
@@ -393,7 +394,7 @@ class SystemLaTeXWriter(object):
             assembly = humanjoin(names, andchr=r'\&')
 
             if isinstance(component, Assembly):
-                row = [r'\hline\emph{%s}' % e(capitalize(component.name))]
+                row = [r'\hline\rowcolor[gray]{.9}{%s}' % e(capitalize(component.name))]
             elif isinstance(component, Part):
                 row = [r'%s' % e(capitalize(component.name))]
 
@@ -801,4 +802,152 @@ class PartLaTeXWriter(_ComponentLaTeXWriter):
 # TODO: eBOM writer
 class eBOMWriter(object):
     def write(self, basepath, systems, metadata):
-        pass
+        pagerefs = AuxReader().read(basepath)
+
+        filepath = os.path.join(basepath, metadata.ebom_filename + ".csv")
+        writer = csv.writer(open(filepath, 'w'))
+
+        rows = self._create_rows(systems, metadata, pagerefs)
+        for row in rows:
+            writer.writerow(row)
+
+    def _create_rows(self, systems, metadata, pagerefs):
+        rows = []
+
+        # spreadsheet header
+        row = ['Competition Code', 'FSAEM'] + [''] * 13
+        rows.append(row)
+
+        row = ['Year', str(metadata.year)[2:]] + [''] * 13
+        rows.append(row)
+
+        row = ['Car #', str(metadata.car_number).zfill(3)] + [''] * 13
+        rows.append(row)
+
+        # empty row
+        row = [''] * 15
+        rows.append(row)
+
+        # table header
+        header = ['Line Num.',
+                  'Area of Commodity',
+                  'Asm/Prt #',
+                  'Rev. Lvl.',
+                  'Asm',
+                  'Component',
+                  'Description',
+                  'Unit Cost',
+                  'Quantity',
+                  'Material Cost',
+                  'Process Cost',
+                  'Fastener Cost',
+                  'Tooling Cost',
+                  'Total Cost',
+                  'Details Page Number']
+        rows.append(header)
+
+        materials_totalcost = 0.0
+        processes_totalcost = 0.0
+        fasteners_totalcost = 0.0
+        toolings_totalcost = 0.0
+        systems_totalcost = 0.0
+
+        for system in sorted(systems):
+            (system_rows, materials_cost, processes_cost,
+                fasteners_cost, toolings_cost, system_cost) = \
+                    self._create_system_rows(system, pagerefs)
+
+            rows.extend(system_rows)
+
+            materials_totalcost += materials_cost
+            processes_totalcost += processes_cost
+            fasteners_totalcost += fasteners_cost
+            toolings_totalcost += toolings_cost
+            systems_totalcost += system_cost
+
+        # add top row since the vehicle cost is now known
+        row = ['University', metadata.university] + [''] * 10 + \
+                ['Total Vehicle Cost', '', systems_totalcost]
+        rows.insert(0, row)
+
+        # vehicle total row
+        row = ['',
+               'Vehicle Total',
+               '', '', '',
+               'Total',
+               '', '', '',
+               materials_totalcost,
+               processes_totalcost,
+               fasteners_totalcost,
+               toolings_totalcost,
+               systems_totalcost,
+               '']
+        rows.append(row)
+
+        return rows
+
+    def _create_system_rows(self, system, pagerefs):
+        rows = []
+
+        materials_totalcost = 0.0
+        processes_totalcost = 0.0
+        fasteners_totalcost = 0.0
+        toolings_totalcost = 0.0
+        system_totalcost = 0.0
+
+        for line_num, component in enumerate(system.get_hierarchy()):
+            # use tablecost instead of unitcost not to include the cost of parts
+            unitcost = component.tablecost
+            quantity = component.quantity
+            totalcost = unitcost * quantity
+
+            materials_cost = sum(map(SUBTOTAL, component.materials))
+            materials_totalcost += materials_cost * quantity
+
+            processes_cost = sum(map(SUBTOTAL, component.processes))
+            processes_totalcost += processes_cost * quantity
+
+            fasteners_cost = sum(map(SUBTOTAL, component.fasteners))
+            fasteners_totalcost += fasteners_cost * quantity
+
+            toolings_cost = sum(map(SUBTOTAL, component.toolings))
+            toolings_totalcost += toolings_cost * quantity
+
+            system_totalcost += totalcost
+
+            names = [e(capitalize(parent.name)) for parent in component.parents]
+            assembly = humanjoin(names, andchr=r'\&')
+
+            row = [line_num + 1,
+                   str(system),
+                   component.pn_base,
+                   component.revision,
+                   assembly,
+                   capitalize(component.name),
+                   capitalize(component.details),
+                   unitcost,
+                   quantity,
+                   materials_cost,
+                   processes_cost,
+                   fasteners_cost,
+                   toolings_cost,
+                   totalcost,
+                   pagerefs.get(component.pn, "")]
+            rows.append(row)
+
+        # area total row
+        row = ['',
+               str(system),
+               '', '', '',
+               'Area Total',
+               '', '', '',
+               materials_totalcost,
+               processes_totalcost,
+               fasteners_totalcost,
+               toolings_totalcost,
+               system_totalcost,
+               '']
+        rows.append(row)
+
+        return (rows, materials_totalcost, processes_totalcost,
+                fasteners_totalcost, toolings_totalcost, system_totalcost)

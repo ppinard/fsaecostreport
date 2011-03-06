@@ -31,6 +31,8 @@ class TestSystem(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
+        TM.clear_components()
+
         basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
         self.system = SystemFileReader().read(basepath, TM)
 

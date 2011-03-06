@@ -17,6 +17,9 @@ __copyright__ = "Copyright (c) 2011 Philippe T. Pinard"
 __license__ = "GPL v3"
 
 # Standard library modules.
+import os
+import glob
+import re
 
 # Third party modules.
 
@@ -93,3 +96,24 @@ def create_tabular(data, environment='tabular',
     tabular += [r'\end{%s}' % environment]
 
     return tabular
+
+class AuxReader(object):
+    def read(self, basepath):
+        files = glob.glob(os.path.join(basepath, "*.aux"))
+        if not files:
+            return {}
+
+        newlabel_lines = []
+        with open(files[0], 'r') as f:
+            for line in f.readlines():
+                if line.startswith("\\newlabel{ct:"):
+                    newlabel_lines.append(line.strip())
+
+        pagerefs = {}
+        for line in newlabel_lines:
+            pn = line[13:24]
+            page = int(re.findall('{(\d+)}', line)[0])
+            pagerefs.setdefault(pn, page)
+
+        return pagerefs
+

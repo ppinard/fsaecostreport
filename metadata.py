@@ -33,3 +33,7 @@ class Metadata(object):
         self.university = university
         self.team_name = team_name
         self.introduction = introduction
+
+    @property
+    def ebom_filename(self):
+        return str(self.car_number).zfill(3) + "_" + self.university + "_FSAEM_CR"
