@@ -49,9 +49,13 @@ if __name__ == '__main__':
                       dest='read', default=False,
                       help="Read the CSVs, drawings and pictures and check for errors")
 
-    parser.add_option('-c', '--create', action="store_true",
-                      dest='create', default=False,
-                      help="Read, process and write the cost report and eBOM")
+    parser.add_option('-w', '--write', action="store_true",
+                      dest='write', default=False,
+                      help="Read, process and write the cost report")
+
+    parser.add_option('-e', '--ebom', action="store_true",
+                      dest='ebom', default=False,
+                      help="Read, process and write the eBOM")
 
     options, args = parser.parse_args()
 
@@ -94,7 +98,7 @@ if __name__ == '__main__':
         MetadataReader().read(basepath)
         logging.info("Reading metadata... DONE")
 
-    elif options.create:
+    elif options.write:
         # read systems
         for system_label in systems_labels:
             logging.info("Reading system %s..." % system_label)
@@ -111,9 +115,22 @@ if __name__ == '__main__':
         CostReportLaTeXWriter().write(basepath, SYSTEMS.values(), metadata)
         logging.info("Writing cost report... DONE")
 
+    elif options.ebom:
+        # read systems
+        for system_label in systems_labels:
+            logging.info("Reading system %s..." % system_label)
+            SystemFileReader().read(basepath, SYSTEMS[system_label])
+            logging.info("Reading system %s... DONE" % system_label)
+
+        # read metadata
+        logging.info("Reading metadata...")
+        metadata = MetadataReader().read(basepath)
+        logging.info("Reading metadata... DONE")
+
         # write eBOM
         logging.info("Writing eBOM...")
         eBOMWriter().write(basepath, SYSTEMS.values(), metadata)
         logging.info("Writing eBOM... DONE")
+
     else:
         parser.print_help()
