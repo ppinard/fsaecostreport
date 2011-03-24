@@ -253,7 +253,7 @@ class CostReportLaTeXWriter(object):
                 # of parts twice in the system cost
                 system_cost += component.tablecost * qty
 
-            row = [r'\rowcolor{color%s}\raggedright %s' % (system.letter, system.name),
+            row = [r'\rowcolor{color%s}\raggedright %s' % (system.letter, e(system.name)),
                    r'\centering\$ %4.2f' % materials_cost,
                    r'\centering\$ %4.2f' % processes_cost,
                    r'\centering\$ %4.2f' % fasteners_cost,
@@ -331,7 +331,7 @@ class SystemLaTeXWriter(object):
 
         lines = []
 
-        lines += [r'\chapter{%s}' % system.name]
+        lines += [r'\chapter{%s}' % e(system.name)]
         lines += [r'\newpage', '']
 
         # BOM

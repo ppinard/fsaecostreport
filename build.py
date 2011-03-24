@@ -40,7 +40,7 @@ project = Project(find_package_path('fsaecostreport'))
 
 # Base Build
 project.metadata.name = "fsaecostreport"
-project.metadata.version = "0.3"
+project.metadata.version = "0.3.1"
 project.metadata.author = "Philippe T. Pinard"
 project.metadata.author_email = "philippe.pinard@gmail.com"
 project.metadata.description = "Generator of the FSAE Cost Report"
