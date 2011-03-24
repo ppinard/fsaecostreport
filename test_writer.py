@@ -58,9 +58,9 @@ class TestCostReportLaTeXWriter(unittest.TestCase):
 
         TM.clear_components()
 
-        basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        self.system = SystemFileReader().read(basepath, TM)
-        self.metadata = MetadataReader().read(basepath)
+        self.basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
+        self.system = SystemFileReader().read(self.basepath, TM)
+        self.metadata = MetadataReader().read(self.basepath)
 
         self.writer = CostReportLaTeXWriter()
 
@@ -71,8 +71,8 @@ class TestCostReportLaTeXWriter(unittest.TestCase):
         self.assertTrue(True)
 
     def testwrite(self):
-        lines = self.writer._write([self.system], self.metadata)
-        self.assertEqual(285, len(lines))
+        lines = self.writer._write(self.basepath, [self.system], self.metadata)
+        self.assertEqual(286, len(lines))
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)

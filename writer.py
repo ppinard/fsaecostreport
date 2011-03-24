@@ -51,14 +51,14 @@ def capitalize(value):
 class CostReportLaTeXWriter(object):
     def write(self, basepath, systems, metadata):
         filename = 'costreport%i.tex' % metadata.year
-        lines = self._write(systems, metadata)
+        lines = self._write(basepath, systems, metadata)
 
         with open(os.path.join(basepath, filename), 'w') as out:
             for line in lines:
                 out.write(line + "\n")
         out.close()
 
-    def _write(self, systems, metadata):
+    def _write(self, basepath, systems, metadata):
         lines = []
 
         lines += self.write_header(metadata.year)
@@ -75,7 +75,7 @@ class CostReportLaTeXWriter(object):
         lines += ['']
 
         # content
-        lines += self.write_frontmatter(systems, metadata.introduction)
+        lines += self.write_frontmatter(basepath, systems, metadata.introduction)
         lines += ['']
 
         lines += self.write_systems(systems)
@@ -158,7 +158,7 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_frontmatter(self, systems, introduction):
+    def write_frontmatter(self, basepath, systems, introduction):
         lines = []
 
         lines += [r'\pagenumbering{roman}']
@@ -170,7 +170,7 @@ class CostReportLaTeXWriter(object):
         lines += self.write_cost_summary(systems)
         lines += [r'\newpage', '']
 
-        lines += self.write_standard_partnumbering()
+        lines += self.write_standard_partnumbering(basepath)
         lines += [r'\newpage', '']
 
         lines += self.write_toc()
@@ -271,9 +271,16 @@ class CostReportLaTeXWriter(object):
 
         return rows
 
-    def write_standard_partnumbering(self):
-        #TODO: Standard part numbering
-        return []
+    def write_standard_partnumbering(self, basepath):
+        lines = []
+
+        lines += [r'\section{Standard Part Numbering}']
+
+        path = os.path.join(basepath, "part_numbering.pdf")
+        if os.path.exists(path):
+            lines += [r'\includegraphics[height=0.8\textheight]{%s}' % path]
+
+        return lines
 
     def write_toc(self):
         lines = []
@@ -799,7 +806,6 @@ class AssemblyLaTeXWriter(_ComponentLaTeXWriter):
 class PartLaTeXWriter(_ComponentLaTeXWriter):
     pass
 
-# TODO: eBOM writer
 class eBOMWriter(object):
     def write(self, basepath, systems, metadata):
         pagerefs = AuxReader().read(basepath)
