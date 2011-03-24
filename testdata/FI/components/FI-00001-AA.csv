@@ -1,0 +1,55 @@
+University,McGill University,,Car #,046,,Asm Cost,19.99333333,,
+System,Random Stuff,,,,,Qty,1,,
+Assembly,Push bar,,,,,,,,
+Part,Cup holder,,,,,,,,
+P/N Base,00001,,,,,Extended Cost,19.99333333,,
+Suffix,AA,,,,,,,,
+Details,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Materials,,,,,,,,,
+ID,Material,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
+754,Titanium (per kg),ring,8.8,0.4,kg,,,1,8.8
+754,Titanium (per kg),bottom,4.4,0.2,kg,,,1,4.4
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,13.2
+,,,,,,,,,
+Processes,,,,,,,,,
+ID,Process,Use,UnitCost,Unit,Quantity,Multiplier ID,Mult. Val.,Sub Total,
+141,Sheet metal bends,bend bottom ,0.25,bend,1,,,0.25,
+136,Tapping holes,drill holes,0.35,hole,4,20,3.65,5.11,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,Sub Total,5.36,
+,,,,,,,,,
+Fasteners,,,,,,,,,
+ID,Fastener,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
+30,"Nut, Grade 10.9 (SAE 8)",Attach bottom to ring,0.05,25.4,mm,5.4,mm,4,0.2
+17,"Bolt, Grade 10.9 (SAE 8)",Attach bottom to ring,0.1,25.4,mm,5.4,mm,4,0.4
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,0.6
+,,,,,,,,,
+Tooling,,,,,,,,,
+ID,Tooling,Use,UnitCost,Unit,Quantity,PVF,FracIncld,Sub Total,
+11,Welds - Welding Fixture,,500,point,5,3000,,0.833333333,
+,,,,,,3000,,0,
+,,,,,,,Sub Total,0.833333333,
+,,,,,,,,,
+,,,,,,,,,

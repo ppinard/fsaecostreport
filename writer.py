@@ -31,6 +31,7 @@ from misctools.format import humanjoin
 
 from fsaecostreport.latex import create_tabular, escape as e, AuxReader
 from fsaecostreport.component import Part, Assembly
+import fsaecostreport.graph as graph
 
 # Globals and constants variables.
 from constants import DRAWINGS_DIR, PICTURES_DIR, LOGO_FILE
@@ -167,7 +168,7 @@ class CostReportLaTeXWriter(object):
         lines += self.write_introduction(introduction)
         lines += [r'\newpage', '']
 
-        lines += self.write_cost_summary(systems)
+        lines += self.write_cost_summary(basepath, systems)
         lines += [r'\newpage', '']
 
         lines += self.write_standard_partnumbering(basepath)
@@ -192,7 +193,7 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_cost_summary(self, systems):
+    def write_cost_summary(self, basepath, systems):
         lines = []
 
         lines += [r'\section{Cost Summary}']
@@ -207,6 +208,12 @@ class CostReportLaTeXWriter(object):
                                format_after_header=r'\hline\endhead',
                                format_between_rows=r'\hline', header_endrow=1)
         lines += [r'\renewcommand{\arraystretch}{1}']
+        lines += [r'\newpage']
+
+        self._create_cost_summary_chart(basepath, systems)
+        lines += [r'\begin{center}']
+        lines += [r'\includegraphics[height=0.8\textheight]{cost_summary}']
+        lines += [r'\end{center}']
 
         return lines
 
@@ -271,6 +278,9 @@ class CostReportLaTeXWriter(object):
 
         return rows
 
+    def _create_cost_summary_chart(self, basepath, systems):
+        graph.cost_summary(basepath, systems)
+
     def write_standard_partnumbering(self, basepath):
         lines = []
 
@@ -278,7 +288,9 @@ class CostReportLaTeXWriter(object):
 
         path = os.path.join(basepath, "part_numbering.pdf")
         if os.path.exists(path):
-            lines += [r'\includegraphics[height=0.8\textheight]{%s}' % path]
+            lines += [r'\begin{center}']
+            lines += [r'\includegraphics[height=0.8\textheight]{part_numbering}']
+            lines += [r'\end{center}']
 
         return lines
 
