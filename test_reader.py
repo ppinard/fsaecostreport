@@ -160,7 +160,7 @@ class TestAssemblyReader(unittest.TestCase):
         TM.clear_components()
 
         testdata = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        filepath = os.path.join(testdata, 'TM', 'components', 'TM-A0001-AA.csv')
+        filepath = os.path.join(testdata, 'TM', 'components', 'TM-A1100-AA.csv')
         self.assy = AssemblyFileReader().read(filepath, TM)
 
     def tearDown(self):
@@ -171,11 +171,11 @@ class TestAssemblyReader(unittest.TestCase):
 
     def testheader(self):
         self.assertEqual('Push bar', self.assy.name)
-        self.assertEqual('A0001', self.assy.pn_base)
+        self.assertEqual('A1100', self.assy.pn_base)
         self.assertEqual('AA', self.assy.revision)
         self.assertEqual('', self.assy.details)
-        self.assertEqual('TM-A0001-AA', self.assy.partnumber)
-        self.assertEqual('TM-A0001-AA', self.assy.pn)
+        self.assertEqual('TM-A1100-AA', self.assy.partnumber)
+        self.assertEqual('TM-A1100-AA', self.assy.pn)
         self.assertEqual(2, self.assy.quantity)
 
     def testcomponents(self):
@@ -265,7 +265,7 @@ class TestAssemblyReader(unittest.TestCase):
 
     def testpictures(self):
         self.assertEqual(1, len(self.assy.pictures))
-        self.assertEqual('TM-A0001-AA.jpg', os.path.basename(self.assy.pictures[0]))
+        self.assertEqual('TM-A1100-AA.jpg', os.path.basename(self.assy.pictures[0]))
 
 class TestSystemReader(unittest.TestCase):
 
@@ -284,17 +284,17 @@ class TestSystemReader(unittest.TestCase):
     def testcomponents(self):
         self.assertEqual(4, len(self.system._components))
 
-        assy1 = self.system.get_component('TM-A1000-AA')
-        assy2 = self.system.get_component('TM-A0001-AA')
-        assy3 = self.system.get_component('TM-A0002-AA')
+        assy1 = self.system.get_component('TM-A0000-AA')
+        assy2 = self.system.get_component('TM-A1100-AA')
+        assy3 = self.system.get_component('TM-A1200-AA')
         part = self.system.get_component('TM-00001-AA')
 
         self.assertEqual('Pusher', assy1.name)
-        self.assertEqual('A1000', assy1.pn_base)
+        self.assertEqual('A0000', assy1.pn_base)
         self.assertEqual('AA', assy1.revision)
         self.assertEqual('', assy1.details)
-        self.assertEqual('TM-A1000-AA', assy1.partnumber)
-        self.assertEqual('TM-A1000-AA', assy1.pn)
+        self.assertEqual('TM-A0000-AA', assy1.partnumber)
+        self.assertEqual('TM-A0000-AA', assy1.pn)
         self.assertEqual(1, len(assy1.components))
         self.assertEqual(assy2, assy1.components.keys()[0])
         self.assertEqual(2, assy1.components.values()[0])
@@ -303,11 +303,11 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual(1, assy1.quantity)
 
         self.assertEqual('Push bar', assy2.name)
-        self.assertEqual('A0001', assy2.pn_base)
+        self.assertEqual('A1100', assy2.pn_base)
         self.assertEqual('AA', assy2.revision)
         self.assertEqual('', assy2.details)
-        self.assertEqual('TM-A0001-AA', assy2.partnumber)
-        self.assertEqual('TM-A0001-AA', assy2.pn)
+        self.assertEqual('TM-A1100-AA', assy2.partnumber)
+        self.assertEqual('TM-A1100-AA', assy2.pn)
         self.assertEqual(1, len(assy2.components))
         self.assertEqual(part, assy2.components.keys()[0])
         self.assertEqual(2, assy2.components.values()[0])
@@ -316,11 +316,11 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual(2, assy2.quantity)
 
         self.assertEqual('Cart', assy3.name)
-        self.assertEqual('A0002', assy3.pn_base)
+        self.assertEqual('A1200', assy3.pn_base)
         self.assertEqual('AA', assy3.revision)
         self.assertEqual('', assy3.details)
-        self.assertEqual('TM-A0002-AA', assy3.partnumber)
-        self.assertEqual('TM-A0002-AA', assy3.pn)
+        self.assertEqual('TM-A1200-AA', assy3.partnumber)
+        self.assertEqual('TM-A1200-AA', assy3.pn)
         self.assertEqual(1, len(assy3.components))
         self.assertEqual(part, assy3.components.keys()[0])
         self.assertEqual(3, assy3.components.values()[0])

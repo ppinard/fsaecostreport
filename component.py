@@ -91,7 +91,8 @@ class _Component(object):
         self.pictures = []
 
         # check
-        self._validate_pn()
+        if not self._validate_pn():
+            raise ValueError, "Incorrect P/N (%s)" % self.pn
 
     def __str__(self):
         return self.name
@@ -119,11 +120,9 @@ class _Component(object):
                 return - 1
 
         # designation
-        if self.pn_base[1] != other.pn_base[1]:
-            if self.pn_base[1] == '0':
-                return - 1
-            else:
-                return cmp(self.pn_base[1] , other.pn_base[1])
+        c = -cmp(self.pn_base[1] , other.pn_base[1])
+        if c != 0:
+            return c
 
         # category
         c = cmp(self.pn_base[2], other.pn_base[2])

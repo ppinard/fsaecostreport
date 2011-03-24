@@ -1,14 +1,14 @@
-University,McGill University,,Car #,046,,Asm Cost,47.785,,
-System,Random Stuff,,,,,Qty,2,,
-Assembly,Push bar,,,,,,,,
-P/N Base,A0001,,,,,Extended Cost,95.57,,
+University,McGill University,,Car #,046,,Asm Cost,95.57,,
+System,Random Stuff,,,,,Qty,1,,
+Assembly,Pusher,,,,,,,,
+P/N Base,A0000,,,,,Extended Cost,95.57,,
 Suffix,AA,,,,,,,,
 Details,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
 Parts,,,,,,,,,
 ItemOrder,Part,Part Cost,Quantity,Sub Total,,,,,
-FI-00001-AA,Cup holder,19.99333333,2,39.98666667,,,,,
+TM-A1100-AA,Push bar,47.785,2,95.57,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
@@ -17,22 +17,20 @@ FI-00001-AA,Cup holder,19.99333333,2,39.98666667,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
-,,,Sub Total,39.98666667,,,,,
+,,,Sub Total,95.57,,,,,
 ,,,,,,,,,
 Materials,,,,,,,,,
 ID,Material,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
-752,"Steel, Mild (per kg)",Tube,1.125,0.5,kg,,,1,1.125
-752,"Steel, Mild (per kg)",Handle,0.9,0.4,kg,,,1,0.9
 ,,,,,,,,,0
 ,,,,,,,,,0
 ,,,,,,,,,0
 ,,,,,,,,,0
-,,,,,,,,Sub Total,2.025
+,,,,,,,,,0
+,,,,,,,,,0
+,,,,,,,,Sub Total,0
 ,,,,,,,,,
 Processes,,,,,,,,,
 ID,Process,Use,UnitCost,Unit,Quantity,Multiplier ID,Mult. Val.,Sub Total,
-150,Weld - Round Tubing,Weld handle to main tube,0.38,cm,5,,,1.9,
-150,Weld - Round Tubing,Weld cup holder to tube,0.38,cm,4,22,2,3.04,
 ,,,,,,,,0,
 ,,,,,,,,0,
 ,,,,,,,,0,
@@ -44,7 +42,9 @@ ID,Process,Use,UnitCost,Unit,Quantity,Multiplier ID,Mult. Val.,Sub Total,
 ,,,,,,,,0,
 ,,,,,,,,0,
 ,,,,,,,,0,
-,,,,,,,Sub Total,4.94,
+,,,,,,,,0,
+,,,,,,,,0,
+,,,,,,,Sub Total,0,
 ,,,,,,,,,
 Fasteners,,,,,,,,,
 ID,Fastener,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
@@ -60,8 +60,8 @@ ID,Fastener,Use,UnitCost,Size1,Unit1,Size2,Unit2,Quantity,Sub Total
 ,,,,,,,,,
 Tooling,,,,,,,,,
 ID,Tooling,Use,UnitCost,Unit,Quantity,PVF,FracIncld,Sub Total,
-11,Welds - Welding Fixture,Weld,500,point,5,3000,,0.833333333,
+,,Weld,,,,3000,,0,
 ,,,,,,3000,,0,
-,,,,,,,Sub Total,0.833333333,
+,,,,,,,Sub Total,0,
 ,,,,,,,,,
 ,,,,,,,,,

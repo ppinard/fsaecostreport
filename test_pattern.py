@@ -28,8 +28,8 @@ class Test(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        self.sys_assy = 'TM-A1000-AA'
-        self.sub_assy = 'TM-A0101-AA'
+        self.sys_assy = 'TM-A0000-AA'
+        self.sub_assy = 'TM-A1100-AA'
         self.part = 'TM-00102-BB'
 
     def tearDown(self):
