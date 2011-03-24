@@ -40,7 +40,7 @@ project = Project(find_package_path('fsaecostreport'))
 
 # Base Build
 project.metadata.name = "fsaecostreport"
-project.metadata.version = "0.2"
+project.metadata.version = "0.3"
 project.metadata.author = "Philippe T. Pinard"
 project.metadata.author_email = "philippe.pinard@gmail.com"
 project.metadata.description = "Generator of the FSAE Cost Report"
@@ -73,7 +73,7 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild, CoverageBui
         SetupBuild.__init__(self, project)
         DocBuild.__init__(self, project)
         TestBuild.__init__(self, project)
-        Py2exeBuild.__init__(self, project)
+        Py2exeBuild.__init__(self, project, matplotlib=True)
         CoverageBuild.__init__(self, project)
 
     def bdist_exe(self):
@@ -110,7 +110,7 @@ class Build(BaseBuild, SetupBuild, DocBuild, TestBuild, Py2exeBuild, CoverageBui
         zip.close()
 
         # clean up
-        cleanup([os.path.join(self.dest_dir, 'exe')])
+#        cleanup([os.path.join(self.dest_dir, 'exe')])
 
 if __name__ == '__main__':
     build = Build(project)

@@ -22,7 +22,9 @@ __license__ = "GPL v3"
 import os
 
 # Third party modules.
-from pylab import * #@UnusedWildImport
+from matplotlib.figure import Figure
+from matplotlib.axes import Axes
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 # Local modules.
 
@@ -48,17 +50,19 @@ def cost_summary(basepath, systems):
 
         return names, colours, values
 
-    figure(1, figsize=(10, 7), facecolor='w')
-    axes([0.1, 0.1, 0.6, 0.8])
+    fig = Figure(figsize=(10, 7), facecolor='w')
+    ax = Axes(fig, rect=[0.1, 0.1, 0.6, 0.8])
+    fig.add_axes(ax)
 
     names, colours, values = calculate_values(systems)
     labels = ['%.2f$' % value for value in values]
 
     patches, _texts, _autotexts = \
-        pie(values, labels=labels, colors=colours, autopct='%1.1f%%', shadow=True)
+        ax.pie(values, labels=labels, colors=colours, autopct='%1.1f%%', shadow=True)
 
-    figlegend(patches, names, 'center right')
+    fig.legend(patches, names, 'center right')
 
     path = os.path.join(basepath, "cost_summary.pdf")
-    savefig(path)
+    fig.set_canvas(FigureCanvasAgg(fig));
+    fig.savefig(path)
 
