@@ -72,7 +72,7 @@ class TestCostReportLaTeXWriter(unittest.TestCase):
 
     def testwrite(self):
         lines = self.writer._write(self.basepath, [self.system], self.metadata)
-        self.assertEqual(290, len(lines))
+        self.assertEqual(296, len(lines))
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)

@@ -107,8 +107,7 @@ class System(object):
                 orphans.append(component)
 
         hierarchy = []
-        print sorted(orphans, reverse=True)
-        for orphan in sorted(orphans, reverse=True):
+        for orphan in reversed(sorted(orphans)):
             for component in orphan.get_hierarchy():
                 if component not in hierarchy:
                     hierarchy.append(component)

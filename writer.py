@@ -29,7 +29,8 @@ import csv
 # Local modules.
 from misctools.format import humanjoin
 
-from fsaecostreport.latex import create_tabular, escape as e, AuxReader
+from fsaecostreport.latex import \
+    create_tabular, escape as e, AuxReader, escape_math as m
 from fsaecostreport.component import Part, Assembly
 import fsaecostreport.graph as graph
 
@@ -185,11 +186,13 @@ class CostReportLaTeXWriter(object):
         lines = []
 
         lines += [r'\section{Introduction}']
-        lines += [r'\begin{multicols}{2}]']
+        lines += [r'\doublespacing']
+        lines += [r'\begin{multicols}{2}']
 
         lines += introduction
 
         lines += [r'\end{multicols}']
+        lines += [r'\singlespacing']
 
         return lines
 
@@ -273,7 +276,7 @@ class CostReportLaTeXWriter(object):
                r'\centering\textbf{\$ %4.2f}' % processes_totalcost,
                r'\centering\textbf{\$ %4.2f}' % fasteners_totalcost,
                r'\centering\textbf{\$ %4.2f}' % toolings_totalcost,
-               r'\centering\textbf{\$ %4.2f}' % toolings_totalcost]
+               r'\centering\textbf{\$ %4.2f}' % systems_totalcost]
         rows.append(row)
 
         return rows
@@ -442,6 +445,8 @@ class SystemLaTeXWriter(object):
             elif isinstance(component, Part):
                 lines += PartLaTeXWriter().write_costtables(component)
 
+            lines += [r'\newpage']
+
         return lines
 
     def write_drawings(self, system, hierarchy):
@@ -499,7 +504,7 @@ class _ComponentLaTeXWriter(object):
     def _create_header_lines(self, component):
         lines = []
 
-        lines += [r'\subsection{%s (%s)}' % (component.name, component.pn)]
+        lines += [r'\subsection{%s (%s)}' % (e(component.name), component.pn)]
         lines += [r'\label{ct:%s}' % component.pn]
 
         return lines
@@ -542,12 +547,12 @@ class _ComponentLaTeXWriter(object):
         # rows
         for material in materials:
             if material.size1:
-                size1 = '%s $%s$' % (decimal(material.size1), e(material.unit1))
+                size1 = '%s $%s$' % (decimal(material.size1), m(material.unit1))
             else:
                 size1 = r'\ '
 
             if material.size2:
-                size2 = '%s $%s$' % (decimal(material.size2), e(material.unit2))
+                size2 = '%s $%s$' % (decimal(material.size2), m(material.unit2))
             else:
                 size2 = r'\ '
 
@@ -556,7 +561,7 @@ class _ComponentLaTeXWriter(object):
                    r'\centering %s' % size1,
                    r'\centering %s' % size2,
                    r'\raggedleft\$ %4.2f' % material.unitcost,
-                   r'\centering %s' % material.quantity,
+                   r'\centering %.3f' % material.quantity,
                    r'\raggedleft\$ %4.2f' % material.subtotal]
             rows.append(row)
 
@@ -604,19 +609,19 @@ class _ComponentLaTeXWriter(object):
 
         # rows
         for process in processes:
-            unitcost = r'\$ %4.2f / $%s$' % (process.unitcost, e(process.unit))
+            unitcost = r'\$ %4.2f / $%s$' % (process.unitcost, m(process.unit))
 
             if process.multiplier is None:
                 multiplier = 1.0
             else:
-                multiplier = '%4.2f' % process.multiplier
+                multiplier = process.multiplier
 
 
             row = [r'\raggedright %s' % e(capitalize(process.name)),
                    r'\raggedright %s' % e(capitalize(process.use)),
                    r'\raggedleft %s' % unitcost,
                    r'\centering %4.2f' % process.quantity,
-                   r'\centering %s' % multiplier,
+                   r'\centering %4.2f' % multiplier,
                    r'\raggedleft\$ %4.2f' % process.subtotal]
             rows.append(row)
 
@@ -666,11 +671,11 @@ class _ComponentLaTeXWriter(object):
         # rows
         for fastener in fasteners:
             if fastener.size1 is not None:
-                size1 = '%4.2f $%s$' % (fastener.size1, e(fastener.unit1))
+                size1 = '%4.2f $%s$' % (fastener.size1, m(fastener.unit1))
             else:
                 size1 = r'\ '
             if fastener.size2 is not None:
-                size2 = '%4.2f $%s$' % (fastener.size2, e(fastener.unit2))
+                size2 = '%4.2f $%s$' % (fastener.size2, m(fastener.unit2))
             else:
                 size2 = r'\ '
 
@@ -727,7 +732,7 @@ class _ComponentLaTeXWriter(object):
 
         # rows
         for tooling in toolings:
-            unitcost = r'\$ %4.2f / $%s$' % (tooling.unitcost, e(tooling.unit))
+            unitcost = r'\$ %4.2f / $%s$' % (tooling.unitcost, m(tooling.unit))
 
 
             row = [r'\raggedright %s' % e(capitalize(tooling.name)),
@@ -796,7 +801,7 @@ class AssemblyLaTeXWriter(_ComponentLaTeXWriter):
         # rows
         totalcost = 0.0
 
-        for part, quantity in parts.iteritems():
+        for part, quantity in reversed(sorted(parts.iteritems())):
             subtotal = part.unitcost * quantity
 
             row = [r'\raggedright %s' % e(capitalize(part.name)),

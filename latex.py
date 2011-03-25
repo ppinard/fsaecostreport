@@ -47,6 +47,16 @@ _latex_special_chars = {
     u'\n': u'\\\\',
 }
 
+_latex_special_math_chars = {
+    u'$':  u'\\$',
+    u'%':  u'\\%',
+    u'&':  u'\\&',
+    u'#':  u'\\#',
+    u'"':  u"{''}",
+    u'`':  u'{}`', # avoid ?` and !`
+    u'\n': u'\\\\',
+}
+
 def escape(s):
     r'''
     From Volker Grabsch, python-tex package 1.7
@@ -55,6 +65,9 @@ def escape(s):
     Escape a unicode string for LaTeX.
     '''
     return u''.join(_latex_special_chars.get(c, c) for c in s)
+
+def escape_math(s):
+    return u''.join(_latex_special_math_chars.get(c, c) for c in s)
 
 def create_tabular(data, environment='tabular',
                    tableparameters=None, tablespec=None,

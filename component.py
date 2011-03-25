@@ -108,7 +108,7 @@ class _Component(object):
 
     def __cmp__(self, other):
         # system label
-        c = cmp(self._system_label, other._system_label) * -1
+        c = -1 * cmp(self._system_label, other._system_label)
         if c != 0:
             return c
 
@@ -119,23 +119,25 @@ class _Component(object):
             else:
                 return - 1
 
-        # designation
-        c = -cmp(self.pn_base[1] , other.pn_base[1])
-        if c != 0:
-            return c
-
         # category
-        c = cmp(self.pn_base[2], other.pn_base[2])
+        if self.pn_base[2] != other.pn_base[2]:
+            if self.pn_base[2] == '0': # hardware
+                return - 1
+            else:
+                return - 1 * cmp(self.pn_base[2], other.pn_base[2])
+
+        # designation
+        c = -1 * cmp(self.pn_base[1] , other.pn_base[1])
         if c != 0:
             return c
 
         # counter
-        c = cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
+        c = -1 * cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
         if c != 0:
             return c
 
         # revision
-        return cmp(self.revision, other.revision)
+        return - 1 * cmp(self.revision, other.revision)
 
     def __hash__(self):
         return hash(self.partnumber)
@@ -201,7 +203,7 @@ class _Component(object):
         """
         hierarchy = [self]
 
-        for component in sorted(self.components.keys(), reverse=True):
+        for component in reversed(sorted(self.components.keys())):
             hierarchy.extend(component.get_hierarchy())
 
         return hierarchy

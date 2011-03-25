@@ -50,12 +50,12 @@ def cost_summary(basepath, systems):
 
         return names, colours, values
 
-    fig = Figure(figsize=(10, 7), facecolor='w')
-    ax = Axes(fig, rect=[0.1, 0.1, 0.6, 0.8])
+    fig = Figure(figsize=(12, 7), facecolor='w')
+    ax = Axes(fig, rect=[0.1, 0.1, 0.5, 0.8])
     fig.add_axes(ax)
 
     names, colours, values = calculate_values(systems)
-    labels = ['%.2f$' % value for value in values]
+    labels = ['$%.2f' % value for value in values]
 
     patches, _texts, _autotexts = \
         ax.pie(values, labels=labels, colors=colours, autopct='%1.1f%%', shadow=True)
@@ -65,4 +65,5 @@ def cost_summary(basepath, systems):
     path = os.path.join(basepath, "cost_summary.pdf")
     fig.set_canvas(FigureCanvasAgg(fig));
     fig.savefig(path)
+
 
