@@ -412,7 +412,8 @@ class SystemLaTeXWriter(object):
             quantity = component.quantity
             totalcost = unitcost * quantity
 
-            names = [e(capitalize(parent.name)) for parent in component.parents]
+            names = [e(capitalize(parent.name)) \
+                        for parent in reversed(sorted(component.parents))]
             assembly = humanjoin(names, andchr=r'\&')
 
             if isinstance(component, Assembly):
@@ -776,7 +777,7 @@ class AssemblyLaTeXWriter(_ComponentLaTeXWriter):
             lines += \
                 create_tabular(data, environment='longtable',
                                tableparameters='l',
-                               tablespec=r'm{14em}|m{8em}|m{6em}|m{4.5em}|m{4.5em}',
+                               tablespec=r'm{20em}|m{8em}|m{6em}|m{4.5em}|m{7em}',
                                format_before_tabular=r'\rowcolor[gray]{0}',
                                format_after_header=r'\hline\endhead',
                                format_between_rows=r'\hline', header_endrow=1)
