@@ -132,12 +132,12 @@ class CostReportLaTeXWriter(object):
 
         lines += [r'\pagestyle{fancy}']
         lines += [r'\fancyhf{}']
-        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} %s -- %i Cost Report}' % (LOGO_FILE, team_name, year)]
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s}\hspace{10pt} %s -- %i Cost Report}' % (LOGO_FILE, team_name, year)]
         lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
         lines += [r'\rfoot{\thepage}']
         lines += [r'\fancypagestyle{plain}{']
         lines += [r'\fancyhf{}']
-        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s} %s -- %i Cost Report}' % (LOGO_FILE, team_name, year)]
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s}\hspace{10pt} %s -- %i Cost Report}' % (LOGO_FILE, team_name, year)]
         lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
         lines += [r'\rfoot{\thepage}}']
 
