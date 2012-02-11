@@ -63,13 +63,13 @@ class CostReportLaTeXWriter(object):
     def _write(self, basepath, systems, metadata):
         lines = []
 
-        lines += self.write_header(metadata.year)
+        lines += self.write_header(metadata)
         lines += ['']
 
         lines += [r'\begin{document}']
         lines += ['']
 
-        lines += self.write_fancy_header(metadata.year, metadata.team_name)
+        lines += self.write_fancy_header(metadata)
         lines += ['']
         lines += self.write_renewcommand()
         lines += ['']
@@ -77,7 +77,7 @@ class CostReportLaTeXWriter(object):
         lines += ['']
 
         # content
-        lines += self.write_frontmatter(basepath, systems, metadata.introduction)
+        lines += self.write_frontmatter(basepath, systems, metadata)
         lines += ['']
 
         lines += self.write_systems(systems)
@@ -90,11 +90,14 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_header(self, year):
+    def write_header(self, metadata):
         lines = []
 
         lines += [r'\documentclass[letterpaper,landscape]{report}']
 
+        lines += [r'\usepackage[scaled]{helvet}']
+        lines += [r'\renewcommand*\familydefault{\sfdefault}']
+        lines += [r'\usepackage[T1]{fontenc}']
         lines += [r'\usepackage[top=3cm, bottom=3cm, right=1cm, left=1cm]{geometry}']
         lines += [r'\usepackage{graphicx}']
         lines += [r'\usepackage{multirow}']
@@ -110,9 +113,9 @@ class CostReportLaTeXWriter(object):
         lines += [r'\usepackage[english]{babel}']
         lines += [r'\usepackage[latin1]{inputenc}']
         lines += [r'\usepackage{fancyhdr}']
-        lines += [r'\usepackage[pdftitle={Cost Report %i}, ' % year,
-                  r'pdfsubject={Formula SAE Competition Michigan}, ',
-                  r'pdfauthor={McGill Racing Team}, ',
+        lines += [r'\usepackage[pdftitle={Cost Report %i}, ' % metadata.year,
+                  r'pdfsubject={%s}, ' % metadata.competition_name,
+                  r'pdfauthor={%s}, ' % metadata.team_name,
                   r'colorlinks=true, ',
                   r'linkcolor=blue, ',
                   r'pdfborder = 0 0 0, ',
@@ -121,7 +124,10 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_fancy_header(self, year, team_name):
+    def write_fancy_header(self, metadata):
+        team_name = metadata.team_name
+        year = metadata.year
+
         lines = []
 
         lines += [r'\pagestyle{fancy}']
@@ -160,13 +166,13 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_frontmatter(self, basepath, systems, introduction):
+    def write_frontmatter(self, basepath, systems, metadata):
         lines = []
 
         lines += [r'\pagenumbering{roman}']
         lines += ['']
 
-        lines += self.write_introduction(introduction)
+        lines += self.write_introduction(metadata)
         lines += [r'\newpage', '']
 
         lines += self.write_cost_summary(basepath, systems)
@@ -182,14 +188,14 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_introduction(self, introduction):
+    def write_introduction(self, metadata):
         lines = []
 
         lines += [r'\section{Introduction}']
         lines += [r'\doublespacing']
         lines += [r'\begin{multicols}{2}']
 
-        lines += introduction
+        lines += metadata.introduction
 
         lines += [r'\end{multicols}']
         lines += [r'\singlespacing']
