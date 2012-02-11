@@ -24,6 +24,7 @@ import operator
 import os.path
 import logging
 import glob
+from ConfigParser import SafeConfigParser
 
 # Third party modules.
 
@@ -35,8 +36,7 @@ from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
 from fsaecostreport.constants import \
-    (COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, YEAR_FILE, INTRODUCTION_FILE,
-     CAR_NUMBER_FILE, UNIVERSITY_FILE, TEAM_NAME_FILE)
+    COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, CONFIG_FILE, INTRODUCTION_FILE
 
 class _ComponentFileReader(object):
     def _read(self, component, lines):
@@ -466,31 +466,21 @@ class SystemFileReader(object):
 
 class MetadataReader(object):
     def read(self, basepath):
-        year = self.read_year(basepath)
-        car_number = self.read_car_number(basepath)
-        university = self.read_university(basepath)
-        team_name = self.read_team_name(basepath)
-        introduction = self.read_introduction(basepath)
+        parser = SafeConfigParser()
+        parser.read(os.path.join(basepath, CONFIG_FILE))
 
-        return Metadata(year, car_number, university, team_name, introduction)
+        year = int(parser.get('CostReport', 'year'))
+        car_number = int(parser.get('CostReport', 'carnumber'))
+        university = parser.get('CostReport', 'university')
+        team_name = parser.get('CostReport', 'teamname')
+        competition_name = parser.get('CostReport', 'competitionname')
+        competition_abbrev = parser.get('CostReport', 'competitionabbrev')
+        introduction = self._read_introduction(basepath)
 
-    def read_year(self, basepath):
-        with open(os.path.join(basepath, YEAR_FILE), 'r') as f:
-            return int(f.readline().strip())
+        return Metadata(year, car_number, university, team_name,
+                        competition_name, competition_abbrev, introduction)
 
-    def read_car_number(self, basepath):
-        with open(os.path.join(basepath, CAR_NUMBER_FILE), 'r') as f:
-            return int(f.readline().strip())
-
-    def read_university(self, basepath):
-        with open(os.path.join(basepath, UNIVERSITY_FILE), 'r') as f:
-            return str(f.readline().strip())
-
-    def read_team_name(self, basepath):
-        with open(os.path.join(basepath, TEAM_NAME_FILE), 'r') as f:
-            return str(f.readline().strip())
-
-    def read_introduction(self, basepath):
+    def _read_introduction(self, basepath):
         lines = []
         with open(os.path.join(basepath, INTRODUCTION_FILE), 'r') as f:
             for line in f.readlines():

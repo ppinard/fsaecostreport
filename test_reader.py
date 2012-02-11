@@ -356,6 +356,8 @@ class TestMetadataReader(unittest.TestCase):
         self.assertEqual('McGill University', self.metadata.university)
         self.assertEqual('McGill Racing Team', self.metadata.team_name)
         self.assertEqual(['Intro', 'BLAH'], self.metadata.introduction)
+        self.assertEqual('Formula SAE Competition Michigan', self.metadata.competition_name)
+        self.assertEqual('FSAEM', self.metadata.competition_abbrev)
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.INFO)
