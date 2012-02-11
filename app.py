@@ -34,7 +34,21 @@ from fsaecostreport.system import SYSTEMS
 
 logging.getLogger().setLevel(logging.DEBUG)
 
-if __name__ == '__main__':
+def _read(basepath, systems_labels):
+    # read systems
+    for system_label in systems_labels:
+        logging.info("Reading system %s..." % system_label)
+        SystemFileReader().read(basepath, SYSTEMS[system_label])
+        logging.info("Reading system %s... DONE" % system_label)
+
+    # read metadata
+    logging.info("Reading metadata...")
+    metadata = MetadataReader().read(basepath)
+    logging.info("Reading metadata... DONE")
+
+    return metadata
+
+def run():
     parser = OptionParser()
 
     parser.add_option('-b', '--basepath', action="store",
@@ -87,28 +101,10 @@ if __name__ == '__main__':
                 logging.info("Converting %s... DONE" % input_file)
 
     elif options.read:
-        # read systems
-        for system_label in systems_labels:
-            logging.info("Reading system %s..." % system_label)
-            SystemFileReader().read(basepath, SYSTEMS[system_label])
-            logging.info("Reading system %s... DONE" % system_label)
-
-        # read metadata
-        logging.info("Reading metadata...")
-        MetadataReader().read(basepath)
-        logging.info("Reading metadata... DONE")
+        _read(basepath, systems_labels)
 
     elif options.write:
-        # read systems
-        for system_label in systems_labels:
-            logging.info("Reading system %s..." % system_label)
-            SystemFileReader().read(basepath, SYSTEMS[system_label])
-            logging.info("Reading system %s... DONE" % system_label)
-
-        # read metadata
-        logging.info("Reading metadata...")
-        metadata = MetadataReader().read(basepath)
-        logging.info("Reading metadata... DONE")
+        metadata = _read(basepath, systems_labels)
 
         # write cost report
         logging.info("Writing cost report...")
@@ -116,16 +112,7 @@ if __name__ == '__main__':
         logging.info("Writing cost report... DONE")
 
     elif options.ebom:
-        # read systems
-        for system_label in systems_labels:
-            logging.info("Reading system %s..." % system_label)
-            SystemFileReader().read(basepath, SYSTEMS[system_label])
-            logging.info("Reading system %s... DONE" % system_label)
-
-        # read metadata
-        logging.info("Reading metadata...")
-        metadata = MetadataReader().read(basepath)
-        logging.info("Reading metadata... DONE")
+        metadata = _read(basepath, systems_labels)
 
         # write eBOM
         logging.info("Writing eBOM...")
@@ -134,3 +121,6 @@ if __name__ == '__main__':
 
     else:
         parser.print_help()
+
+if __name__ == '__main__':
+    run()
