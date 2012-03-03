@@ -117,27 +117,33 @@ class _Component(object):
             if self.pn_base[0] == 'A':
                 return 1
             else:
-                return - 1
+                return -1
+
+        # designation
+        if self.pn_base[1] != other.pn_base[1]:
+            if self.pn_base[1] == '0':
+                return -1
+            elif other.pn_base[2] == '0':
+                return 1
+            else:
+                return cmp(self.pn_base[1], other.pn_base[1])
 
         # category
         if self.pn_base[2] != other.pn_base[2]:
-            if self.pn_base[2] == '0': # hardware
-                return - 1
+            if self.pn_base[2] == '0':
+                return -1
+            elif other.pn_base[2] == '0':
+                return 1
             else:
-                return - 1 * cmp(self.pn_base[2], other.pn_base[2])
-
-        # designation
-        c = -1 * cmp(self.pn_base[1] , other.pn_base[1])
-        if c != 0:
-            return c
+                return -1 * cmp(self.pn_base[2], other.pn_base[2])
 
         # counter
-        c = -1 * cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
+        c = cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
         if c != 0:
             return c
 
         # revision
-        return - 1 * cmp(self.revision, other.revision)
+        return cmp(self.revision, other.revision)
 
     def __hash__(self):
         return hash(self.partnumber)

@@ -42,9 +42,9 @@ class TestAuxReader(unittest.TestCase):
         pagerefs = self.reader.read(self.basepath)
 
         self.assertEqual(3, pagerefs['TM-A1000-AA'])
-        self.assertEqual(3, pagerefs['TM-A0001-AA'])
-        self.assertEqual(5, pagerefs['TM-A0002-AA'])
-        self.assertEqual(4, pagerefs['TM-00001-AA'])
+        self.assertEqual(4, pagerefs['TM-A0001-AA'])
+        self.assertEqual(6, pagerefs['TM-A0002-AA'])
+        self.assertEqual(5, pagerefs['TM-00001-AA'])
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)

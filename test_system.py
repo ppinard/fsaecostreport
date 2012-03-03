@@ -43,16 +43,14 @@ class TestSystem(unittest.TestCase):
         self.assertTrue(True)
 
     def testhierarchy(self):
-        assy1 = self.system.get_component('TM-A0000-AA')
-        assy2 = self.system.get_component('TM-A1100-AA')
-        assy3 = self.system.get_component('TM-A1200-AA')
+        assy1 = self.system.get_component('TM-A1000-AA')
+        assy2 = self.system.get_component('TM-A0001-AA')
+        assy3 = self.system.get_component('TM-A0002-AA')
         part = self.system.get_component('TM-00001-AA')
 
-        #FIXME: Problem with hierarchy test although it works in the cost report
-
-#        expected = [assy1, assy2, part, assy3]
-#        actual = self.system.get_hierarchy()
-#        self.assertEqual(expected, actual)
+        expected = [assy1, assy2, part, assy3]
+        actual = self.system.get_hierarchy()
+        self.assertEqual(expected, actual)
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.INFO)
