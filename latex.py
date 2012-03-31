@@ -28,33 +28,33 @@ import re
 # Globals and constants variables.
 
 _latex_special_chars = {
-    u'$':  u'\\$',
-    u'%':  u'\\%',
-    u'&':  u'\\&',
-    u'#':  u'\\#',
-    u'_':  u'\\_',
-    u'{':  u'\\{',
-    u'}':  u'\\}',
-    u'[':  u'{[}',
-    u']':  u'{]}',
-    u'"':  u"{''}",
-    u'\\': u'\\textbackslash{}',
-    u'~':  u'\\textasciitilde{}',
-    u'<':  u'\\textless{}',
-    u'>':  u'\\textgreater{}',
-    u'^':  u'\\textasciicircum{}',
-    u'`':  u'{}`', # avoid ?` and !`
-    u'\n': u'\\\\',
+    '$':  '\\$',
+    '%':  '\\%',
+    '&':  '\\&',
+    '#':  '\\#',
+    '_':  '\\_',
+    '{':  '\\{',
+    '}':  '\\}',
+    '[':  '{[}',
+    ']':  '{]}',
+    '"':  "{''}",
+    '\\': '\\textbackslash{}',
+    '~':  '\\textasciitilde{}',
+    '<':  '\\textless{}',
+    '>':  '\\textgreater{}',
+    '^':  '\\textasciicircum{}',
+    '`':  '{}`', # avoid ?` and !`
+    '\n': '\\\\',
 }
 
 _latex_special_math_chars = {
-    u'$':  u'\\$',
-    u'%':  u'\\%',
-    u'&':  u'\\&',
-    u'#':  u'\\#',
-    u'"':  u"{''}",
-    u'`':  u'{}`', # avoid ?` and !`
-    u'\n': u'\\\\',
+    '$':  '\\$',
+    '%':  '\\%',
+    '&':  '\\&',
+    '#':  '\\#',
+    '"':  "{''}",
+    '`':  '{}`', # avoid ?` and !`
+    '\n': '\\\\',
 }
 
 def escape(s):
@@ -64,10 +64,10 @@ def escape(s):
     
     Escape a unicode string for LaTeX.
     '''
-    return u''.join(_latex_special_chars.get(c, c) for c in s)
+    return ''.join(_latex_special_chars.get(c, c) for c in s)
 
 def escape_math(s):
-    return u''.join(_latex_special_math_chars.get(c, c) for c in s)
+    return ''.join(_latex_special_math_chars.get(c, c) for c in s)
 
 def create_tabular(data, environment='tabular',
                    tableparameters=None, tablespec=None,
