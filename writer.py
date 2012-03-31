@@ -328,8 +328,8 @@ class CostReportLaTeXWriter(object):
         lines = []
 
         lines += [r'\renewcommand{\listfigurename}{List of Drawings}']
-        lines += [r'\listoffigures']
         lines += [r'\pdfbookmark[0]{List of Drawings}{listofdd}']
+        lines += [r'\listoffigures']
 
         return lines
 
@@ -371,7 +371,7 @@ class SystemLaTeXWriter(object):
         lines += \
             create_tabular(data, environment='longtable',
                                tableparameters='l',
-                               tablespec=r'p{10em} | p{3em} | p{2em} | p{7em} | p{13em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em} | p{5em}',
+                               tablespec=r'p{13em} | p{3em} | p{2em} | p{10em} | p{7em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em} | p{5em}',
                                format_before_tabular=r'\rowcolor[gray]{0}',
                                format_after_header=r'\hline\endhead',
                                format_between_rows=r'\hline', header_endrow=1)
