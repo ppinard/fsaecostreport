@@ -80,9 +80,9 @@ class Test_Component(unittest.TestCase):
         c14 = ComponentMock("TM", "00199", "AA")
 
         cs = sorted([c12, c13, c14]) # c13, c12, c14
-        self.assertEqual(c13, cs[0])
+        self.assertEqual(c13, cs[2])
         self.assertEqual(c12, cs[1])
-        self.assertEqual(c14, cs[2])
+        self.assertEqual(c14, cs[0])
 
         # revision
         c15 = ComponentMock("TM", "00115", "AA")

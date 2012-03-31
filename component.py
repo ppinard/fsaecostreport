@@ -126,7 +126,7 @@ class _Component(object):
             elif other.pn_base[2] == '0':
                 return 1
             else:
-                return cmp(self.pn_base[1], other.pn_base[1])
+                return -1 * cmp(self.pn_base[1], other.pn_base[1])
 
         # category
         if self.pn_base[2] != other.pn_base[2]:
@@ -140,7 +140,7 @@ class _Component(object):
         # counter
         c = cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
         if c != 0:
-            return c
+            return -1 * c
 
         # revision
         return cmp(self.revision, other.revision)
