@@ -25,6 +25,7 @@ import os.path
 import logging
 import glob
 from ConfigParser import SafeConfigParser
+import unicodedata
 
 # Third party modules.
 
@@ -37,6 +38,31 @@ from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 # Globals and constants variables.
 from fsaecostreport.constants import \
     COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, CONFIG_FILE, INTRODUCTION_FILE
+
+def ascii(unistr):
+    """
+    Convert unicode to ascii.
+    """
+    if isinstance(unistr, unicode):
+        ascii_chrs = []
+
+        for char in unistr:
+            decomposition = unicodedata.decomposition(char)
+
+            try:
+                root, _modifier = decomposition.split()
+            except: #Not a unicode character
+                ascii_chrs.append(char)
+            else: #Convert to ascii
+                try:
+                    ascii_chr = chr(int(root, 16)) #root is in hex base
+                    ascii_chrs.append(ascii_chr)
+                except:
+                    pass
+
+        return ''.join(ascii_chrs)
+    else:
+        return unistr
 
 class _ComponentFileReader(object):
     def _read(self, component, lines):
@@ -89,19 +115,19 @@ class _ComponentFileReader(object):
 
     def _read_material(self, line):
         id = int(line[0])
-        name = line[1].strip()
-        use = line[2].strip()
+        name = ascii(line[1].strip())
+        use = ascii(line[2].strip())
         unitcost = float(line[3])
 
         if line[5].strip():
             size1 = float(line[4])
-            unit1 = line[5].strip()
+            unit1 = ascii(line[5].strip())
         else:
             size1 = unit1 = None
 
         if line[7].strip():
             size2 = float(line[6])
-            unit2 = line[7].strip()
+            unit2 = ascii(line[7].strip())
         else:
             size2 = unit2 = None
 
@@ -131,10 +157,10 @@ class _ComponentFileReader(object):
 
     def _read_process(self, line):
         id = int(line[0])
-        name = line[1].strip()
-        use = line[2].strip()
+        name = ascii(line[1].strip())
+        use = ascii(line[2].strip())
         unitcost = float(line[3])
-        unit = line[4].strip()
+        unit = ascii(line[4].strip())
         quantity = float(line[5])
 
         if line[6].strip():
@@ -167,19 +193,19 @@ class _ComponentFileReader(object):
 
     def _read_fastener(self, line):
         id = int(line[0])
-        name = line[1].strip()
-        use = line[2].strip()
+        name = ascii(line[1].strip())
+        use = ascii(line[2].strip())
         unitcost = float(line[3])
 
         if line[5].strip():
             size1 = float(line[4])
-            unit1 = line[5].strip()
+            unit1 = ascii(line[5].strip())
         else:
             size1 = unit1 = None
 
         if line[7].strip():
             size2 = float(line[6])
-            unit2 = line[7].strip()
+            unit2 = ascii(line[7].strip())
         else:
             size2 = unit2 = None
 
@@ -209,10 +235,10 @@ class _ComponentFileReader(object):
 
     def _read_tooling(self, line):
         id = int(line[0])
-        name = line[1].strip()
-        use = line[2].strip()
+        name = ascii(line[1].strip())
+        use = ascii(line[2].strip())
         unitcost = float(line[3])
-        unit = line[4].strip()
+        unit = ascii(line[4].strip())
         quantity = float(line[5])
         pvf = float(line[6])
 
@@ -272,10 +298,10 @@ class PartFileReader(_ComponentFileReader):
     def _read_header(self, lines):
         logging.debug("Reading header ...")
 
-        name = lines[3][1].strip()
-        pn_base = lines[4][1].strip()
-        revision = lines[5][1].strip()
-        details = lines[6][1].strip()
+        name = ascii(lines[3][1].strip())
+        pn_base = ascii(lines[4][1].strip())
+        revision = ascii(lines[5][1].strip())
+        details = ascii(lines[6][1].strip())
 
         logging.debug("Reading header ... DONE")
         return {'name': name, 'pn_base': pn_base, 'revision': revision,
@@ -309,10 +335,10 @@ class AssemblyFileReader(_ComponentFileReader):
     def _read_header(self, lines):
         logging.debug("Reading header ...")
 
-        name = lines[2][1].strip()
-        pn_base = lines[3][1].strip()
-        revision = lines[4][1].strip()
-        details = lines[5][1].strip()
+        name = ascii(lines[2][1].strip())
+        pn_base = ascii(lines[3][1].strip())
+        revision = ascii(lines[4][1].strip())
+        details = ascii(lines[5][1].strip())
 
         logging.debug("Reading header ... DONE")
         return {'name': name, 'pn_base': pn_base, 'revision': revision,
@@ -471,10 +497,10 @@ class MetadataReader(object):
 
         year = int(parser.get('CostReport', 'year'))
         car_number = int(parser.get('CostReport', 'carnumber'))
-        university = parser.get('CostReport', 'university')
-        team_name = parser.get('CostReport', 'teamname')
-        competition_name = parser.get('CostReport', 'competitionname')
-        competition_abbrev = parser.get('CostReport', 'competitionabbrev')
+        university = ascii(parser.get('CostReport', 'university'))
+        team_name = ascii(parser.get('CostReport', 'teamname'))
+        competition_name = ascii(parser.get('CostReport', 'competitionname'))
+        competition_abbrev = ascii(parser.get('CostReport', 'competitionabbrev'))
         introduction = self._read_introduction(basepath)
 
         return Metadata(year, car_number, university, team_name,
@@ -484,5 +510,5 @@ class MetadataReader(object):
         lines = []
         with open(os.path.join(basepath, INTRODUCTION_FILE), 'r') as f:
             for line in f.readlines():
-                lines.append(line.strip())
+                lines.append(ascii(line.strip()))
         return lines
