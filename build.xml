@@ -16,7 +16,7 @@
 
     <!-- Metadata -->
     <property name="name" value="fsaecostreport" />
-    <property name="version" value="0.4.0" />
+    <property name="version" value="0.4.4" />
     <property name="url" value="http://fsae.mcgill.ca" />
     <property name="author" value="Philippe T. Pinard" />
     <property name="author.email" value="philippe.pinard@gmail.com" />
