@@ -27,8 +27,6 @@ import csv
 # Third party modules.
 
 # Local modules.
-from misctools.format import humanjoin
-
 from fsaecostreport.latex import \
     create_tabular, escape as e, AuxReader, escape_math as m
 from fsaecostreport.component import Part, Assembly
@@ -49,6 +47,18 @@ def capitalize(value):
         return value[0].upper() + value[1:]
     else:
         return value
+
+def humanjoin(values, sort=True, andchr="and"):
+    if not values:
+        return ''
+    elif len(values) == 1:
+        return values[0]
+    elif len(values) == 2:
+        if sort: values.sort()
+        return "%s %s %s" % (values[0], andchr, values[1])
+    else:
+        if sort: values.sort()
+        return ', '.join(values[:-1]) + " " + andchr + " " + values[-1]
 
 class CostReportLaTeXWriter(object):
     def write(self, basepath, systems, metadata):
