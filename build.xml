@@ -5,7 +5,7 @@
 
     <!-- Directories -->
     <property name="tmp.dir" location="${java.io.tmpdir}" />
-    <property name="src.dir" location="${basedir}" />
+    <property name="src.dir" location="${basedir}/src" />
     <property name="code.dir" location="${tmp.dir}/code" />
     <property name="lib.dir" location="${tmp.dir}/lib" />
     <property name="build.dir" location="${tmp.dir}/build" />
@@ -66,9 +66,9 @@
     <target name="copy-src"
             depends="init"
             description="Copy Python source code and project files to code directory">
-        <mkdir dir="${code.dir}/${name}" />
+        <mkdir dir="${code.dir}" />
 
-        <copy todir="${code.dir}/${name}">
+        <copy todir="${code.dir}">
             <fileset dir="${src.dir}">
                 <include name="**/*.py" />
                 <include name="*.cfg.example" />
@@ -77,15 +77,15 @@
             </fileset>
         </copy>
 
-        <copy file="${src.dir}/README" todir="${code.dir}" />
+        <copy file="${src.dir}/../README" todir="${code.dir}" />
     </target>
 
     <target name="copy-test"
             depends="copy-src"
             description="Copy Python test files and data">
-        <mkdir dir="${code.dir}/${name}" />
+        <mkdir dir="${code.dir}" />
 
-        <copy todir="${code.dir}/${name}">
+        <copy todir="${code.dir}">
             <fileset dir="${src.dir}">
                 <include name="**/test_*.py" />
                 <include name="*.cfg.example" />
