@@ -21,6 +21,7 @@ import os
 import logging
 import glob
 from optparse import OptionParser
+from operator import attrgetter
 
 # Third party modules.
 
@@ -30,23 +31,8 @@ from fsaecostreport.reader import SystemFileReader, MetadataReader
 from fsaecostreport.writer import CostReportLaTeXWriter, eBOMWriter
 
 # Globals and constants variables.
-from fsaecostreport.system import SYSTEMS
 
 logging.getLogger().setLevel(logging.DEBUG)
-
-def _read(basepath, systems_labels):
-    # read systems
-    for system_label in systems_labels:
-        logging.info("Reading system %s..." % system_label)
-        SystemFileReader().read(basepath, SYSTEMS[system_label])
-        logging.info("Reading system %s... DONE" % system_label)
-
-    # read metadata
-    logging.info("Reading metadata...")
-    metadata = MetadataReader().read(basepath)
-    logging.info("Reading metadata... DONE")
-
-    return metadata
 
 def run():
     parser = OptionParser()
@@ -77,22 +63,34 @@ def run():
     basepath = os.path.abspath(options.basepath)
     logging.info("Base path: %s" % basepath)
 
+    # read metadata
+    logging.info("Reading metadata...")
+    metadata = MetadataReader().read(basepath)
+    logging.info("Reading metadata... DONE")
+
     # systems
-    systems_labels = []
+    values = metadata.systems
+    keys = map(attrgetter('label'), values)
+    available_systems = dict(zip(keys, values))
+
+    systems = []
     if args:
         for arg in args:
-            if arg in SYSTEMS.keys():
-                systems_labels.append(arg)
-            else:
-                logging.error("Unknown system: %s" % arg)
-                logging.error("Possible systems: %s" % ','.join(SYSTEMS.keys()))
+            try:
+                systems.append(available_systems[arg])
+            except KeyError:
+                parser.error("Unknown system: %s" % arg)
+                parser.error("Possible systems: %s" % ','.join(available_systems.keys()))
     else:
-        systems_labels = SYSTEMS.keys()
-    logging.info("Looking through system(s): %s" % ','.join(systems_labels))
+        systems = available_systems.values()
+    logging.info("Looking through system(s): %s",
+                 ', '.join(map(attrgetter('label'), systems)))
+
+    metadata.systems = sorted(systems)
 
     if options.xlsx2csv:
-        for system_label in systems_labels:
-            dir = os.path.join(basepath, system_label)
+        for system in metadata.systems:
+            dir = os.path.join(basepath, system.label)
             output_dir = os.path.join(dir, 'components')
 
             for input_file in glob.glob(os.path.join(dir, '*.xls*')):
@@ -100,27 +98,24 @@ def run():
                 xlstocsv(input_file, output_dir)
                 logging.info("Converting %s... DONE" % input_file)
 
-    elif options.read:
-        _read(basepath, systems_labels)
+    # read systems
+    if options.read or options.write or options.ebom:
+        for system in metadata.systems:
+            logging.info("Reading system %s..." % system)
+            SystemFileReader().read(basepath, system)
+            logging.info("Reading system %s... DONE" % system)
 
-    elif options.write:
-        metadata = _read(basepath, systems_labels)
-
-        # write cost report
+    # write cost report
+    if options.write:
         logging.info("Writing cost report...")
-        CostReportLaTeXWriter().write(basepath, SYSTEMS.values(), metadata)
+        CostReportLaTeXWriter().write(basepath, metadata)
         logging.info("Writing cost report... DONE")
 
-    elif options.ebom:
-        metadata = _read(basepath, systems_labels)
-
+    if options.ebom:
         # write eBOM
         logging.info("Writing eBOM...")
-        eBOMWriter().write(basepath, SYSTEMS.values(), metadata)
+        eBOMWriter().write(basepath, metadata)
         logging.info("Writing eBOM... DONE")
-
-    else:
-        parser.print_help()
 
 if __name__ == '__main__':
     run()

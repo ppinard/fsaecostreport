@@ -5,3 +5,44 @@ teamName=McGill Racing Team
 year=2011
 competitionName=Formula SAE Competition Michigan
 competitionAbbrev=FSAEM
+systems=BR,EN,FR,EL,MS,ST,SU,WT
+
+[BR]
+name=Brake System
+letter=A
+colour=153, 204, 255
+
+[EN]
+name=Engine & Drivetrain
+letter=B
+colour=204, 255, 204
+
+[FR]
+name=Frame & Body
+letter=C
+colour=255, 153, 204
+
+[EL]
+name=Electronics, Controls & Wiring
+letter=D
+colour=255, 204, 153
+
+[MS]
+name=Miscellaneous, Fit & Finish
+letter=E
+colour=204, 153, 255
+
+[ST]
+name=Steering System
+letter=F
+colour=255, 153, 0
+
+[SU]
+name=Suspension System
+letter=G
+colour=255, 255, 0
+
+[WT]
+name=Wheels, Wheels Bearings & Tires
+letter=H
+colour=204, 255, 255

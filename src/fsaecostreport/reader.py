@@ -24,6 +24,7 @@ import operator
 import os.path
 import logging
 import glob
+import re
 from ConfigParser import SafeConfigParser
 import unicodedata
 
@@ -34,10 +35,13 @@ from fsaecostreport.metadata import Metadata
 from fsaecostreport.costtable import Material, Process, Fastener, Tooling
 from fsaecostreport.component import Part, Assembly
 from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
+from fsaecostreport.system import System
 
 # Globals and constants variables.
 from fsaecostreport.constants import \
     COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, CONFIG_FILE, INTRODUCTION_FILE
+
+COMMA_SPLIT_PATTERN = re.compile(r'[^,;\s]+')
 
 def ascii(unistr):
     """
@@ -492,8 +496,12 @@ class SystemFileReader(object):
 
 class MetadataReader(object):
     def read(self, basepath):
+        filepath = os.path.join(basepath, CONFIG_FILE)
+        if not os.path.exists(filepath):
+            raise ValueError, 'No configuration file'
+
         parser = SafeConfigParser()
-        parser.read(os.path.join(basepath, CONFIG_FILE))
+        parser.read(filepath)
 
         year = int(parser.get('CostReport', 'year'))
         car_number = int(parser.get('CostReport', 'carnumber'))
@@ -503,8 +511,30 @@ class MetadataReader(object):
         competition_abbrev = ascii(parser.get('CostReport', 'competitionabbrev'))
         introduction = self._read_introduction(basepath)
 
+        # Systems
+        system_labels = parser.get('CostReport', 'systems')
+        system_labels = COMMA_SPLIT_PATTERN.findall(system_labels)
+
+        systems = []
+        for label in system_labels:
+            if not parser.has_section(label):
+                raise ValueError, 'No section for system: %s' % label
+
+            name = parser.get(label, 'name')
+            letter = parser.get(label, 'letter')
+            colour = parser.get(label, 'colour')
+            colour = COMMA_SPLIT_PATTERN.findall(colour)
+            colour = map(int, colour)
+            colour = tuple(colour)
+
+            system = System(label, name, letter, colour)
+            systems.append(system)
+
+        systems = sorted(systems) # Sort by letters
+
         return Metadata(year, car_number, university, team_name,
-                        competition_name, competition_abbrev, introduction)
+                        competition_name, competition_abbrev, introduction,
+                        systems)
 
     def _read_introduction(self, basepath):
         lines = []

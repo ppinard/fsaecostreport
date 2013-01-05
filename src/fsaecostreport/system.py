@@ -51,15 +51,15 @@ class System(object):
         # arguments
         if len(label) != 2:
             raise ValueError, "The label (%s) must be two characters." % label
-        self.label = label.upper()
+        self._label = label.upper()
 
-        self.name = name
+        self._name = name
 
         if len(letter) != 1:
             raise ValueError, "The letter (%s) must be one character." % letter
-        self.letter = letter
+        self._letter = letter
 
-        self.colour = colour
+        self._colour = colour
 
         # extras
         self._components = {}
@@ -78,6 +78,22 @@ class System(object):
 
     def __cmp__(self, other):
         return cmp(self.letter, other.letter)
+
+    @property
+    def label(self):
+        return self._label
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def colour(self):
+        return self._colour
+
+    @property
+    def letter(self):
+        return self._letter
 
     def add_component(self, component):
         """
@@ -115,14 +131,14 @@ class System(object):
         return hierarchy
 
 
-BR = System("BR", "Brake System", "A", (153, 204, 255))
-EN = System("EN", "Engine & Drivetrain", "B", (204, 255, 204))
-FR = System("FR", "Frame & Body", "C", (255, 153, 204))
-EL = System("EL", "Electronics, Controls & Wiring", "D", (255, 204, 153))
-MS = System("MS", "Miscellaneous, Fit & Finish", "E", (204, 153, 255))
-ST = System("ST", "Steering System", "F", (255, 153, 0))
-SU = System("SU", "Suspension System", "G", (255, 255, 0))
-WT = System("WT", "Wheels, Wheels Bearings & Tires", "H", (204, 255, 255))
-
-SYSTEMS = {'BR': BR, 'EN': EN, 'FR': FR, 'EL': EL,
-           'MS': MS, 'ST': ST, 'SU': SU, 'WT': WT}
+#BR = System("BR", "Brake System", "A", (153, 204, 255))
+#EN = System("EN", "Engine & Drivetrain", "B", (204, 255, 204))
+#FR = System("FR", "Frame & Body", "C", (255, 153, 204))
+#EL = System("EL", "Electronics, Controls & Wiring", "D", (255, 204, 153))
+#MS = System("MS", "Miscellaneous, Fit & Finish", "E", (204, 153, 255))
+#ST = System("ST", "Steering System", "F", (255, 153, 0))
+#SU = System("SU", "Suspension System", "G", (255, 255, 0))
+#WT = System("WT", "Wheels, Wheels Bearings & Tires", "H", (204, 255, 255))
+#
+#SYSTEMS = {'BR': BR, 'EN': EN, 'FR': FR, 'EL': EL,
+#           'MS': MS, 'ST': ST, 'SU': SU, 'WT': WT}

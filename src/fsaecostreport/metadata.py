@@ -28,7 +28,7 @@ __license__ = "GPL v3"
 
 class Metadata(object):
     def __init__(self, year, car_number, university, team_name,
-                 competition_name, competition_abbrev, introduction):
+                 competition_name, competition_abbrev, introduction, systems):
         self.year = year
         self.car_number = car_number
         self.university = university
@@ -36,6 +36,7 @@ class Metadata(object):
         self.competition_name = competition_name
         self.competition_abbrev = competition_abbrev
         self.introduction = introduction
+        self.systems = list(systems)
 
     @property
     def ebom_filename(self):

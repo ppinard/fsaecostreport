@@ -30,7 +30,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 # Globals and constants variables.
 
-def cost_summary(basepath, systems):
+def cost_summary(basepath, metadata):
     def calculate_values(systems):
         names = []
         colours = []
@@ -54,7 +54,7 @@ def cost_summary(basepath, systems):
     ax = Axes(fig, rect=[0.1, 0.1, 0.5, 0.8])
     fig.add_axes(ax)
 
-    names, colours, values = calculate_values(systems)
+    names, colours, values = calculate_values(metadata.systems)
     labels = ['$%.2f' % value for value in values]
 
     patches, _texts, _autotexts = \

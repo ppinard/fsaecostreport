@@ -61,16 +61,16 @@ def humanjoin(values, sort=True, andchr="and"):
         return ', '.join(values[:-1]) + " " + andchr + " " + values[-1]
 
 class CostReportLaTeXWriter(object):
-    def write(self, basepath, systems, metadata):
+    def write(self, basepath, metadata):
         filename = 'costreport%i.tex' % metadata.year
-        lines = self._write(basepath, systems, metadata)
+        lines = self._write(basepath, metadata)
 
         with open(os.path.join(basepath, filename), 'w') as out:
             for line in lines:
                 out.write(line + "\n")
         out.close()
 
-    def _write(self, basepath, systems, metadata):
+    def _write(self, basepath, metadata):
         lines = []
 
         lines += self.write_header(metadata)
@@ -83,14 +83,14 @@ class CostReportLaTeXWriter(object):
         lines += ['']
         lines += self.write_renewcommand()
         lines += ['']
-        lines += self.write_colors(systems)
+        lines += self.write_colors(metadata)
         lines += ['']
 
         # content
-        lines += self.write_frontmatter(basepath, systems, metadata)
+        lines += self.write_frontmatter(basepath, metadata)
         lines += ['']
 
-        lines += self.write_systems(systems)
+        lines += self.write_systems(metadata)
         lines += ['']
 
         lines += self.write_backmatter()
@@ -164,10 +164,10 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_colors(self, systems):
+    def write_colors(self, metadata):
         lines = []
 
-        for system in sorted(systems):
+        for system in metadata.systems:
             r = system.colour[0] / 255.0
             g = system.colour[1] / 255.0
             b = system.colour[2] / 255.0
@@ -176,7 +176,7 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_frontmatter(self, basepath, systems, metadata):
+    def write_frontmatter(self, basepath, metadata):
         lines = []
 
         lines += [r'\pagenumbering{roman}']
@@ -185,7 +185,7 @@ class CostReportLaTeXWriter(object):
         lines += self.write_introduction(metadata)
         lines += [r'\newpage', '']
 
-        lines += self.write_cost_summary(basepath, systems)
+        lines += self.write_cost_summary(basepath, metadata)
         lines += [r'\newpage', '']
 
         lines += self.write_standard_partnumbering(basepath)
@@ -212,13 +212,13 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_cost_summary(self, basepath, systems):
+    def write_cost_summary(self, basepath, metadata):
         lines = []
 
         lines += [r'\section{Cost Summary}']
         lines += [r'\renewcommand{\arraystretch}{1.5}']
 
-        data = self._create_cost_summary_lines(systems)
+        data = self._create_cost_summary_lines(metadata)
         lines += \
             create_tabular(data, environment='longtable',
                                tableparameters='l',
@@ -229,14 +229,14 @@ class CostReportLaTeXWriter(object):
         lines += [r'\renewcommand{\arraystretch}{1}']
         lines += [r'\newpage']
 
-        self._create_cost_summary_chart(basepath, systems)
+        self._create_cost_summary_chart(basepath, metadata)
         lines += [r'\begin{center}']
         lines += [r'\includegraphics[height=0.8\textheight]{cost_summary}']
         lines += [r'\end{center}']
 
         return lines
 
-    def _create_cost_summary_lines(self, systems):
+    def _create_cost_summary_lines(self, metadata):
         rows = []
 
         header = [r'\color{white} System',
@@ -253,7 +253,7 @@ class CostReportLaTeXWriter(object):
         toolings_totalcost = 0.0
         systems_totalcost = 0.0
 
-        for system in sorted(systems):
+        for system in metadata.systems:
             materials_cost = 0.0
             processes_cost = 0.0
             fasteners_cost = 0.0
@@ -297,8 +297,8 @@ class CostReportLaTeXWriter(object):
 
         return rows
 
-    def _create_cost_summary_chart(self, basepath, systems):
-        graph.cost_summary(basepath, systems)
+    def _create_cost_summary_chart(self, basepath, metadata):
+        graph.cost_summary(basepath, metadata)
 
     def write_standard_partnumbering(self, basepath):
         lines = []
@@ -325,10 +325,10 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
-    def write_systems(self, systems):
+    def write_systems(self, metadata):
         lines = []
 
-        for system in sorted(systems):
+        for system in metadata.systems:
             lines += SystemLaTeXWriter().write(system)
             lines += ['']
 
@@ -841,17 +841,17 @@ class PartLaTeXWriter(_ComponentLaTeXWriter):
     pass
 
 class eBOMWriter(object):
-    def write(self, basepath, systems, metadata):
+    def write(self, basepath, metadata):
         pagerefs = AuxReader().read(basepath)
 
         filepath = os.path.join(basepath, metadata.ebom_filename + ".csv")
         writer = csv.writer(open(filepath, 'w'))
 
-        rows = self._create_rows(systems, metadata, pagerefs)
+        rows = self._create_rows(metadata, pagerefs)
         for row in rows:
             writer.writerow(row)
 
-    def _create_rows(self, systems, metadata, pagerefs):
+    def _create_rows(self, metadata, pagerefs):
         rows = []
 
         # spreadsheet header
@@ -892,7 +892,7 @@ class eBOMWriter(object):
         toolings_totalcost = 0.0
         systems_totalcost = 0.0
 
-        for system in sorted(systems):
+        for system in metadata.systems:
             (system_rows, materials_cost, processes_cost,
                 fasteners_cost, toolings_cost, system_cost) = \
                     self._create_system_rows(system, pagerefs)

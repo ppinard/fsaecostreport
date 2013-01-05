@@ -41,6 +41,7 @@ class Test(unittest.TestCase):
         self.system1 = SystemFileReader().read(self.basepath, TM)
         self.system2 = SystemFileReader().read(self.basepath, FI)
         self.metadata = MetadataReader().read(self.basepath)
+        self.metadata.systems = [self.system1, self.system2]
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)
@@ -49,7 +50,7 @@ class Test(unittest.TestCase):
         self.assertTrue(True)
 
     def testgraph_costsummary(self):
-        graph.cost_summary(self.basepath, [self.system1, self.system2])
+        graph.cost_summary(self.basepath, self.metadata)
 
         path = os.path.join(self.basepath, 'cost_summary.pdf')
         self.assertTrue(os.path.exists(path))

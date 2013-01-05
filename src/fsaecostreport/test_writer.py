@@ -38,6 +38,7 @@ class TesteBOMWriter(unittest.TestCase):
         basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
         self.system = SystemFileReader().read(basepath, TM)
         self.metadata = MetadataReader().read(basepath)
+        self.metadata.systems = [self.system]
 
         self.writer = eBOMWriter()
 
@@ -48,7 +49,7 @@ class TesteBOMWriter(unittest.TestCase):
         self.assertTrue(True)
 
     def testwrite(self):
-        rows = self.writer._create_rows([self.system], self.metadata, {})
+        rows = self.writer._create_rows(self.metadata, {})
         self.assertEqual(12, len(rows))
 
 class TestCostReportLaTeXWriter(unittest.TestCase):
@@ -61,6 +62,7 @@ class TestCostReportLaTeXWriter(unittest.TestCase):
         self.basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
         self.system = SystemFileReader().read(self.basepath, TM)
         self.metadata = MetadataReader().read(self.basepath)
+        self.metadata.systems = [self.system]
 
         self.writer = CostReportLaTeXWriter()
 
@@ -71,7 +73,7 @@ class TestCostReportLaTeXWriter(unittest.TestCase):
         self.assertTrue(True)
 
     def testwrite(self):
-        lines = self.writer._write(self.basepath, [self.system], self.metadata)
+        lines = self.writer._write(self.basepath, self.metadata)
         self.assertEqual(299, len(lines))
 
 #        self.writer.write(self.basepath, [self.system], self.metadata)
