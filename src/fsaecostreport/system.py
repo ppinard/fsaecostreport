@@ -31,13 +31,12 @@ class System(object):
     The cost report has 8 systems.
     """
 
-    def __init__(self, label, name, letter, colour):
+    def __init__(self, label, name, colour):
         """
         Creates a new system.
         
         :arg label: two characters label
         :arg name: full name
-        :arg letter: single character
         :arg colour: RGB of the colour
         :type colour: tuple
         
@@ -45,7 +44,6 @@ class System(object):
         
             * :attr:`label`: two characters label
             * :attr:`name`: full name
-            * :attr:`letter`: single character
             * :attr:`colour`: RGB of the colour
         """
         # arguments
@@ -55,10 +53,6 @@ class System(object):
 
         self._name = name
 
-        if len(letter) != 1:
-            raise ValueError, "The letter (%s) must be one character." % letter
-        self._letter = letter
-
         self._colour = colour
 
         # extras
@@ -66,6 +60,9 @@ class System(object):
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return '<System(%s)>' % self.label
 
     def __eq__(self, other):
         return self.label == other.label
@@ -77,7 +74,7 @@ class System(object):
         return hash(self.label)
 
     def __cmp__(self, other):
-        return cmp(self.letter, other.letter)
+        return cmp(self.label, other.label)
 
     @property
     def label(self):
@@ -90,10 +87,6 @@ class System(object):
     @property
     def colour(self):
         return self._colour
-
-    @property
-    def letter(self):
-        return self._letter
 
     def add_component(self, component):
         """

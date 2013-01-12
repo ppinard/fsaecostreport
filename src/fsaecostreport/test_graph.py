@@ -20,28 +20,22 @@ import os
 # Third party modules.
 
 # Local modules.
-from fsaecostreport.system import System
 from fsaecostreport.reader import SystemFileReader, MetadataReader
-
 import fsaecostreport.graph as graph
 
 # Globals and constants variables.
-TM = System("TM", "Random stuff", "Y", (255, 0, 0))
-FI = System("FI", "Finance stuff", "Z", (0, 255, 0))
 
 class Test(unittest.TestCase):
 
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        TM.clear_components()
-        FI.clear_components()
-
         self.basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        self.system1 = SystemFileReader().read(self.basepath, TM)
-        self.system2 = SystemFileReader().read(self.basepath, FI)
+
         self.metadata = MetadataReader().read(self.basepath)
-        self.metadata.systems = [self.system1, self.system2]
+
+        for system in self.metadata.systems:
+            SystemFileReader().read(self.basepath, system)
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)

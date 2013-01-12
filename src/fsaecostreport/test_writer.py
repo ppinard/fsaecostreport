@@ -21,24 +21,21 @@ import os.path
 
 # Local modules.
 from fsaecostreport.writer import eBOMWriter, CostReportLaTeXWriter
-
-from fsaecostreport.system import System
 from fsaecostreport.reader import SystemFileReader, MetadataReader
 
 # Globals and constants variables.
-TM = System("TM", "Random stuff", "Z", (255, 0, 0))
 
 class TesteBOMWriter(unittest.TestCase):
 
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        TM.clear_components()
-
         basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        self.system = SystemFileReader().read(basepath, TM)
+
         self.metadata = MetadataReader().read(basepath)
-        self.metadata.systems = [self.system]
+
+        for system in self.metadata.systems:
+            SystemFileReader().read(basepath, system)
 
         self.writer = eBOMWriter()
 
@@ -50,19 +47,19 @@ class TesteBOMWriter(unittest.TestCase):
 
     def testwrite(self):
         rows = self.writer._create_rows(self.metadata, {})
-        self.assertEqual(12, len(rows))
+        self.assertEqual(15, len(rows))
 
 class TestCostReportLaTeXWriter(unittest.TestCase):
 
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        TM.clear_components()
-
         self.basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-        self.system = SystemFileReader().read(self.basepath, TM)
+
         self.metadata = MetadataReader().read(self.basepath)
-        self.metadata.systems = [self.system]
+
+        for system in self.metadata.systems:
+            SystemFileReader().read(self.basepath, system)
 
         self.writer = CostReportLaTeXWriter()
 
@@ -74,9 +71,9 @@ class TestCostReportLaTeXWriter(unittest.TestCase):
 
     def testwrite(self):
         lines = self.writer._write(self.basepath, self.metadata)
-        self.assertEqual(299, len(lines))
+        self.assertEqual(427, len(lines))
 
-#        self.writer.write(self.basepath, [self.system], self.metadata)
+        self.writer.write(self.basepath, self.metadata)
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)

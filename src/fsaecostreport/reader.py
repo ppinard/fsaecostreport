@@ -521,13 +521,12 @@ class MetadataReader(object):
                 raise ValueError, 'No section for system: %s' % label
 
             name = parser.get(label, 'name')
-            letter = parser.get(label, 'letter')
             colour = parser.get(label, 'colour')
             colour = COMMA_SPLIT_PATTERN.findall(colour)
             colour = map(int, colour)
             colour = tuple(colour)
 
-            system = System(label, name, letter, colour)
+            system = System(label, name, colour)
             systems.append(system)
 
         systems = sorted(systems) # Sort by letters

@@ -25,7 +25,7 @@ from fsaecostreport.reader import \
     PartFileReader, AssemblyFileReader, SystemFileReader, MetadataReader
 
 # Globals and constants variables.
-TM = System("TM", "Random stuff", "Z", (255, 0, 0))
+TM = System("TM", "Random stuff", (255, 0, 0))
 
 class TestPartReader(unittest.TestCase):
 
@@ -360,15 +360,14 @@ class TestMetadataReader(unittest.TestCase):
         self.assertEqual('FSAEM', self.metadata.competition_abbrev)
 
         self.assertEqual(2, len(self.metadata.systems))
-        self.assertEqual('TM', self.metadata.systems[0].label)
-        self.assertEqual('Random stuff', self.metadata.systems[0].name)
-        self.assertEqual('Y', self.metadata.systems[0].letter)
-        self.assertEqual((255, 0, 0), self.metadata.systems[0].colour)
 
-        self.assertEqual('FI', self.metadata.systems[-1].label)
-        self.assertEqual('Finance stuff', self.metadata.systems[-1].name)
-        self.assertEqual('Z', self.metadata.systems[-1].letter)
-        self.assertEqual((0, 255, 0), self.metadata.systems[-1].colour)
+        self.assertEqual('FI', self.metadata.systems[0].label)
+        self.assertEqual('Finance stuff', self.metadata.systems[0].name)
+        self.assertEqual((0, 255, 0), self.metadata.systems[0].colour)
+
+        self.assertEqual('TM', self.metadata.systems[-1].label)
+        self.assertEqual('Random stuff', self.metadata.systems[-1].name)
+        self.assertEqual((255, 0, 0), self.metadata.systems[-1].colour)
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.INFO)

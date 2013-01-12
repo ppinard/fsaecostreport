@@ -172,7 +172,7 @@ class CostReportLaTeXWriter(object):
             g = system.colour[1] / 255.0
             b = system.colour[2] / 255.0
             lines += [r'\definecolor{color%s}{rgb}{%f,%f,%f}' % \
-                        (system.letter, r, g, b)]
+                        (system.label, r, g, b)]
 
         return lines
 
@@ -272,7 +272,7 @@ class CostReportLaTeXWriter(object):
                 # of parts twice in the system cost
                 system_cost += component.tablecost * qty
 
-            row = [r'\rowcolor{color%s}\raggedright %s' % (system.letter, e(system.name)),
+            row = [r'\rowcolor{color%s}\raggedright %s' % (system.label, e(system.name)),
                    r'\centering\$ %4.2f' % materials_cost,
                    r'\centering\$ %4.2f' % processes_cost,
                    r'\centering\$ %4.2f' % fasteners_cost,

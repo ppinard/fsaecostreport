@@ -24,7 +24,7 @@ from fsaecostreport.system import System
 from fsaecostreport.reader import SystemFileReader
 
 # Globals and constants variables.
-TM = System("TM", "Random stuff", "Z", (255, 0, 0))
+TM = System("TM", "Random stuff", (255, 0, 0))
 
 class TestSystem(unittest.TestCase):
 
