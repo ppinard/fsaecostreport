@@ -29,3 +29,4 @@ PICTURES_DIR = "pictures"
 CONFIG_FILE = 'costreport.cfg'
 INTRODUCTION_FILE = 'introduction.txt'
 LOGO_FILE = 'logo.jpg'
+SAE_PARTS_FILE = 'sae_parts.csv'

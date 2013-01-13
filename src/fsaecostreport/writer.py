@@ -60,6 +60,50 @@ def humanjoin(values, sort=True, andchr="and"):
         if sort: values.sort()
         return ', '.join(values[:-1]) + " " + andchr + " " + values[-1]
 
+def _create_bom_row(component):
+    if len(component.drawings) == 1:
+        drawings = r'\pageref{dwg:%s-0}' % component.pn
+    elif len(component.drawings) > 1:
+        drawings = r'\pageref{dwg:%s-0}--\pageref{dwg:%s-%i}' % \
+                (component.pn, component.pn, len(component.drawings) - 1)
+    else:
+        drawings = ''
+
+    if len(component.pictures) == 1:
+        pictures = r'\pageref{img:%s-0}' % component.pn
+    elif len(component.pictures) > 1:
+        pictures = r'\pageref{img:%s-0}--\pageref{img:%s-%i}' % \
+                (component.pn, component.pn, len(component.pictures) - 1)
+    else:
+        pictures = ''
+
+    # use tablecost instead of unitcost not to include the cost of parts
+    unitcost = component.tablecost
+    quantity = component.quantity
+    totalcost = unitcost * quantity
+
+    names = [e(capitalize(parent.name)) \
+                for parent in reversed(sorted(component.parents))]
+    assembly = humanjoin(names, andchr=r'\&')
+
+    if isinstance(component, Assembly):
+        row = [r'\hline\rowcolor[gray]{.9}{%s}' % e(capitalize(component.name))]
+    elif isinstance(component, Part):
+        row = [r'%s' % e(capitalize(component.name))]
+
+    row += [r'\centering %s' % component.pn_base,
+            r'\centering %s' % component.revision,
+            r'\centering %s' % assembly,
+            r'\raggedright %s' % e(capitalize(component.details)),
+            r'\centering %i' % quantity,
+            r'\raggedleft\$ %4.2f' % unitcost,
+            r'\raggedleft\$ %4.2f' % totalcost,
+            r'\centering\pageref{ct:%s}' % component.pn,
+            r'\centering%s' % drawings,
+            r'\centering%s' % pictures]
+
+    return row
+
 class CostReportLaTeXWriter(object):
     def write(self, basepath, metadata):
         filename = 'costreport%i.tex' % metadata.year
@@ -191,6 +235,9 @@ class CostReportLaTeXWriter(object):
         lines += self.write_standard_partnumbering(basepath)
         lines += [r'\newpage', '']
 
+        lines += self.write_sae_parts_bom(metadata)
+        lines += [r'\newpage', '']
+
         lines += self.write_toc()
         lines += [r'\newpage', '']
 
@@ -313,6 +360,59 @@ class CostReportLaTeXWriter(object):
 
         return lines
 
+    def write_sae_parts_bom(self, metadata):
+        lines = []
+
+        lines += [r'\section{SAE common parts}']
+        lines += [r'\noindent\emph{As given in SAE Appendix C3}']
+        lines += [r'\renewcommand{\arraystretch}{1.1}']
+
+        data = self._write_sae_parts_bom_rows(metadata)
+        lines += \
+            create_tabular(data, environment='longtable',
+                               tableparameters='l',
+                               tablespec=r'p{13em} | p{3em} | p{2em} | p{10em} | p{7em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em} | p{5em}',
+                               format_before_tabular=r'\rowcolor[gray]{0}',
+                               format_after_header=r'\hline\endhead',
+                               format_between_rows=r'\hline', header_endrow=1)
+
+        lines += [r'\renewcommand{\arraystretch}{1}']
+
+        return lines
+
+    def _write_sae_parts_bom_rows(self, metadata):
+        rows = []
+
+        header = [r'\color{white} Component',
+                  r'\color{white}\centering Asm / Prt \#',
+                  r'\color{white}\centering Rev.',
+                  r'\color{white}\centering Assembly',
+                  r'\color{white} Description',
+                  r'\color{white}\centering Qty',
+                  r'\color{white}\centering Unit\\ Cost',
+                  r'\color{white}\centering Cost',
+                  r'\color{white}\centering Cost\\ Table',
+                  r'\color{white}\centering Drawing(s)',
+                  r'\color{white}\centering Photo(s)']
+        rows.append(header)
+
+        for system in metadata.systems:
+            row = r'\multicolumn{11}{l}{\cellcolor{color%s}\textbf{%s}}' % \
+                        (system.label, e(system.name))
+            rows.append([row])
+
+            for component_name, pn in metadata.sae_parts.get(system, []):
+                if pn:
+                    component = system.get_component(pn)
+                    row = _create_bom_row(component)
+                else:
+                    row = [r'%s' % e(capitalize(component_name)),
+                           r'\multicolumn{10}{l}{\emph{%s}}' % e('Not available')]
+
+                rows.append(row)
+
+        return rows
+
     def write_toc(self):
         lines = []
 
@@ -407,46 +507,7 @@ class SystemLaTeXWriter(object):
         rows.append(header)
 
         for component in hierarchy:
-            if len(component.drawings) == 1:
-                drawings = r'\pageref{dwg:%s-0}' % component.pn
-            elif len(component.drawings) > 1:
-                drawings = r'\pageref{dwg:%s-0}--\pageref{dwg:%s-%i}' % \
-                        (component.pn, component.pn, len(component.drawings) - 1)
-            else:
-                drawings = ''
-
-            if len(component.pictures) == 1:
-                pictures = r'\pageref{img:%s-0}' % component.pn
-            elif len(component.pictures) > 1:
-                pictures = r'\pageref{img:%s-0}--\pageref{img:%s-%i}' % \
-                        (component.pn, component.pn, len(component.pictures) - 1)
-            else:
-                pictures = ''
-
-            # use tablecost instead of unitcost not to include the cost of parts
-            unitcost = component.tablecost
-            quantity = component.quantity
-            totalcost = unitcost * quantity
-
-            names = [e(capitalize(parent.name)) \
-                        for parent in reversed(sorted(component.parents))]
-            assembly = humanjoin(names, andchr=r'\&')
-
-            if isinstance(component, Assembly):
-                row = [r'\hline\rowcolor[gray]{.9}{%s}' % e(capitalize(component.name))]
-            elif isinstance(component, Part):
-                row = [r'%s' % e(capitalize(component.name))]
-
-            row += [r'\centering %s' % component.pn_base,
-                    r'\centering %s' % component.revision,
-                    r'\centering %s' % assembly,
-                    r'\raggedright %s' % e(capitalize(component.details)),
-                    r'\centering %i' % quantity,
-                    r'\raggedleft\$ %4.2f' % unitcost,
-                    r'\raggedleft\$ %4.2f' % totalcost,
-                    r'\centering\pageref{ct:%s}' % component.pn,
-                    r'\centering%s' % drawings,
-                    r'\centering%s' % pictures]
+            row = _create_bom_row(component)
             rows.append(row)
 
         return rows

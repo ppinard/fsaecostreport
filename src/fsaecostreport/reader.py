@@ -20,13 +20,13 @@ __license__ = "GPL v3"
 
 # Standard library modules.
 import csv
-import operator
 import os.path
 import logging
 import glob
 import re
 from ConfigParser import SafeConfigParser
 import unicodedata
+from operator import attrgetter, itemgetter
 
 # Third party modules.
 
@@ -39,7 +39,8 @@ from fsaecostreport.system import System
 
 # Globals and constants variables.
 from fsaecostreport.constants import \
-    COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, CONFIG_FILE, INTRODUCTION_FILE
+    (COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, CONFIG_FILE, INTRODUCTION_FILE,
+     SAE_PARTS_FILE)
 
 COMMA_SPLIT_PATTERN = re.compile(r'[^,;\s]+')
 
@@ -87,7 +88,7 @@ class _ComponentFileReader(object):
         return list(reader)
 
     def _find_line(self, lookup, lines):
-        firstcol_getter = operator.itemgetter(0)
+        firstcol_getter = itemgetter(0)
         firstcol = map(firstcol_getter, lines)
 
         return firstcol.index(lookup)
@@ -437,7 +438,7 @@ class SystemFileReader(object):
             raise ValueError, "Directory 'pictures' is missing from %s" % system_dir
 
     def _check_unread_components(self, basepath, system):
-        filepath_getter = operator.attrgetter('filepath')
+        filepath_getter = attrgetter('filepath')
 
         expected = map(filepath_getter, system._components.values())
         actual = glob.glob(os.path.join(basepath, COMPONENTS_DIR, "*.csv"))
@@ -498,7 +499,7 @@ class MetadataReader(object):
     def read(self, basepath):
         filepath = os.path.join(basepath, CONFIG_FILE)
         if not os.path.exists(filepath):
-            raise ValueError, 'No configuration file'
+            raise IOError, 'No configuration file'
 
         parser = SafeConfigParser()
         parser.read(filepath)
@@ -531,9 +532,11 @@ class MetadataReader(object):
 
         systems = sorted(systems) # Sort by letters
 
+        sae_parts = self._read_sae_parts(basepath, systems)
+
         return Metadata(year, car_number, university, team_name,
                         competition_name, competition_abbrev, introduction,
-                        systems)
+                        sae_parts, systems)
 
     def _read_introduction(self, basepath):
         lines = []
@@ -541,3 +544,42 @@ class MetadataReader(object):
             for line in f.readlines():
                 lines.append(ascii(line.strip()))
         return lines
+
+    def _read_sae_parts(self, basepath, systems):
+        # Empty SAE parts
+        sae_parts = {}
+        for system in systems:
+            sae_parts.setdefault(system, [])
+
+        # Check file existence
+        filepath = os.path.join(basepath, SAE_PARTS_FILE)
+        if not os.path.exists(filepath):
+            raise IOError, 'No SAE common parts file'
+
+        # Look-up table for system labels
+        keys = map(attrgetter('label'), systems)
+        systems_ref = dict(zip(keys, systems))
+
+        # Read file
+        with open(filepath, 'r') as fp:
+            reader = csv.reader(fp)
+
+            for row in reader:
+                try:
+                    system = systems_ref[row[0].strip()]
+                except KeyError:
+                    continue
+
+                component_name = row[1].strip()
+                pn = row[2].strip()
+                if pn:
+                    if not (PART_PN.match(pn) or SYS_ASSY_PN.match(pn) or \
+                            SUB_ASSY_PN.match(pn)):
+                        raise ValueError, 'Part number for %s is invalid' % component_name
+                else:
+                    pn = None
+
+                sae_parts[system].append((component_name, pn))
+
+        return sae_parts
+

@@ -111,8 +111,8 @@ def run():
         CostReportLaTeXWriter().write(basepath, metadata)
         logging.info("Writing cost report... DONE")
 
+    # write eBOM
     if options.ebom:
-        # write eBOM
         logging.info("Writing eBOM...")
         eBOMWriter().write(basepath, metadata)
         logging.info("Writing eBOM... DONE")
