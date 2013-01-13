@@ -226,6 +226,9 @@ class CostReportLaTeXWriter(object):
         lines += [r'\pagenumbering{roman}']
         lines += ['']
 
+        lines += self.write_toc()
+        lines += [r'\newpage', '']
+
         lines += self.write_introduction(metadata)
         lines += [r'\newpage', '']
 
@@ -236,9 +239,6 @@ class CostReportLaTeXWriter(object):
         lines += [r'\newpage', '']
 
         lines += self.write_sae_parts_bom(metadata)
-        lines += [r'\newpage', '']
-
-        lines += self.write_toc()
         lines += [r'\newpage', '']
 
         lines += [r'\pagenumbering{arabic}']
