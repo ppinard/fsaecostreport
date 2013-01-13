@@ -1,9 +1,0 @@
-<ivy-module version="2.0">
-    <info organisation="ca.mcgill.fsae" module="fsaecostreport"
-        revision="0.4" />
-
-    <dependencies>
-        <dependency org="net.sf.ant-python" name="ant-python"
-            rev="0.1.3" conf="*->runtime" />
-    </dependencies>
-</ivy-module>

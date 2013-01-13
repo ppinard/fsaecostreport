@@ -1,4 +1,5 @@
 syntax: glob
 
-*.tex
-*.out
+src/fsaecostreport/testdata/*.tex
+src/fsaecostreport/testdata/*.out
+build/
