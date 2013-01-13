@@ -364,7 +364,7 @@ class CostReportLaTeXWriter(object):
         lines = []
 
         lines += [r'\section{SAE common parts}']
-        lines += [r'\noindent\emph{As given in SAE Appendix C3}']
+        lines += [r'\noindent\emph{As per SAE Appendix C3}']
         lines += [r'\renewcommand{\arraystretch}{1.1}']
 
         data = self._write_sae_parts_bom_rows(metadata)
