@@ -1,0 +1,14 @@
+"Tooling Table.  Posted Version 1.4, 28-Nov-2010",,,,,
+ID,Process,Tool,Cost,Unit,Comments
+1,All,None, $-   ,,
+2,Die Casting,Die Casting - Die," $10,000 ",die,Per die not die set.  Minimum number of dies is 2 per die set.
+3,Lamination,Lamination - Aluminum Tool," $20,000 ",m^2,Use surface area of tool that is used to form part geometry.
+4,Lamination,Lamination - Composite Tool," $10,000 ",m^2,Use surface area of tool that is used to form part geometry.
+5,Lamination,Lamination - Flat Panel Tool," $1,500 ",m^2,Use surface area of tool that is used to form part geometry.  To use this tooling type composite part must have geometry that is possible to obtain from sheet metal tool with no complex curvature or shape.  For example flat panel parts are allowed or parts with curvature in only one axis.
+6,Lamination,Lamination - Steel Tool," $40,000 ",m^2,Use surface area of tool that is used to form part geometry.
+7,Plastic injection molding,Plastic injection molding - Die," $10,000 ",die,Per die not die set. 
+8,Powder Metal Forming,Powder Metal Forming - Die," $10,000 ",die,Per die not die set. 
+9,Sand Casting,Sand Casting - Die," $10,000 ",die,Per die not die set. 
+10,Sand Casting,Sand Casting - Sand Core Package," $5,000 ",core,Per core not core package.
+11,Welds,Welds - Welding Fixture, $500 ,point,Each point is a pickup or support point.
+12,Braze,Brazing Fixture, $500 ,point,Each point is a pickup or support point.

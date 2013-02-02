@@ -1,0 +1,32 @@
+"Process Multipliers Table.  Posted Version 1.3, 28-Nov-2010",,,,
+ProcessMultiplierID,Process Multiplier,Multiplier,Use,Comments
+1,Assemble - Length > 0.5m,1.25,Assembly,
+2,Disassemble,0.8,Assembly,To be used when removing parts or fasteners
+3,Fastener Engagement Length > 2D,1.25,Fastener Installation,
+4,Fastener Engagement Length > 4D,1.5,Fastener Installation,
+5,Machine - Hole Length >= 4D,1.5,"Drill, Tap",
+6,Machine - Hole Length >= 8D,3,"Drill, Tap",
+7,Material  - Composite,2,Machining,
+8,Material - Aluminum,1,Machining,
+9,Material - Brass,0.8,Machining,
+10,Material - Bronze,1.33,Machining,
+11,Material - Cast Iron,2.5,Machining,
+12,Material - Foam,0.33,Machining,
+13,Material - Inconel,4,Machining,
+14,Material - Magnesium,0.8,Machining,
+15,Material - MMC,4.25,Machining,
+16,Material - Nickel,1.33,Machining,
+17,Material - Plastic,0.5,Machining,
+18,Material - Stainless Steel,3.75,Machining,
+19,Material - Steel,3,Machining,
+20,Material - Titanium,3.65,Machining,
+21,Material - Wood (Hard or soft),0.5,Machining,
+22,Repeat 2,2,,"Optional, to show repetition of processes."
+23,Repeat 3,3,,"Optional, to show repetition of processes."
+24,Repeat 4,4,,"Optional, to show repetition of processes."
+25,Repeat 5,5,,"Optional, to show repetition of processes."
+26,Repeat 6,6,,"Optional, to show repetition of processes."
+27,Repeat 7,7,,"Optional, to show repetition of processes."
+28,Repeat 8,8,,"Optional, to show repetition of processes."
+29,Repeat 9,9,,"Optional, to show repetition of processes."
+30,Repeat 10,10,,"Optional, to show repetition of processes."

@@ -1,0 +1,151 @@
+"Process Table.  Posted Version 6.1, 28-Nov-2010",,,,,,,,,
+Process ID,Process,Unit Cost,Unit,Category,Tooling Required,Near Net Shape,Multiplier Type Used,Modified,Comments
+2,Die Casting, $4.00 ,kg,Basic Forming,Yes,Yes,,,
+3,Investment Casting, $8.00 ,kg,Basic Forming,,Yes,,,
+4,Laser Powder Deposition, $330.00 ,kg,Basic Forming,,Yes,,,
+5,Plastic injection molding, $2.75 ,kg,Basic Forming,Yes,Yes,,,
+6,Powder Metal Forming, $3.00 ,kg,Basic Forming,Yes,Yes,,,
+7,Rapid Prototype - Stereo Lith., $32.00 ,kg,Basic Forming,,Yes,,,
+8,Sand Casting, $3.00 ,kg,Basic Forming,Yes,,,,
+9,Exhaust System Ceramic Coating, $25.00 ,m,Coating,,,,24-Feb-09,"Linear distance of coating on exhaust header and tubing including all runners, etc.  Material included."
+10,"Cure, Autoclave", $50.00 ,m^2,Composite,Yes,,,,Includes all consumable materials and labor.
+11,"Cure, Oven", $20.00 ,m^2,Composite,Yes,,,,Includes all consumable materials and labor.
+12,"Cure, Room Temperature", $10.00 ,m^2,Composite,Yes,,,24-Feb-09,Includes all consumable materials and labor.
+13,"Lamination, Fillament Winding", $25.00 ,kg,Composite,,,,26-Mar-09,Cost based on finished part mass of composite fibers and resin.
+14,"Lamination, Manual", $35.00 ,m^2,Composite,,,,,
+15,Potting, $0.50 ,cm,Composite,,,,26-Apr-09,Cost based on perimeter of insert.  Includes potting compund material cost
+16,"Resin application, Infusion Molding", $2.50 ,m^2,Composite,,,,,
+17,"Resin application, Manual", $5.00 ,m^2,Composite,,,,,If prepreg composites are used do not included the resin application step.
+18,"Attach Wire, Fork", $0.25 ,unit,Electrical - Attach Wires,,,,,
+19,"Attach Wire, Quick connect terminal", $0.10 ,unit,Electrical - Attach Wires,,,,,
+20,"Attach Wire, Ring", $0.48 ,unit,Electrical - Attach Wires,,,,,
+21,"Attach Wire, Solder wire, bent", $0.35 ,unit,Electrical - Attach Wires,,,,,
+22,"Attach Wire, Solder wire, not bent", $0.52 ,unit,Electrical - Attach Wires,,,,,
+23,"Attach Wire, Terminated wire with screw", $0.35 ,unit,Electrical - Attach Wires,,,,,
+24,"Attach Wire, Terminated wire with screw and nut", $0.52 ,unit,Electrical - Attach Wires,,,,,
+25,"Attach Wire, Wire to screw", $0.48 ,unit,Electrical - Attach Wires,,,,,
+26,"Attach Wire, Wire to screw with nut", $0.65 ,unit,Electrical - Attach Wires,,,,,
+27,"Attach Wire, Wire to terminal block", $0.35 ,unit,Electrical - Attach Wires,,,,,
+28,"Attach Wire, Wire wrap around terminal post", $0.27 ,unit,Electrical - Attach Wires,,,,,
+29,"Install Tie Wrap (Zip Tie, Cable Clamp)", $0.09 ,unit,Electrical - Bundle Install,,,,17-Feb-09,
+30,Wire Dressing (Install and route), $1.00 ,m,Electrical - Bundle Install,,,,,
+31,Insert Bundle Into Tube or Sleeve, $0.02 ,m,Electrical - Bundle Processing,,,,24-Jan-09,
+32,Install Adhesive Cable Clamp, $0.19 ,unit,Electrical - Bundle Processing,,,,,
+33,Lace, $0.15 ,unit,Electrical - Bundle Processing,,,,,
+34,Shrink Tube, $0.15 ,cm,Electrical - Bundle Processing,,,,26-Mar-09,
+35,Taping Wire Bundle, $0.04 ,cm,Electrical - Bundle Processing,,,,26-Mar-09,
+36,"Connector Install, Circular, Bayonet", $0.11 ,unit,Electrical - Connections,,,,,
+37,"Connector Install, Circular, Friction", $0.14 ,unit,Electrical - Connections,,,,,
+38,"Connector Install, Circular, Screw Thread", $0.24 ,unit,Electrical - Connections,,,,,
+39,"Connector Install, Square, Friction", $0.14 ,unit,Electrical - Connections,,,,,
+40,"Connector Install, Square, Latch/Snap-on Type", $0.17 ,unit,Electrical - Connections,,,,,
+41,"Connector Install, Square, Screw (x2)", $0.50 ,unit,Electrical - Connections,,,,,
+42,"Connector Install, Square, Spring Clip", $0.20 ,unit,Electrical - Connections,,,,,
+43,Lay Wire - Control, $0.02 ,m,Electrical - Layout,,,,25-Jan-09,
+44,Lay Wire - Power, $0.03 ,m,Electrical - Layout,,,,25-Jan-09,
+45,Lay Wire - Signal, $0.02 ,m,Electrical - Layout,,,,25-Jan-09,
+46,Crimp Wire, $0.17 ,unit,Electrical - Prep,,,,,
+47,Cut wire, $0.08 ,unit,Electrical - Prep,,,,,
+48,Strip Multi-Conductor, $0.13 ,wire(s),Electrical - Prep,,,,24-Jan-09,
+49,Strip Wire, $0.08 ,unit,Electrical - Prep,,,,,
+50,Tin Wire, $0.13 ,unit,Electrical - Prep,,,,,
+51,"Connector Assembley, Crimp", $0.36 ,contacts,Electrical - Wire in Connector,,,,24-Jan-09,
+52,"Connector Assembley, Solder", $0.24 ,contacts,Electrical - Wire in Connector,,,,24-Jan-09,
+53,Hand - Start Only, $0.12 ,unit,Fasteners,,,,,
+54,"Hand, Loose <= 25.4 mm", $0.50 ,unit,Fasteners,,,,,
+55,"Hand, Loose <= 6.35 mm", $0.25 ,unit,Fasteners,,,,,
+56,"Hand, Loose > 25.4 mm", $0.75 ,unit,Fasteners,,,,,
+57,"Hand, Tight <= 6.35 mm", $0.50 ,unit,Fasteners,,,,,
+58,Power Tool <= 25.4 mm, $0.25 ,unit,Fasteners,,,Fastener Installation,,
+59,Power Tool <= 6.35 mm, $0.25 ,unit,Fasteners,,,Fastener Installation,,
+60,Power Tool > 25.4 mm, $0.50 ,unit,Fasteners,,,Fastener Installation,,
+61,Ratchet <= 25.4 mm, $0.75 ,unit,Fasteners,,,Fastener Installation,,
+62,Ratchet <= 6.35 mm, $0.50 ,unit,Fasteners,,,Fastener Installation,,
+63,Ratchet > 25.4 mm, $1.50 ,unit,Fasteners,,,Fastener Installation,,
+64,Reaction Tool <= 25.4 mm, $0.25 ,unit,Fasteners,,,,,
+65,Reaction Tool <= 6.35 mm, $0.25 ,unit,Fasteners,,,,,
+66,Reaction Tool > 25.4 mm, $0.50 ,unit,Fasteners,,,,,
+67,Screwdriver < 1 Turn, $0.12 ,unit,Fasteners,,,Fastener Installation,,
+68,Screwdriver > 1 Turn, $0.50 ,unit,Fasteners,,,Fastener Installation,,
+69,Wrench <= 25.4 mm, $1.50 ,unit,Fasteners,,,Fastener Installation,,
+70,Wrench <= 6.35 mm, $1.00 ,unit,Fasteners,,,Fastener Installation,,
+71,Wrench > 25.4 mm, $2.00 ,unit,Fasteners,,,Fastener Installation,,
+72,Braze, $0.15 ,cm,Joining,Yes,,,26-Mar-09,
+73,Sewing, $0.08 ,cm,Joining,,,,,
+74,Weld, $0.15 ,cm,Joining,Yes,,,24-Feb-09,
+75,Adjustment - Misc., $5.00 ,unit,Labor,,,,,"Chain tension, etc."
+76,Aerosol Apply, $5.25 ,m^2,Labor,,,,,
+77,Annodize, $-   ,unit,Labor,,,,25-Feb-09,It is not necessary to include any cost for annodizing.  Included for reference only.
+78,"Assemble, >20 kg, Interference", $5.63 ,unit,Labor,,,Assembly,,
+79,"Assemble, >20 kg, Line-on-Line", $3.75 ,unit,Labor,,,Assembly,,
+80,"Assemble, >20 kg, Loose", $1.88 ,unit,Labor,,,Assembly,,
+81,"Assemble, 1 kg, Interference", $0.19 ,unit,Labor,,,Assembly,,
+82,"Assemble, 1 kg, Line-on-Line", $0.13 ,unit,Labor,,,Assembly,,
+83,"Assemble, 1 kg, Loose", $0.06 ,unit,Labor,,,Assembly,,
+84,"Assemble, 10 kg, Interference", $1.88 ,unit,Labor,,,Assembly,,
+85,"Assemble, 10 kg, Line-on-Line", $1.25 ,unit,Labor,,,Assembly,,
+86,"Assemble, 10 kg, Loose", $0.63 ,unit,Labor,,,Assembly,,
+87,"Assemble, 15 kg, Interference", $2.81 ,unit,Labor,,,Assembly,,
+88,"Assemble, 15 kg, Line-on-Line", $1.88 ,unit,Labor,,,Assembly,,
+89,"Assemble, 15 kg, Loose", $0.94 ,unit,Labor,,,Assembly,,
+90,"Assemble, 20 kg, Interference", $3.75 ,unit,Labor,,,Assembly,,
+91,"Assemble, 20 kg, Line-on-Line", $2.50 ,unit,Labor,,,Assembly,,
+92,"Assemble, 20 kg, Loose", $1.25 ,unit,Labor,,,Assembly,,
+93,"Assemble, 3 kg, Interference", $0.56 ,unit,Labor,,,Assembly,,
+94,"Assemble, 3 kg, Line-on-Line", $0.38 ,unit,Labor,,,Assembly,,
+95,"Assemble, 3 kg, Loose", $0.19 ,unit,Labor,,,Assembly,,
+96,"Assemble, 5 kg, Interference", $0.94 ,unit,Labor,,,Assembly,,
+97,"Assemble, 5 kg, Line-on-Line", $0.63 ,unit,Labor,,,Assembly,,
+98,"Assemble, 5 kg, Loose", $0.31 ,unit,Labor,,,Assembly,,
+99,Brake Bleed - Per Bleeder Valve, $2.50 ,unit,Labor,,,,,
+100,Brush Apply, $0.02 ,cm^2,Labor,,,,,"For use with glue, adhesives, paint, resin, etc."
+101,"Cut (scissors, knife)", $0.06 ,cm,Labor,,,,,
+102,Heat Treatment, $-   ,unit,Labor,,,,30-Apr-09,It is not necessary to include any cost for heat treatment.  Included for reference only.
+103,Liquid Applicator Gun, $0.02 ,cm,Labor,,,,,"For use with glue, adhesives, paint, resin, etc."
+104,Liquid Apply - Pour Expanding Foam, $2.00 ,m^3,Labor,,,,,Cost based on volume of fully expanded final part before trimming
+105,Liquid Apply - Spot, $0.10 ,unit,Labor,,,,,"For use with glue, adhesives, paint, resin, etc."
+106,"Machining Setup, Change", $0.65 ,unit,Labor,,,,01-Mar-09,The quantity for this process may be used to scale the cost to the number of parts yielded from each setup.  For example if 4 parts can be machined from a single plate then the quantity per part may be set to 0.25 to spread the cost out over each part.
+107,"Machining Setup, Install and remove", $1.30 ,unit,Labor,,,,01-Mar-09,The quantity for this process may be used to scale the cost to the number of parts yielded from each setup.  For example if 4 parts can be machined from a single plate then the quantity per part may be 0.25 to spread the cost out over each part.
+108,Riveting, $0.25 ,unit,Labor,,,,17-Feb-09,
+109,"Safety Wire, Install", $0.60 ,unit,Labor,,,,17-Feb-09,"Unit includes each item or hole included in safety wire path.  One item could include bolt, nut, hole in an axle, hub, etc."
+110,Suspension Setup - Solid Axle (per corner), $4.50 ,unit,Labor,,,,,
+111,Suspension Setup-Independent Susp. (per corner), $8.75 ,unit,Labor,,,,,
+112,Tape, $0.80 ,m,Labor,,,,,
+113,"Broach, External", $0.50 ,cm,Material Removal,,,,17-Feb-09,Linear distance of broach
+114,"Broach, Internal", $0.50 ,cm,Material Removal,,,,17-Feb-09,Linear distance of broach
+115,Drilled hole < 50.8 mm dia., $0.70 ,hole,Material Removal,,,Drill & Tap,,Holes >= 50.8 mm must be machined
+116,Drilled holes < 25.4 mm dia., $0.35 ,hole,Material Removal,,,Drill & Tap,,
+117,EDM - Plunge, $0.30 ,cm^3,Material Removal,,,Machining,,
+118,EDM - Wire, $0.20 ,cm,Material Removal,,,Machining,,
+119,Gear Shaping (hobbing), $0.50 ,cm,Material Removal,,,Machining,09-May-10,Linear travel of gear shaping.  A half-shaft end 5cm long would cost $2.50
+120,"Grind, Cylindrical", $0.15 ,cm^2,Material Removal,,,Machining,,0.25mm machine stock
+121,"Grind, Flat", $0.15 ,cm^2,Material Removal,,,Machining,,0.25mm machine stock
+122,"Grind, Profile", $0.15 ,cm^2,Material Removal,,,Machining,,0.25mm machine stock
+123,Hand Finish - Material Removal, $0.20 ,cm^3,Material Removal,,,Machining,20-Feb-09,"Hand sanding, grinding, shaping.  Any manual material removal process."
+124,Hand Finish - Surface Preperation, $0.02 ,cm^2,Material Removal,,,Machining,20-Feb-09,"Hand sanding, cleaning or other operations used to prepare the surface, such as for bonding."
+125,Knurling, $0.10 ,cm,Material Removal,,,Machining,24-Feb-09,"Linear distance of knurl on part (length of knurl, not diameter)"
+126,Laser Cut, $0.01 ,cm,Material Removal,,,Machining,24-Oct-10,Revised cost for 2011 Competition Years
+127,Machining, $0.04 ,cm^3,Material Removal,,,Machining,25-Sep-10,"Machining can include roughing (1.5mm machine stock min., Tol +/- 0.5mm) and/or finishing (0.5mm machine stock min.).  All parts should include the minimum 1.5mm material stock except parts produced by ""near net shaped"" basic forming processes.  It is not necessary to break down rough and finish cuts, only use the correct minimum stock in the calculation of material removed."
+128,Mill - Form Cutter, $0.10 ,cm,Material Removal,,,Machining,,0.5mm machine stock min.  Linear distance of cutter motion.
+129,Non-metallic cutting <= 25.4 mm, $0.35 ,cut,Material Removal,,,Machining,,
+130,Non-metallic cutting <= 50.8 mm, $0.70 ,cut,Material Removal,,,Machining,,
+131,Non-metallic cutting <= 76.2 mm, $1.05 ,cut,Material Removal,,,Machining,,
+132,Non-metallic cutting > 76.2 mm, $1.40 ,cut,Material Removal,,,Machining,,
+133,Plasma Cutting, $0.10 ,cm,Material Removal,,,Machining,,
+134,Reemed hole, $0.35 ,hole,Material Removal,,,Machining,,Reemed holes must first be drilled or machined
+135,Saw or tubing cuts, $0.40 ,cm,Material Removal,,,Machining,,
+136,Tapping holes, $0.35 ,hole,Material Removal,,,Drill & Tap,,
+137,"Threading, External (machining)", $0.10 ,cm,Material Removal,,,,17-Feb-09,"Linear distance of thread (length of bolt thread, not diameter)"
+138,"Threading, Internal (machining)", $0.10 ,cm,Material Removal,,,,17-Feb-09,"Linear distance of thread (length of bolt thread, not diameter)"
+139,Waterjet Cut, $0.01 ,cm,Material Removal,,,Machining,24-Oct-10,Revised cost for 2011 Competition Years
+140,"Spinning, Metal", $0.02 ,cm^3,Shaping,,,,26-Mar-09,Cost based on the total volume created between the metal starting position and final position.
+141,Sheet metal bends, $0.25 ,bend,Sheet Materials,,,,,
+142,Sheet metal punching, $0.03 ,cm^2,Sheet Materials,,,,,
+143,Sheet Metal Saw Cut, $0.20 ,cm,Sheet Materials,,,,17-Feb-09,Includes linear saw cuts and hole saw cuts.  Linear cuts by linear distance and hole saw cuts by hole circumference.
+144,Sheet metal shearing, $0.25 ,cut,Sheet Materials,,,,,
+145,Sheet metal stamping, $0.03 ,cm^2,Sheet Materials,,,,,
+146,Tube bends, $0.75 ,bend,Tubing,,,,,
+147,Tube cut, $0.15 ,cm,Tubing,,,,24-Jan-09,Use diameter of tube
+148,Tube end preperation for welding, $0.75 ,end,Tubing,,,,,"Includes mitering, nothing, sanding, wire wheeling and surface prep.  All steps necessary for welding of one tube end except cutting and welding."
+149,Tube Flare/Bead, $0.45 ,end,Tubing,,,,24-Feb-09,"Form flare or bead for brake lines, cooling lines, etc. in hard lines"
+150,Weld - Round Tubing, $0.38 ,cm,Tubing,,,,24-Jan-09,Use diameter for dimension.  Ratio of pi included.

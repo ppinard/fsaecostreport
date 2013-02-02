@@ -1,0 +1,777 @@
+"Materials Table.  Posted Version 12.7, 8-Feb-2012",,,,,,,,,Added cost calculation,,,,
+Material ID,Material,Supplier,Category,Table Price,Unit 1,Unit 2,C1,C2,Size1,Size2,Calc Value,Modified,Comments
+1,"Bearing Ball, Steel",Any,Bearings,[C1]*[Size1]+[C2],mm,,0.003,0.05,0,,0.05,5-May-09,"[Size1]=Ball diameter (mm).  Any steel materiAluminum  This material is for a single steel sphere ball, not a complete bearing."
+2,"Bearing, Ball, Angular Contact",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.1,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Not to be used for wheel bearings."
+3,"Bearing, Ball, Deep Groove",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.1,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Not to be used for wheel bearings."
+4,"Bearing, Ball, Radial",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.1,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Not to be used for wheel bearings."
+5,"Bearing, Cylindrical Roller",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0045,3.6,0,0, $3.60 ,23-Feb-09,[Size1]=Outer Diameter (mm).  [Size2]=Length of bearing (mm).  Not for wheel bearing use.
+6,"Bearing, Double Row, Ball, Angular Contact",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.1,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Not to be used for wheel bearings."
+7,"Bearing, Double Row, Ball, Deep Groove",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.1,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Not to be used for wheel bearings."
+8,"Bearing, Double Row, Ball, Radial",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.1,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Not to be used for wheel bearings."
+9,"Bearing, Linear, Closed",Any,Bearings, [C1]*[Size1]^2*[Size2]+[C2] ,mm,mm,0.00010,7.38,0,0, $7.38 ,10-Mar-09,"[Size1]=Outer diameter (mm), [Size2]=Length (mm).  Use with end-supported shafts."
+10,"Bearing, Linear, Open",Any,Bearings, [C1]*[Size1]^2*[Size2]+[C2] ,mm,mm,0.00012,13.1,0,0, $13.10 ,10-Mar-09,"[Size1]=Outer diameter (mm), [Size2]=Length (mm).  Use with continuously supported shafts or where access to shaft ends is not possible."
+11,"Bearing, Needle",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0045,3.6,0,0, $3.60 ,23-Feb-09,[Size1]=Outer Diameter (mm).  [Size2]=Length of bearing (mm).  Any style of needle bearing.  Not for wheel bearing use.
+12,"Bearing, Spherical",Any,Bearings, [C1]*[Size1]^2+[C2] ,mm,,0.03,5.00,0,, $5.00 ,,[Size1]=bore size (diameter of hole in spherical bearing).
+13,"Bearing, Tapered Needle",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0045,10.45,0,0, $10.45 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Cost includes outer ring, inner ring and roller assembly.   Not to be used for wheel bearings."
+14,"Bearing, Tapered Roller",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0045,10.45,0,0, $10.45 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Cost includes outer ring, inner ring and roller assembly.   Not to be used for wheel bearings."
+15,"Bearing, Thrust Needle Roller, Cage Assembly",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.02,0.15,0,0, $0.15 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Cost includes cage assembly but no washers.   Not to be used for wheel bearings."
+16,"Bearing, Thrust Needle Roller, Washers",Any,Bearings, [C1]*[Size1]^2*[Size2]+[C2] ,mm,mm,0.0003,0.13,0,0, $0.13 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  For thrust bearings.   Not to be used for wheel bearings."
+17,"Bushing, Student Built",Student Built,Bearings, $-   ,unit,,,,,,,,"Solid material (metal, plastic, etc.).  No moving elements (ball, needle, etc.)"
+18,"Rod End, Aluminum",Any,Bearings, [C1]*[Size1]^2+[C2] ,mm,,0.05,3.80,0,, $3.80 ,,[Size1]=bore size (diameter of hole in spherical bearing).  Includes male/female and left/right threads.
+19,"Rod End, Industrial",Any,Bearings, [C1]*[Size1]^2+[C2] ,mm,,0.02,1.22,0,, $1.22 ,,[Size1]=bore size (diameter of hole in spherical bearing).  Includes male/female and left/right threads.
+20,"Rod End, Precison (Aircraft)",Any,Bearings, [C1]*[Size1]^2+[C2] ,mm,,0.05,5.00,0,, $5.00 ,,[Size1]=bore size (diameter of hole in spherical bearing).  Includes male/female and left/right threads.
+21,"Wheel Bearing, Ball, Angular Contact",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.4,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+22,"Wheel Bearing, Ball, Deep Groove",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.4,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+23,"Wheel Bearing, Ball, Radial",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.4,0.5,95,20, $169.94 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+24,"Wheel Bearing, Double Row, Ball, Angular Contact",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.4,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+25,"Wheel Bearing, Double Row, Ball, Deep Groove",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.4,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+26,"Wheel Bearing, Double Row, Ball, Radial",Any,Bearings, [C1]*(([Size1]^2*[Size2]))^([C2]) ,mm,mm,0.4,0.5,0,0, $-   ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+27,"Wheel Bearing, Tapered Needle",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.009,20.9,0,0, $20.90 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+28,"Wheel Bearing, Tapered Roller",Any,Bearings, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.009,20.9,0,0, $20.90 ,23-Feb-09,"[Size1]=Outer diameter (mm), [Size2]=Thickness (mm).  Higher load capacity bearings intended for wheel/hub applications."
+29,"90-Degree Coupler, Tilton 72-560",Tilton,Brake System, $45.00 ,unit,,,,,,,,
+30,"90-Degree Coupler, Tilton 72-561",Tilton,Brake System, $47.50 ,unit,,,,,,,14-Mar-09,
+31,"90-Degree Coupler, Tilton 72-562",Tilton,Brake System, $50.00 ,unit,,,,,,,14-Mar-09,
+32,"ABS Kit, Bosch, M4 Kit 1",Bosch,Brake System," $3,534.00 ",unit,,,,,,,18-Apr-10,
+33,"ABS Kit, Bosch, M4 Kit 2",Bosch,Brake System," $4,158.00 ",unit,,,,,,,18-Apr-10,
+34,"Balance Bar, AP, CP5500-9",AP,Brake System, $270.00 ,unit,,,,,,,,
+35,"Balance Bar, AP, CP5520-4",AP,Brake System, $300.00 ,unit,,,,,,,8-Jun-09,
+36,"Balance Bar, Brake, Student Built",Student Built,Brake System, $-   ,unit,,,,,,,,
+37,"Balance Bar, Sandtler, 128153",Sandtler,Brake System, $65.00 ,unit,,,,,,,23-May-10,
+38,"Balance Bar, Sandtler, 128154",Sandtler,Brake System, $73.00 ,unit,,,,,,,23-May-10,
+39,"Balance Bar, Timms Autoteile, 013 901",Timms Autoteile,Brake System, $28.40 ,unit,,,,,,,3-May-09,
+40,"Balance Bar, Tilton, 72-250 ",Tilton,Brake System, $30.00 ,unit,,,,,,,,
+41,"Balance Bar, Tilton, 72-260",Tilton,Brake System, $30.00 ,unit,,,,,,,,
+42,"Balance Bar, Tilton, 72-280",Tilton,Brake System, $312.50 ,unit,,,,,,,,
+43,"Balance Bar, Tilton, 72-281",Tilton,Brake System, $325.00 ,unit,,,,,,,,
+44,"Balance Bar, Tilton, 72-300",Any,Brake System, $32.00 ,unit,,,,,,,15-Mar-09,
+45,"Balance Bar Cable Adjuster, AP CP2905-8",AP,Misc., $80.00 ,,,,,,,,19-Apr-09,
+46,"Balance Bar Cable Adjuster, Optimum Balance Prod",Optimum Balance Products,Misc., $22.00 ,unit,,,,,,,22-Apr-09,
+47,"Balance Bar Cable Adjuster, Right Angle Drive, AP CP5500-10",AP,Brake System, $103.00 ,unit,,,,,,,18-Apr-10,
+48,"Balance Bar Cable Adjuster, Sandtler, 128154",Sandtler,Brake System, $73.00 ,unit,,,,,,,23-May-10,
+49,"Brake Caliper Piston, Student Built",Student Built,Brake System, $5.00 ,unit,,,,,,,,
+50,"Brake Caliper, AP, CP2577",AP,Brake System, $125.00 ,unit,,,,,,,,
+51,"Brake Caliper, AP, CP3696-6E0",AP,Brake System, $77.50 ,unit,,,,,,,,
+52,"Brake Caliper, AP, CP4226",AP,Brake System, $112.50 ,unit,,,,,,,,
+53,"Brake Caliper, AP, CP4227",AP,Brake System, $200.00 ,unit,,,,,,,,
+54,"Brake Caliper, AP, CP4488",AP,Brake System, $490.00 ,unit,,,,,,,,
+55,"Brake Caliper, AP, CP7003",AP,Brake System, $100.00 ,unit,,,,,,,,
+56,"Brake Caliper, AP, CP7853",AP,Brake System, $340.50 ,unit,,,,,,,23-May-10,
+57,"Brake Caliper, Beringer, 4H02",Beringer,Brake System, $110.00 ,unit,,,,,,,7-May-11,
+58,"Brake Caliper, Beringer, 4H12",Beringer,Brake System, $110.00 ,unit,,,,,,,7-May-11,
+59,"Brake Caliper, Beringer, 2D1",Beringer,Brake System, $83.00 ,unit,,,,,,,7-May-11,
+60,"Brake Caliper, Brembo, 20.5161.46/P32F",Brembo,Brake System, $50.00 ,unit,,,,,,,,
+61,"Brake Caliper, Brembo, 20.6101/GP4-24",Brembo,Brake System, $450.00 ,unit,,,,,,,,
+62,"Brake Caliper, Brembo, 20.6950.10",Brembo,Brake System, $70.00 ,unit,,,,,,,23-Feb-09,
+63,"Brake Caliper, Brembo, 20.6950.11/P32G",Brembo,Brake System, $70.00 ,unit,,,,,,,6-Apr-09,
+64,"Brake Caliper, Brembo, 20.6950.21/P32G",Brembo,Brake System, $70.00 ,unit,,,,,,,,
+65,"Brake Caliper, Brembo, 20.6951.12/P34G",Brembo,Brake System, $70.00 ,unit,,,,,,,24-Feb-09,
+66,"Brake Caliper, Brembo, 20.6951.50/P34C",Brembo,Brake System, $70.00 ,unit,,,,,,,,
+67,"Brake Caliper,  Harrison, 121019P",Harrison,Brake System, $162.00 ,unit,,,,,,,27-Mar-09,
+68,"Brake Caliper, Harrison, 222004P",Harrison,Brake System, $94.00 ,unit,,,,,,,27-Mar-09,
+69,"Brake Caliper, Harrison, 222005P",Harrison,Brake System, $94.00 ,unit,,,,,,,27-Mar-09,
+70,"Brake Caliper, Honda,  45150-HP1-006",Honda/Nissin,Brake System, $55.00 ,unit,,,,,,,,
+71,"Brake Caliper, Honda, 45150-HN6-006",Honda/Nissin,Brake System, $30.00 ,unit,,,,,,,,
+72,"Brake Caliper, ISR, 22-028",ISR,Brake System, $65.00 ,unit,,,,,,,,
+73,"Brake Caliper, ISR, 22-034",ISR,Brake System, $240.00 ,unit,,,,,,,20-Apr-10,Same cost left and right calipers
+74,"Brake Caliper, ISR, 22-036",ISR,Brake System, $77.50 ,unit,,,,,,,20-Mar-10,
+75,"Brake Caliper, ISR, 22-048",ISR,Brake System, $96.00 ,unit,,,,,,,,
+76,"Brake Caliper, ISR, 22-049",ISR,Brake System, $97.00 ,unit,,,,,,,20-Mar-10,
+77,"Brake Caliper, Magura, 908.1",Magura,Brake System, $226.00 ,unit,,,,,,,20-Mar-10,
+78,"Brake Caliper, Motorcycle, OEM (Any)",Any,Brake System,AIR,unit,,,,,,,24-Feb-09,
+79,"Brake Caliper, NISSIN, 08-1CP-32-15",Nissin,Brake System, $82.00 ,unit,,,,,,,,
+80,"Brake Caliper, NISSIN, 08-2CP-25-08",Nissin,Brake System, $96.00 ,unit,,,,,,,,
+81,"Brake Caliper, NISSIN, 08-2CT-25-06",Nissin,Brake System, $109.00 ,unit,,,,,,,,
+82,"Brake Caliper, NISSIN, 08-2CT-38-07",Nissin,Brake System, $109.00 ,unit,,,,,,,,
+83,"Brake Caliper, Polaris, 1910825/1910826",Polaris,Brake System, $66.00 ,unit,,,,,,,1-Mar-09,Cost applies to either part number (similar part one left hand one right hand)
+84,"Brake Caliper, PVM, 6-piston Monoblock Radial Mount",PVM,Brake System, $600.00 ,unit,,,,,,,19-Apr-09,
+85,"Brake Caliper, PVM, Front 4-Piston Monoblock Radial Mount",PVM,Brake System, $385.00 ,unit,,,,,,,19-Apr-09,
+86,"Brake Caliper, PVM, Rear 4-Piston Monoblock Radial Mount",PVM,Brake System, $225.00 ,unit,,,,,,,19-Apr-09,
+87,"Brake Caliper, PVM, 2-Piston Monoblock Radial Mount",PVM,Brake System, $225.00 ,unit,,,,,,,19-Apr-09,
+88,"Brake Caliper, Spiegler, S070",Spiegler,Brake System, $207.00 ,unit,,,,,,,23-May-10,Same price for left and righ calipers.
+89,"Brake Caliper, Spiegler, S108",Spiegler,Brake System, $257.00 ,unit,,,,,,,23-May-10,Same price for left and righ calipers.
+90,"Brake Caliper, Student Built",Student Built,Brake System, $-   ,unit,,,,,,,,
+91,"Brake Caliper, Tokico, 45150-MEL-023",Tokico,Brake System, $75.00 ,unit,,,,,,,2-Mar-09,
+92,"Brake Caliper, Wilwood, Billet Dynalite Single",Wilwood,Brake System, $50.00 ,unit,,,,,,,,
+93,"Brake Caliper, Wilwood, Billet NDL",Wilwood,Brake System, $78.00 ,unit,,,,,,,,
+94,"Brake Caliper, Wilwood, Dynalite Single Floater",Wilwood,Brake System, $50.00 ,unit,,,,,,,,
+95,"Brake Caliper, Wilwood, DynaPro Radial",Wilwood,Brake System, $110.00 ,unit,,,,,,,,
+96,"Brake Caliper, Wilwood, DynaPro Single",Wilwood,Brake System,$53.00 ,unit,,,,,,,18-Apr-10,
+97,"Brake Caliper, Wilwood, Forged Dynalite",Wilwood,Brake System, $68.00 ,unit,,,,,,,,
+98,"Brake Caliper, Wilwood, GP310",Wilwood,Brake System, $105.00 ,unit,,,,,,,,
+99,"Brake Caliper, Wilwood, GP320",Wilwood,Brake System, $98.00 ,unit,,,,,,,,
+100,"Brake Caliper, Wilwood, Kart",Wilwood,Brake System, $58.00 ,unit,,,,,,,,
+101,"Brake Caliper, Wilwood, NDL",Wilwood,Brake System, $70.00 ,unit,,,,,,,,
+102,"Brake Caliper, Wilwood, PS-1",Wilwood,Brake System, $46.00 ,unit,,,,,,,,
+103,"Brake Caliper, Yamaha (YZF 450), 5TG-2580T-00-00",Yamaha,Brake System, $91.00 ,unit,,,,,,,20-Mar-10,
+104,"Brake Hard Line, Any Material (All Cost as Made)",Any,Brake System, $-   ,unit,,,,,,,,
+105,Brake Light Pressure Switch Banjo Bolt,Any,Brake System, $8.00 ,unit,,,,,,,8-Mar-09,
+106,"Brake Pad, Aluminum or MMC Rotor",Any,Brake System, $0.0004 ,mm^3,,,,,,,,Volume of pad and backing plate to be included in calculation
+107,"Brake Pad, Carbon Rotor",Any,Brake System, $0.0012 ,mm^3,,,,,,,,Please submit Add Item Request
+108,"Brake Pad, Iron or Steel Rotor",Any,Brake System, $0.0002 ,mm^3,,,,,,,,Volume of pad and backing plate to be included in calculation.
+109,Brake Rotor (All Cost as Made),Any,Brake System, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+110,"Brake Caliper, Comet 650, Front",,Brake System, $43.00 ,unit,,,,,,,1-Mar-09,
+111,"Master Cylinder, AP, CP2623",AP,Brake System, $81.50 ,unit,,,,,,,,
+112,"Master Cylinder, AP, CP3756",AP,Brake System, $97.00 ,unit,,,,,,,19-Apr-09,
+113,"Master Cylinder, AP, CP4400",AP,Brake System, $117.50 ,unit,,,,,,,,
+114,"Master Cylinder, AP, CP4623",AP,Brake System, $68.50 ,unit,,,,,,,9-May-10,
+115,"Master Cylinder, AP, CP5854",AP,Brake System, $203.50 ,unit,,,,,,,,
+116,"Master Cylinder, AP, CP5855",AP,Brake System, $260.00 ,unit,,,,,,,,
+117,"Master Cylinder, AP, CP6465",AP,Brake System, $203.50 ,unit,,,,,,,,
+118,"Master Cylinder, AP, CP7855",AP,Brake System, $174.50 ,unit,,,,,,,23-May-10,
+119,"Master Cylinder, Beck Arnley, 072-9455",Beck Arnley,Brake System, $45.00 ,unit,,,,,,,1-Mar-10,
+120,"Master Cylinder, Brembo, 10.4776.10",Brembo,Brake System, $26.00 ,Unit,,,,,,,,
+121,"Master Cylinder, Brembo, 10.4776.20",Brembo,Brake System, $26.00 ,Unit,,,,,,,1-Jun-09,
+122,"Master Cylinder, Brembo, 10.4776.65",Brembo,Brake System, $46.50 ,Unit,,,,,,,,
+123,"Master Cylinder, Brembo, XA6.C2.3
+",Brembo,Brake System, $205.00 ,Unit,,,,,,,8-Jun-09,
+124,"Master Cylinder, Brembo, XA3.G1.A2/L2",Brembo,Brake System, $317.00 ,unit,,,,,,,29-Mar-09,Front Pivot Fixing with Vertical Bearing
+125,"Master Cylinder, Bremob, 10.9243.54/96",Brembo,Brake System, $167.50 ,unit,,,,,,,29-Mar-09,Two Bolt Fixing
+126,"Master Cylinder, Bremob, 10.6815.16/97",Brembo,Brake System, $193.00 ,unit,,,,,,,29-Mar-09,Single Nut Fixing
+127,"Master Cylinder, Centric Parts, CE130.51017",Centric,Brake System, $51.00 ,unit,,,,,,,1-Mar-09,
+128,"Master Cylinder, Girling",Girling,Brake System, $44.00 ,unit,,,,,,,3-Aug-09,
+129,"Master Cylinder, Honda CBR600F4i, 43510MBW006",Honda,Brake System, $127.20 ,unit,,,,,,,18-Apr-10,
+130,"Master Cylinder, Hyundai Mobis, 41610-2D100",Hyundai Mobis,Brake System, $28.00 ,unit,,,,,,,20-Mar-10,
+131,"Master Cyilnder, ISR, 21-010-OE",ISR,Brake System, $81.00 ,unit,,,,,,,18-Apr-10,
+132,"Master Cylinder, Magura, 10.5mm",Magura,Brake System, $55.00 ,unit,,,,,,,20-Mar-10,
+133,"Master Cylinder, Magura, 770.50",Magura,Brake System, $222.50 ,unit,,,,,,,20-Mar-10,
+134,"Master Cylinder, Magura, 770.1",Magura,Brake System, $222.50 ,unit,,,,,,,20-Mar-10,
+135,"Master Cylinder, New Concept Products, G3",New Concept Products,Brake System, $32.50 ,unit,,,,,,,26-Mar-09,
+136,"Master Cylinder, NISSIN, 08-2RM-14-02",Nissin,Brake System, $55.00 ,unit,,,,,,,,
+137,"Master Cylinder, NISSIN, 08-4RM-15-05",Nissin,Brake System, $57.00 ,unit,,,,,,,,
+138,"Master cylinder, Nissin, 153-M00-125B",Nissin,Brake System, $55.00 ,unit,,,,,,,1-Mar-09,
+139,"Master Cylinder, Student Made",Student Built,Brake System, $-   ,unit,,,,,,,,
+140,"Master Cylinder, Suzuki OEM 69600-16G00",Suzuki,Brake System, $65.00 ,unit,,,,,,,23-May-10,
+141,"Master Cylinder, Tilton, Model 73",Tilton,Brake System, $27.50 ,unit,,,,,,,,
+142,"Master Cylinder, Tilton, Model 74",Tilton,Brake System, $39.50 ,unit,,,,,,,,
+143,"Master Cylinder, Tilton, Model 75",Tilton,Brake System, $49.50 ,unit,,,,,,,,
+144,"Master Cylinder, Tilton, Model 76",Tilton,Brake System, $62.50 ,unit,,,,,,,,
+145,"Master Cylinder, Tilton, Model 77",Tilton,Brake System, $197.50 ,unit,,,,,,,,
+146,"Master Cylinder, Tripmatic & Speed 18771",Tripmatic,Brake System, $30.50 ,unit,,,,,,,23-May-10,
+147,"Master Cylinder, Wilwood, 260-1304",Wilwood,Brake System, $27.00 ,unit,,,,,,,1-Mar-10,
+148,"Master Cylinder, Wilwood, 260-2636",Wilwood,Brake System, $27.00 ,unit,,,,,,,1-May-09,
+149,"Master Cylinder, Wilwood, 260-5520",Wilwood,Brake System, $39.40 ,unit,,,,,,,24-Feb-09,
+150,"Master Cylinder, Wilwood, 260-6087",Wilwood,Brake System, $26.00 ,unit,,,,,,,20-Mar-10,
+151,"Master Cylinder, Wilwood, 260-10371",Wilwood,Brake System, $43.00 ,unit,,,,,,,1-Mar-10,
+152,"Proportioning Valve, Hydraulic",Any,Brake System, $35.00 ,unit,,,,,,,,
+153,"Proportioning Valve, Tilton, 90-1000",Tilton,Brake System, $49.50 ,unit,,,,,,,,
+154,"Proportioning Valve, Tilton, 90-1003",Tilton,Brake System, $49.50 ,unit,,,,,,,,
+155,"Proportioning Valve, Tilton, 90-2000",Tilton,Brake System, $49.50 ,unit,,,,,,,,
+156,"Proportioning Valve, Tilton, 90-2003",Tilton,Brake System, $49.50 ,unit,,,,,,,,
+157,"Remote Brake Bias Adjuster, Tilton 72-408 ",Tilton,Brake System, $97.50 ,unit,,,,,,,14-Mar-09,
+158,"Remote Brake Bias Adjuster, Tilton 72-501",Tilton,Brake System, $33.25 ,unit,,,,,,,,
+159,"Slave Cylinder, CNC, SERIES 305",CNC,Brake System, $35.00 ,unit,,,,,,,3-Aug-09,
+160,"Hydraulic Fluid Reservoir, Remote (Plastic)",Any,Brake System, $5.00 ,unit,,,,,,,22-Feb-09,Includes lid
+161,Chassis (All Cost as Made),Any,Chassis, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+162,Hubs (All Cost as Made),Any,Chassis, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+163,Monocoque (All Cost as Made),Any,Chassis, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+164,Rockers (All Cost as Made),Any,Chassis, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+165,Upright (All Cost as Made),Any,Chassis, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+166,Adhesive Film,Any,Composite, $-   ,m^2,,,,,,,,Included in composite cost
+167,"Aramid (Kevlar) Fiber, 1 Ply",Any,Composite, $150.00 ,kg,,,,,,,,Dry or Pre-Preg.  Both include resin.  Hand trimming allowed.
+168,"Carbon Fiber, 1 Ply",Any,Composite, $200.00 ,kg,,,,,,,,Dry or Pre-Preg.  Both include resin.  Hand trimming allowed.
+169,"Carbon Fiber Reinf Silicon Carbide, Brake Rotors",Any,Composite, $0.0092 ,mm^3,,,,,,,19-Apr-09,Note: actual cost is $0.0092 even though display shows $0.01 actual value is used in math.
+170,"Carbon Fiber Reinf Silicon Carbide, Brake Pads",Any,Composite, $0.0012 ,mm^3,,,,,,,19-Apr-09,Note: actual cost is $0.0012 even though display shows $0.01 actual value is used in math.
+171,Carbon Fiber Reinf Carbon,Any,Composite, $0.0092 ,mm^3,,,,,,,19-Apr-09,Note: actual cost is $0.0092 even though display shows $0.01 actual value is used in math.
+172,"Carbon Fiber Tubes, Purchased (All Cost as Made)",Any,Composites, $-   ,unit,,,,,,,8-Mar-09,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+173,"Composite Tubes, Purchased (All Cost as Made)",Any,Composites, $-   ,unit,,,,,,,8-Mar-09,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+174,"Composite Panel Insert, Press Fit, Torlon",Torlon,Composites, $2.00 ,unit,,,,,,,22-Apr-09,Any Size
+175,"Composite Panel Insert, Potted-in (NAS) Style, Torlon",Torlon,Composites, $2.00 ,unit,,,,,,,22-Apr-09,Any Size
+176,"Glass Fiber, 1 Ply",Any,Composite, $100.00 ,kg,,,,,,,,e.g. S-Glass.  Dry or Pre-preg.  Both include resin.  Hand trimming allowed.
+177,"Honeycomb, Aluminum",Any,Composite, $50.00 ,kg,,,,,,,,Any cell size and density.  Hand trimming allowed.
+178,"Honeycomb, Cardboard",Any,Composite, $10.00 ,kg,,,,,,,1-Mar-09,Any cell size and density.  Hand trimming allowed.
+179,"Honeycomb, Nomex",Any,Composite, $125.00 ,kg,,,,,,,,Any cell size and density.  Hand trimming allowed.
+180,"Honeycomb, Plastic",Any,Composite, $20.00 ,kg,,,,,,,26-Mar-09,
+181,"Polypropylene, High Modulus",Any,Composite, $35.00 ,kg,,,,,,,20-Apr-10,Includes 'Tegris' and 'Innegra' fibers
+182,Structural Foam,Any,Composite, $125.00 ,kg,,,,,,,,Any cell size and density.  Hand trimming allowed.
+183,"Chassis Cntrl Module, +Active Differential",Student Built,Control Module, $125.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry for processing necessary inputs (wheel speed, axle speed, etc) and differential control outputs.  Required Chassis Control Module, Baseline Enclosure.    Sensors and wiring harness not included."
+184,"Chassis Control Module, +Active Suspension",Student Built,Control Module, $125.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry necessary inputs (damper position, velocity, etc) and damper control outputs.  Required Chassis Control Module, Baseline Enclosure.  Sensors and wiring harness not included."
+185,"Chassis Control Module, +Automatic Shifter",Student Built,Control Module, $5.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry for processing sensor input from engine, output to shifter.  Required Chassis Control Module, Baseline Enclosure.  Sensors and wiring harness not included."
+186,"Chassis Control Module, +Battery Charger",Student Built,Control Module, $10.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry for processing battery health input from pack and charging outputs.  Required Chassis Control Module, Baseline Enclosure.  Sensors and wiring harness not included."
+187,"Chassis Control Module, +Dashboard",Student Built,Control Module, $20.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry for processing sensor inputs and dashbboard outputs.  Required Chassis Control Module, Baseline.  Sensors and wiring harness not included."
+188,"Chassis Control Module, +Dashboard",Student Built,Control Module, $5.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry for processing sensor input and output to one (1) engine actuator device.  Include once per actuator in the chassis control module.  Required Chassis Control Module, Baseline.  Sensors and wiring harness not included."
+189,"Chassis Control Module, +Traction Control",Student Built,Control Module, $150.00 ,unit,,,,,,,2-Mar-09,"Includes circuit board and circuitry for processing sensor input from engine, output to shifter.  Required Chassis Control Module, Baseline Enclosure.  Sensors and wiring harness not included."
+190,"Chassis Control Module, Baseline Enclosure",Student Built,Control Module, $25.00 ,unit,,,,,,,2-Mar-09,Includes enclosure.  This item must be included for all chassis control modules.  Add functionality by adding additional line items.
+191,"Controller, Active Differential",Any,Control Module, $200.00 ,unit,,,,,,,,
+192,"Controller, Active Suspension",Any,Control Module, $200.00 ,unit,,,,,,,,
+193,"Datalogger, Aim EVO4",AIM,Control Module, $700.00 ,unt,,,,,,,23-May-10,No screen data logger
+194,"Datalogger, Motec, ADL",MoTeC,Control Module," $3,700.00 ",unit,,,,,,,19-Apr-09,
+195,"Datalogger, Motec, ADL2",MoTeC,Control Module," $3,900.00 ",unit,,,,,,,19-Apr-09,
+196,"ECU, AEM Plug & Play, AVM-30-1052U",AEM,Control Module, $725.00 ,unit,,,,,,,,
+197,"ECU, AEM Wire & Play",AEM,Control Module, $751.93 ,unit,,,,,,,,
+198,"ECU, Autronic, SM4",Autronic,Control Module," $1,150.00 ",unit,,,,,,,19-Apr-09,
+199,"ECU, Bosch Motorsport, HPI Box 1.1",Bosch,Control Module," $1,200.00 ",unit,,,,,,,23-May-10,
+200,"ECU, Bosch Motorsport, MS3 Sport",Bosch,Control Module, $952.00 ,unit,,,,,,,4-May-09,
+201,"ECU, Bosch Motorsport, MS4.0 Sport",Bosch,Control Module," $1,100.00 ",unit,,,,,,,23-Apr-09,
+202,"ECU, Bosch Motorsport, MS4.4 Sport, F01TA20068",Bosch,Control Module," $1,400.00 ",unit,,,,,,,3-Apr-09,
+203,"ECU, DTA, S40 Pro",DTA,Control Module, $495.00 ,unit,,,,,,,20-Apr-10,
+204,"ECU, DTA, S60 Pro",DTA,Control Module, $750.00 ,unit,,,,,,,20-Apr-10,
+205,"ECU, DTA, S80 Pro",DTA,Control Module, $850.00 ,unit,,,,,,,20-Apr-10,
+206,"ECU, DTA, S100 Pro",DTA,Control Module, $950.00 ,unit,,,,,,,20-Apr-10,
+207,"ECU, Dynojet, Power Commender III USB",Dynojet,Control Module, $175.00 ,unit,,,,,,,,Requires OEM ECU to also be included in cost
+208,"ECU, Electromotive, TEC-GT",Electromotive,Control Module," $1,000.00 ",unit,,,,,,,,
+209,"ECU, EngineLab, EL1140L",EngineLab,Control Module," $1,250.00 ",unit,,,,,,,1-Mar-10,
+210,"ECU, Haltech, E11v2",Haltech,Control Module, $966.00 ,unit,,,,,,,,"6,8 c seq"
+211,"ECU, Haltech, E6x",Haltech,Control Module, $590.00 ,unit,,,,,,,,"4,6,8 c"
+212,"ECU, Haltech, E8",Haltech,Control Module, $762.00 ,unit,,,,,,,,4 c seq
+213,"ECU, Haltech, PS1000",Haltech,Control Module, $536.00 ,unit,,,,,,,1-Jun-09,
+214,"ECU, Haltech, Platinum Sport 2000 Long Flying Lead Kit",Haltech,Control Module, $850.00 ,unit,,,,,,,,
+215,"ECU, Link, G4 Storm",Link,Control Module, $647.50 ,unit,,,,,,,27-Mar-09,
+216,"ECU, McLaren MESL TAG-400",McLaren Electronic Systems,Control Module," $2,500.00 ",unit,,,,,,,23-May-10,
+217,"ECU, Megasquirt",Megasquirt,Control Module, $400.00 ,unit,,,,,,,,Assembled with case
+218,"ECU, Magneti Marelli, SRA-E",Magneti Marelli,Control Module, $870.00 ,unit,,,,,,,4-May-09,
+219,"ECU, Magneti Marelli, SRA-EDL 4",Magneti Marelli,Control Module," $1,275.00 ",unit,,,,,,,4-May-09,
+220,"ECU, Magneti Marelli, SRA-EDL 8",Magneti Marelli,Control Module," $1,275.00 ",unit,,,,,,,4-May-09,
+221,"ECU, Magneti Marelli, SRT-E",Magneti Marelli,Control Module," $1,945.00 ",unit,,,,,,,4-May-09,
+222,"ECU, Magneti Marelli, SRT-EDL 16",Magneti Marelli,Control Module," $2,345.00 ",unit,,,,,,,4-May-09,
+223,"ECU, Magneti Marelli, SRT-EDL 32",Magneti Marelli,Control Module," $2,745.00 ",unit,,,,,,,4-May-09,
+224,"ECU, Microsquirt",Megasquirt,Control Module, $400.00 ,unit,,,,,,,,Assembled with case
+225,"ECU, MoTeC, IEX - Ignition Expander",MoTeC,Control Module, $150.00 ,unit,,,,,,,26-Apr-09,
+226,"ECU, MoTeC, M4",MoTeC,Control Module," $1,050.00 ",unit,,,,,,,,
+227,"ECU, MoTeC, M400",MoTeC,Control Module," $1,615.00 ",unit,,,,,,,,
+228,"ECU, MoTeC, M48",MoTeC,Control Module," $1,236.00 ",unit,,,,,,,,
+229,"ECU, MoTeC, M600",MoTeC,Control Module," $1,650.00 ",unit,,,,,,,20-Mar-10,
+230,"ECU, MoTeC, M800",MoTeC,Control Module," $1,500.00 ",unit,,,,,,,27-Nov-10,
+231,"ECU, MoTeC, M800",MoTeC,Control Module," $1,650.00 ",unit,,,,,,,8-Mar-09,
+232,"ECU, MoTeC, TCMUX - Traction Control Multiplexer",MoTeC,Control Module, $150.00 ,unit,,,,,,,26-Apr-09,
+233,"ECU, Nira, i3+",Nira,Control Module, $786.00 ,unit,,,,,,,18-Apr-10,
+234,"ECU, OEM Spark & Fuel",Any OEM,Control Module, $500.00 ,unit,,,,,,,,
+235,"ECU, OEM Spark Only",Any OEM,Control Module, $250.00 ,unit,,,,,,,,
+236,"ECU, OEM Spark, Fuel & Traction Control",Any OEM,Control Module, $750.00 ,unit,,,,,,,,
+237,"ECU, Pectel, SQ-6 ECU",,Control Module," $1,990.00 ",,,,,,,,,
+238,"ECU, Performance Electronics, PE-ECU-1",Performance Electronics,Control Module, $500.00 ,unit,,,,,,,,
+239,"ECU, Performance Electronics, PE-ECU-3",Performance Electronics,Control Module, $535.00 ,unit,,,,,,,8-Feb-12,
+240,"ECU, Simple Digital Systems, EM-4 D ",Simple Digital Systems,Control Module, $486.50 ,unit,,,,,,,,
+241,"ECU, Simple Digital Systems, EM-4 E/MSD ",Simple Digital Systems,Control Module, $582.50 ,unit,,,,,,,,"e.g. 1010, 1025 etc."
+242,"ECU, Simple Digital Systems, EM-4 F ",Simple Digital Systems,Control Module, $572.50 ,unit,,,,,,,,"e.g. 4130, Chrome Moly, etc."
+243,"ECU, Sodemo Moteurs, EV11/4",Sodemo Moteurs,Control Module, $693.00 ,unit,,,,,,,,
+244,"ECU, Student Built, +Active Diff",Student Built,Control Module, $125.00 ,unit,,,,,,,,In addition to cost of base student built ECU
+245,"ECU, Student Built, +Traction Control",Student Built,Control Module, $150.00 ,unit,,,,,,,,In addition to cost of base student built ECU
+246,"ECU, Student Built, Spark & Fuel",Student Built,Control Module, $375.00 ,unit,,,,,,,,"Housing, connector included"
+247,"ECU, Student Built, Spark Only",Student Built,Control Module, $190.00 ,unit,,,,,,,,"Housing, connector included"
+248,"ECU, Trecs, Model II",Trecs,Control Module, $803.00 ,unit,,,,,,,18-Apr-10,
+249,"ECU, Trikejt Plus",Trijekt,Control Module, $760.00 ,unit,,,,,,,9-May-10,
+250,"ECU, VEMS, v3",Versatile Engine Management System,Control Module, $400.00 ,unit,,,,,,,18-Apr-10,
+251,"Cable, Pull",Any,Controls, $15.00 ,m,,,,,,,,Includes cable and housing and integral moutnings at both ends.  Mounting hardware not included
+252,"Cable, Push/Pull",Any,Controls, $30.00 ,m,,,,,,,,Includes cable and housing and integral moutnings at both ends.  Mounting hardware not included
+253,"Damper, AVO, 1.9"" Alum Dbl Adj (DAAWA100/75)",AVO,Damper, $145.00 ,unit,,,,,,,23-May-10,
+254,"Damper, Cane Creek Double Barrel",Cane Creek,Damper, $300.00 ,unit,,,,,,,,
+255,"Damper, Elka Stage-5 MTB",Elka,Damper, $225.00 ,unit,,,,,,,23-Feb-09,
+256,"Damper, Fox DHX 5.0",Fox,Damper, $210.00 ,unit,,,,,,,,
+257,"Damper, Fox Van R",Fox,Damper, $125.00 ,unit,,,,,,,,
+258,"Damper, Fox Vanilla R",Fox,Damper, $190.00 ,unit,,,,,,,,
+259,"Damper, Kind Shock, KS-504",Kind Shock,Damper, $78.00 ,unit,,,,,,,18-Apr-10,
+260,"Damper, Koni 3012",Koni,Damper, $250.00 ,unit,,,,,,,1-Mar-09,
+261,"Damper, Koni, Trax Spax DA, Single Adjustable",Koni,Damper, $145.00 ,unit,,,,,,,19-Apr-09,
+262,"Damper, Koni, Trax Spax DA, Double Adjustable",Koni,Damper, $181.00 ,unit,,,,,,,19-Apr-09,
+263,"Damper, KW GFw 3-Way Adjustable",KW,Damper, $375.00 ,unit,,,,,,,23-May-10,
+264,"Damper, Manitou, Swinger 4 Way",Manitou,Damper, $100.00 ,unit,,,,,,,26-Mar-09,Damper cost without spring
+265,"Damper, Marzocchi, Roco TST R",Marzocchi,Damper, $135.00 ,unit,,,,,,,1-Mar-09,Damper cost without spring
+266,"Damper, Ohlins SD115",Ohlins,Damper, $189.00 ,unit,,,,,,,23-May-10,
+267,"Damper, Ohlins ST44",Ohlins,Damper, $325.00 ,unit,,,,,,,,
+268,"Damper, Ohlins TTX 25",Ohlins,Damper, $305.00 ,unit,,,,,,,9-May-10,
+269,"Damper, Ohlins TTX 36",Ohlins,Damper, $500.00 ,unit,,,,,,,23-May-10,
+270,"Damper, Penske 7800-Non-Adjustable Quarter Midget",Penske,Damper, $117.50 ,unit,,,,,,,3-May-10,Non-adjustable Quarter Midget
+271,"Damper, Penske 7800-Piggyback Dbl. Adj. (Kaz Tech.)",Penske/Kaz Tech,Damper, $337.50 ,unit,,,,,,,3-May-10,"Piggyback, Double Adjustable"
+272,"Damper, Penske 7800-Piggyback Non-Adj.(Kaz Tech.)",Penske/Kaz Tech,Damper, $255.00 ,unit,,,,,,,3-Apr-11,"Piggyback, Non-adjustable"
+273,"Damper, Penske 8100",Penske,Damper, $400.00 ,unit,,,,,,,23-Feb-09,
+274,"Damper, Penske 8300",Penske,Damper, $412.50 ,unit,,,,,,,,
+275,"Damper, Penske 8760",Penske,Damper, $660.00 ,unit,,,,,,,,
+276,"Damper, Risse Jupiter 5",Risse Racing,Damper, $175.00 ,unit,,,,,,,,
+277,"Damper, Risse Jupiter 5R",Risse Racing,Damper, $200.00 ,unit,,,,,,,,
+278,"Damper, Risse Jupiter 7R",Risse Racing,Damper, $300.00 ,unit,,,,,,,,
+279,"Damper, Tanner",Tanner,Damper, $85.00 ,unit,,,,,,,,
+280,"Damper, Team Built",Team,Damper, $-   ,unit,,,,,,,,
+281,"Damper, Team Built, Reservoir Bladder",Any,Damper, $5.00 ,unit,,,,,,,26-Mar-09,
+282,"Damper, X-Fusion Vektor DH 1.0",X-Fusion,Damper, $170.00 ,unit,,,,,,,24-May-10,
+283,"Damper, ZF Sachs, ETX36/15x",ZF Sachs,Damper, $360.00 ,unit,,,,,,,23-Feb-09,
+284,"Damper, ZF Sachs, RD 36-2",ZF Sachs,Damper, $370.00 ,unit,,,,,,,31-Mar-10,
+285,Axle (All Cost as Made),Any,Drivetrain, $-   ,unit,,,,,,,20-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+286,Axle Snubber,Any,Drivetrain, $2.50 ,unit,,,,,,,19-Apr-09,For example Taylor Race Engineering  plastic snubber
+287,Belt,Any,Drivetrain, $0.05 ,mm,,,,,,,,
+288,Chain,Any,Drivetrain, $0.05 ,mm,,,,,,,,Master link included in price of chain.
+289,Chain Guard (All Cost as Made),Any,Drivetrain, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+290,"Constant Velocity Joint, Boot",Any,Drivetrain, $5.00 ,unit,,,,,,,,
+291,"Constant Velocity Joint, Housing (All Cost as Made)",Any,Drivetrain, $-   ,unit,,,,,,,7-May-11,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+292,"Constant Velocity Joint, Plug, Axial Locating",Any,Drivetrain, $2.50 ,unit,,,,,,,19-Apr-09,For example Taylor Race Engineering  plastic snubber
+293,"Constant Velocity Joint, Rzepa Plunging",Any,Drivetrain, $20.00 ,unit,,,,,,,7-May-11,"6-Ball plunging, includes grease, does not inlucde housing which is cost as made"
+294,"Constant Velocity Joint, Rzeppa Fixed",Any,Drivetrain, $20.00 ,unit,,,,,,,7-May-11,"6-Ball Non-plunging, includeas grease, does not inlucde housing which is cost as made"
+295,"Constant Velocity Joint, Tripod",Any,Drivetrain, $45.00 ,unit,,,,,,,7-May-11,"3-Needle bearing plunging, includes grease, does not inlucde housing which is cost as made"
+296,"Constant Velocity Joint, Stub-shaft (All Cost as Made)",Any,Drivetrain, $-   ,unit,,,,,,,7-May-11,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+297,Differential Housing (All Cost as Made),Any,Drivetrain, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+298,"Differential Internals, Limited Slip, Cam & Pawl",Any,Drivetrain, $110.00 ,unit,,,,,,,1-Mar-09,
+299,"Differential Internals, Limited Slip, Quaife",Quaife,Drivetrain, $165.00 ,unit,,,,,,,21-Apr-09,
+300,"Differential Internals, Limited Slip, Salisbury or Powerflow or Clutch Style",Any,Drivetrain, $110.00 ,unit,,,,,,,,
+301,"Differential Internals, Limited Slip, Torsen T1",Torsen,Drivetrain, $165.00 ,unit,,,,,,,,
+302,"Differential Internals, Limited Slip, Torsen T2",Torsen,Drivetrain, $165.00 ,unit,,,,,,,,
+303,"Differential Internals, Open Gearset (Any)",Any,Drivetrain, $60.00 ,unit,,,,,,,,
+304,Half Shaft (All Cost as Made),Any,Drivetrain, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+305,Pulley (All Cost as Made),Any,Drivetrain, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+306,Sprocket (All Cost as Made),Any,Drivetrain, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+307,Universal Joint,Any,Drivetrain, $20.00 ,unit,,,,,,,,
+308,"Battery, Advanced Chemistry (NiMH, Li-Ion, etc.)",Any,Electronics, $65.00 ,kg,,,,,,,,
+309,"Battery, Lead Acid",Any,Electronics, $3.00 ,kg,,,,,,,,
+310,"Circuit Breaker, Thermal, Klixon 7277-2-20",Klixon,Electronics, $8.80 ,unit,,,,,,,19-Apr-09,
+311,"Connector, Aerospace Quality",Any,Electronics, $1.00 ,pin(s),,,,,,,,
+312,"Connector, Computer  Type",Any,Electronics, $1.00 ,pin(s),,,,,,,,"Seriel, Parallel, USB, Firewire, etc."
+313,"Connector, High Power, > 2 Amps",Any,Electronics, $2.00 ,pin(s),,,,,,,,"Vehicle power, starter, alternator, etc."
+314,"Connector, OEM Quality",Any,Electronics, $0.50 ,pin(s),,,,,,,,
+315,"Connector, Single Wire",Any,Electronics, $0.05 ,wire,,,,,,,,"Any style, any size, per wire end.  Includes, ring, spade, bullet, etc."
+316,"Dashpanel, Haltech, Racepak IQ3 Display",Haltech,Electronics, $383.00 ,unit,,,,,,,1-Mar-10,
+317,"Display, 7 Segment",Any,Electronics, $1.00 ,digit,,,,,,,,Each digit can represent a single character alpha or numeric
+318,"Display, LCD (for Student Built Elect. Only), Area",Any,Electronics,[C1]*[Size1]+[C2],cm^2,,1.25,0,0,,0,2-Mar-09,"[Size1]=Display surface area (cm^2).  LCD Display when incorporated into or driven off student built electroincs.  Not to be used in place of purchased displays that are part of data acquisition systems, engine controllers, etc."
+319,"Display, LCD (for Student Built Elect. Only), Rect",Any,Electronics,[C1]*[Size1]*[Size2]+[C2],cm,cm,1.25,0,0,0, $-   ,25-Feb-09,"LCD Display when incorporated into or driven off student built electroincs.  Not to be used in place of purchased displays that are part of data acquisition systems, engine controllers, etc."
+320,"Display, Matrix",Any,Electronics, $2.00 ,digit,,,,,,,,Each digit can represent a single character alpha or numeric
+321,Fuse Box,Any,Electronics, $0.25 ,pin(s),,,,,,,,Use 2 x Number of Fuses and relays to calculate number of pins
+322,"Fuse, Control",Any,Electronics, $0.50 ,unit,,,,,,,,
+323,"Fuse, Power",Any,Electronics, $1.00 ,unit,,,,,,,,
+324,"Fuse, Signal",Any,Electronics, $0.50 ,unit,,,,,,,,
+325,"Gauge, Analog",Any,Electronics, $5.00 ,unit,,,,,,,,"Any use such as RPM, pressure, temperature, etc.  Includes driver (motor, etc) and needle."
+326,"Gauge, Analog Housing",Any,Electronics, $8.00 ,unit,,,,,,,,"Used with Gauge, Analog when mounted not integrated into the instrument panel."
+327,"Gauge, Digital Pro Shifter System, 6187",Autometer,Electronics, $85.00 ,unit,,,,,,,,
+328,Heat Shrink Tubing,Any,Electronics, $0.50 ,m,,,,,,,,
+329,"Lamp, Brake with Housing",Any,Electronics, $4.00 ,unit,,,,,,,,
+330,"Lamp, Incandescent",Any,Electronics, $2.00 ,unit,,,,,,,,
+331,"Lamp, LED",Any,Electronics, $0.50 ,unit,,,,,,,,
+332,"Motor, 12 Volt, DC Brush",Any,Electronics, $20.00 ,unit,,,,,,,,Used for general actuation.  For more specefic motors please submit an Add Item RequeSteel
+333,"Motor, 12 Volt, DC Brushless Servo",Any,Electronics, $40.00 ,unit,,,,,,,,Used for general actuation.  For more specefic motors please submit an Add Item RequeSteel
+334,"Relay, Control",Any,Electronics, $2.00 ,unit,,,,,,,,
+335,"Relay, Power",Any,Electronics, $4.00 ,unit,,,,,,,,
+336,"Relay, Signal",Any,Electronics, $2.00 ,unit,,,,,,,,
+337,Sensor to CAN Converter,Any,Electronics, $25.00 ,unit,,,,,,,,Converts analog or digital sensor input to CAN output
+338,"Servo, 12V",Any,Electronics, $25.00 ,unit,,,,,,,3-Mar-09,Radio Controlled Hobby style servo with built in gear reduction.
+339,"Solenoid, 12 Volt",Any,Electronics, $7.50 ,unit,,,,,,,,
+340,Speaker,Any,Electronics, $2.50 ,unit,,,,,,,12-Jun-11,Can be used for 'ready to drive sound' for electric
+341,"Switch, Kill",Any,Electronics, $3.00 ,unit,,,,,,,,
+342,"Switch, Pushbutton",Any,Electronics, $1.00 ,unit,,,,,,,,
+343,"Switch, Rotary Multi-position Selector",Any,Electronics, $3.00 ,unit,,,,,,,,
+344,"Switch, Toggle",Any,Electronics, $1.00 ,unit,,,,,,,,
+345,"Terminal Block, Wiring",Any,Electronics, $0.25 ,pin(s),,,,,,,,
+346,"Wire Sleeving, Expandable",Any,Electronics, $1.00 ,m,,,,,,,18-Apr-10,
+347,"Wire Sleeving, Split",Any,Electronics, $0.50 ,m,,,,,,,,
+348,"Wire, Control",Any,Electronics, $1.00 ,m,,,,,,,,
+349,"Wire, Power",Any,Electronics, $3.00 ,m,,,,,,,,
+350,"Wire, Signal",Any,Electronics, $1.00 ,m,,,,,,,,
+351,Accusump,Canton Racing Products,Engine,([C1]*[Size1]+[C2]),L,,14.3,82,,,,23-May-10,"Gage not included, include as separate material line item if used on vehicle."
+352,Air Filter,Any,Engine, $0.15 ,cm^2,,,,,,,17-Mar-09,"Paper,  foam and cotton (K&N type) elements"
+353,"Boost Control Solenoid Valve, MR561312",Mitsubishi Motors,Engine, $14.00 ,unit,,,,,,,18-Apr-10,
+354,Carburetor,Any,Engine, $50.00 ,unit,,,,,,,,
+355,"Coolant Pump, External Electric",Any,Engine, $20.00 ,unit,,,,,,,,
+356,Cooling System Air Bleed Valve,Any,Engine, $6.50 ,unit,,,,,,,,
+357,"Dry Sump Pump, Dailey Engineering, 04-00-2162",Dailey Engineering,Engine, $726.00 ,unit,,,,,,,26-Mar-09,
+358,"Dry Sump Pump, Dailey Engineering, 04-99-2162",Dailey Engineering,Engine, $726.00 ,unit,,,,,,,26-Mar-09,
+359,"Dry Sump Pump, Dailey Engineering, 04-99-2162-2",Dailey Engineering,Engine, $726.00 ,unit,,,,,,,26-Mar-09,
+360,"Dry Sump Pump, Dailey Engineering, 04-99-2186",Dailey Engineering,Engine, $264.00 ,unit,,,,,,,26-Mar-09,
+361,"Dry Sump Pump, Dailey Engineering, 04-99-2204 ",Dailey Engineering,Engine, $429.00 ,unit,,,,,,,26-Mar-09,
+362,"Dry Sump Pump, Dailey Engineering, 04-99-2204-2",Dailey Engineering,Engine, $429.00 ,unit,,,,,,,26-Mar-09,
+363,"Dry Sump Pump, Dailey Engineering, 04-99-2264-2",Dailey Engineering,Engine, $726.00 ,unit,,,,,,,26-Mar-09,
+364,"Dry Sump Pump, Pace, 2 Stage",Pace,Engine, $315.00 ,unit,,,,,,,26-Mar-09,Any 2 stage Pace pump
+365,"Dry Sump Pump, Pace, 3 Stage",Pace,Engine, $380.00 ,unit,,,,,,,26-Mar-09,Any 3 stage Pace pump
+366,"Dry Sump Pump, Pace, Single Stage",Pace,Engine, $215.00 ,unit,,,,,,,26-Mar-09,Any single stage Pace pump
+367,"Dry Sump Pump, Student Made",Student Built,Engine, $-   ,unit,,,,,,,22-Feb-09,
+368,"Engine and Transmission, High Performance (5-10 HP/100 cc)",Any,Engine, $2.00 ,cc,,,,,,,26-Mar-09,"Normal motorcycle engines with 2 valves per cylinder, etc.  Engine cost includes tranmission (whether integral or not by design) and all components necessary to run including spark plugs, coils, wires, oil filter, etc. with the exception of the air induction and fuel system components.  Cost includes engine as received by manufacturer but not custom parts such as dry sump pans, PCV changes, etc.  Fully Internal engine changes are free.  If covers or other parts are removed disassembly labor must be included in labor coSteel"
+369,"Engine and Transmission, Low Performance (<5 HP/100 cc)",Any,Engine, $1.20 ,cc,,,,,,,26-Mar-09,"Industrial engines, etc.  Engine cost includes tranmission (whether integral or not by design) and  all components necessary to run including spark plugs, coils, wires, oil filter, etc.  with the exception of the air induction and fuel system components.  Cost includes engine as received by manufacturer but not custom parts such as dry sump pans, PCV changes, etc.  Fully Internal engine changes are free.  If covers or other parts are removed disassembly labor must be included in labor coSteel"
+370,"Engine and Transmission, Ultra High Performance (>10 HP/100 cc)",Any,Engine, $2.50 ,cc,,,,,,,26-Mar-09,"New high tech engines, 3-5 valves per cylinder, etc.  Engine cost includes tranmission (whether integral or not by design) and  all components necessary to run including spark plugs, coils, wires, oil filter, etc.  with the exception of the air induction and fuel system components.  Cost includes engine as received by manufacturer but not custom parts such as dry sump pans, PCV changes, etc.  Fully Internal engine changes are free.  If covers or other parts are removed disassembly labor must be included in labor coSteel"
+371,Exhaust Manifold (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+372,"Exhaust Pipe, Flexible",Any,Engine,([C1]*[Size1]*[Size2]+[C2]),,,0.001,0,,,,4-May-10,Flexible tubing used for exhaust systems.  Also called convoluted or flex piping.
+373,Fuel Check Valve,Any,Engine, $8.00 ,unit,,,,,,,,
+374,Fuel Filter,Any,Engine, $8.00 ,unit,,,,,,,,
+375,"Fuel Injector, Direct Injection",Any,Engine, $30.00 ,unit,,,,,,,27-May-10,"Either fuel, gasoline or E85"
+376,"Fuel Injector, E85",Any,Engine, $13.00 ,unit,,,,,,,,
+377,"Fuel Injector, Gasoline",Any,Engine, $10.00 ,unit,,,,,,,,
+378,"Fuel Pressure Regulator, E85",Any,Engine, $19.50 ,unit,,,355,,,,,
+379,"Fuel Pressure Regulator, Gasoline",Any,Engine, $15.00 ,unit,,,470,,,,,
+380,"Fuel Pump, Carburetor, Gasoline or E85",Any,Engine, $20.00 ,unit,,,,,,,,
+381,"Fuel Pump, Direct Injection",Any,Engine, $120.00 ,unit,,,,,,,27-May-10,"Either fuel, gasoline or E85"
+382,"Fuel Pump, Fuel Injected, E85",Any,Engine, $45.50 ,unit,,,,,,,,"Port fuel injection, not for direct injection use"
+383,"Fuel Pump, Fuel Injected, Gasoline",Any,Engine, $35.00 ,unit,,,,,,,,"Port fuel injection, not for direct injection use"
+384,Fuel Rail (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+385,Fuel Tank (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+386,Header Wrap,Any,Engine, $30.00 ,m^2,,,,,,,18-Apr-10,
+387,Heat Exchanger Fan,Any,Engine, $30.00 ,unit,,,,,,,,Includes motor and blades
+388,Heat Exchanger Fan Shroud (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+389,"Heat Exchanger, Air-to-Air",Any,Engine, $0.0035 ,cm^3,,,,,,,26-Mar-09,"Includes radiator, oil cooler and others.  Volume based on length * width * height of core.  Cost as made the end caps, filler knecks, etc."
+390,"Heat Exchanger, Air-to-Liquid",Any,Engine, $0.0035 ,cm^3,,,,,,,26-Mar-09,"Includes radiator, oil cooler and others.  Volume based on length * width * height of core.  Cost as made the end caps, filler knecks, etc."
+391,"Heat Exchanger, Liquid-to-Liquid",Any,Engine, $0.0035 ,cm^3,,,,,,,26-Mar-09,"Includes radiator, oil cooler and others.  Volume based on length * width * height of core.  Cost as made the end caps, filler knecks, etc."
+392,Intake (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+393,Muffler (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+394,Muffler Batting,Any,Engine, $0.003 ,cm^3,,,,,,,,Cost based on total volume of muffler
+395,Oil Filter,Any,Engine, $-   ,unit,,,,,,,,Included in engine cost - Shown only for reference
+396,"Overflow Bottle, Aluminum Drinking Bottle",Any,Engine, $10.00 ,unit,,,,,,,,
+397,"Overflow Bottle, JAX 1 Qt. Oil Breather Tank",Jax,Engine, $28.50 ,unit,,,,,,,3-Aug-09,
+398,"Overflow Bottle, JAX, 1 Qt. Recirc. Catch Can",Jax,Engine, $12.00 ,unit,,,,,,,3-Aug-09,
+399,"Overflow Bottle, Nalgene Bottle",Any,Engine, $5.00 ,unit,,,,,,,,
+400,"Overflow Bottle, Plastic Bottle",Any,Engine, $5.00 ,unit,,,,,,,10-Mar-09,
+401,"Overflow Bottle, Plastic Drinking Bottle",Any,Engine, $5.00 ,unit,,,,,,,,
+402,"Overflow Bottle, Steel Oil Can",Any,Engine, $1.00 ,unit,,,,,,,18-Apr-10,
+403,"Overflow Bottle, Student Built",Student Built,Engine, $-   ,unit,,,,,,,,
+404,"Pump, Transmission Oil, Hope Technik, 006",Hope Technik,Engine, $105.00 ,unit,,,,,,,18-Apr-10,
+405,Spark Plug Coil,Any,Engine, $-   ,unit,,,,,,,,Included in engine cost - Shown only for reference
+406,Spark Plug Wire,Any,Engine, $-   ,unit,,,,,,,,Included in engine cost - Shown only for reference
+407,Supercharger,Any,Engine, $300.00 ,unit,,,,,,,,Includes pulley and bypass valve (if fitted) but no plumbing.
+408,Throttle Body (All Cost as Made),Any,Engine, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+409,Turbocharger,Any,Engine, $300.00 ,unit,,,,,,,,Includes waste gate but no plumbing
+410,"Fluid, Coolant",Any,Fluid, $0.00 ,liter,,,,,,,,Water or water wetter mixture.  Free.
+411,"Fluid, Oil",Any,Fluid, $0.75 ,liter,,,,,,,,"Engine oil, differential, hydraulic (brake/clutch), etc."
+412,"Foam, Fuel Anti-Surge",Any,Fuel System, $1.00 ,liter,,,,,,,22-Feb-09,
+413,"Fuel Check Valve, In-line, Aluminum Rollover",Any,Fuel System, $15.00 ,unit,,,,,,,18-Mar-09,
+414,"Fuel Check Valve, In-line, Plastic Rollover",Any,Fuel System, $7.00 ,unit,,,,,,,1-Mar-09,
+415,"Cable Tie Mount, Adhesive Backed",Any,Hardware, $0.15 ,unit,,,,,,,23-May-10,"Adhesive mount for connecting cable ties, zip ties, etc.  Normally is injection molded with a single loop for tie wrap connection."
+416,"Coupling, Shaft, Helical Beam",Any,Hardware,([C1]*[Size1]+[C2]),mm,,0.125,8,0,,8,29-Mar-09,[Size1]=Coupling Outer Diameter (mm).
+417,Drawbolt Catch & Hook,Any,Hardware, $1.25 ,unit,,,,,,,18-Apr-10,
+418,"Grommet, Elastomer",Any,Hardware, $0.05 ,unit,,,,,,,,"Any size, any material"
+419,"Locating Pin, Bullet-Nose Dowel, Steel",Any,Hardware,[C1]*[Size1]+[C2],mm,,0.032,1.12,0,,1.12,,[Size1]=Dowel diameter (mm)
+420,"Locating Pin, Liner, Steel",Any,Hardware,[C1]*[Size1]+[C2],mm,,0.05,2.34,0,,2.34,,[Size1]=Hole diameter for dowel (mm)
+421,"Piano Hinge, Aluminum",Any,Hardware,[C1]*[Size1]*[Size2]+[C2],mm,mm,0.04,1.16,0,0, $1.16 ,14-Mar-09,"[Size1]=Hing pin diameter (mm), [Size2]=Open width (mm).  Hinge cost does not include any holes."
+422,"Mount, Vibration-Damping Sandwich
+",Any,Hardware,[C1]*[Size1]+[C2],mm,,0.27,0,0,,0,29-Mar-09,[Size1]=Mount Outer Diameter (mm).
+423,Woodruff Key,Any,Hardware,0.1,unit,,,,,,,17-Mar-09,Any size up to 6.35mm width
+424,Adhesive,Any,Misc., $-   ,unit,,,,,,,,"Included in process cost (brush apply, aerosol apply, etc.).  Includes glue, thread locker, etc."
+425,Cable Adjuster,Any,Misc.,$1.00,unit,,,,,,,1-Mar-09,
+426,Clevis,Any,Misc., [C1]*[Size1]^2+[C2] ,mm,,0.01,0.61,0,, $0.61 ,22-Feb-09,[Size1]=bore size (diameter of hole).  Includes male/female and left/right threads.
+427,Filler Cap,Any,Misc., $3.00 ,unit,,,,,,,,"Fuel, cooling system, etc."
+428,"Gearbox Oil Temp. Control Valve, GearZmo",GearZmo,Misc., $232.00 ,unit,,,,,,,22-Feb-09,
+429,Head Rest Padding,Any,Misc., $0.005 ,cm^3,,,,,,,,
+430,Heat Barrier,Any,Misc., $50.00 ,m^2,,,,,,,,Adhesive film (foil) or matting for reflecting head.
+431,Mirror Lens,Any,Misc., $0.15 ,cm^2,,,,,,,,
+432,"Mirror, Rear View, Housing (All Cost as Made)",Any,Misc., $-   ,in^2,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+433,Paint,Any,Misc., $10.00 ,m^2,,,,,,,,
+434,Roll Hoop Padding,Any,Misc., $0.05 ,cm,,,,,,,,
+435,Seat (All Cost as Made),Any,Misc., $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+436,Tape,Any,Misc., $-   ,unit,,,,,,,18-Apr-10,Included in process cost
+437,"Throttle Linkage, Tilton, 72-790",Tilton,Misc.,$85.00,unit,,,,,,,1-Mar-09,
+438,"Pedal Assembly, Optimum Balance Products OBP0181",Optimum Balance Products,Pedals,$110.00,unit,,,,,,,21-Apr-09,With bias bar adjustment
+439,"Pedal Assembly, Tilton, 72-680",Tilton,Pedals,$360.00,unit,,,,,,,1-Mar-09,
+440,"Pedal, Wilwood, 340-1285",Wilwood,Pedals,$61.00,unit,,,,,,,18-Apr-10,
+441,"Adapter, Hex Nipple, Brass",Any,Plumbing,[C1]*[Size1]+[C2],mm,,1.1,0.22,0,,0.22,8-Mar-09,[Size1]=Pipe Size (mm)
+442,"Adapter, Hex Nipple, Reducing, Brass",Any,Plumbing,[C1]*[Size1]*[Size2]+[C2],mm,,0.02,2.23,0,0, $2.23 ,8-Mar-09,[Size1]=Inlet Pipe Size (mm).  [Size2]=Outlet Pipe Size (mm)
+443,Adapter/L.P.///Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.176,0.056,0,,0.056,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+444,Adapter/L.P./Barb to Male Pipe/Elbow/Plastic,Any,Plumbing, $0.50 ,unit,,,,,,,19-Apr-09,Up to 25.4mm diameter inlet and outlet size.  Low Pressure.
+445,Adapter/L.P./Barb to Male Pipe/Straight/Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.032,1.33,0,0, $1.33 ,29-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Pipe Size (mm).  Low Pressure."
+446,Adapter/L.P./Barb to Male Pipe/Straight/Plastic,Any,Plumbing, $0.50 ,unit,,,,,,,19-Apr-09,Up to 25.4mm diameter inlet and outlet size.  Low Pressure.
+447,Adapter/L.P./Barb to Male Pipe/90 Deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.048,1.995,0,0, $2.00 ,29-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Pipe Size (mm).  Low Pressure."
+448,Adapter/L.P./Bulkhead Male Connector//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0155,5.82,0,0, $5.82 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+449,Adapter/L.P./Bulkhead Run Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.019,10.67,0,0, $10.67 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+450,Adapter/L.P./Bulkhead Run Tee//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0155,15.24,0,0, $15.24 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+451,Adapter/L.P./Bulkhead Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.014,10.54,0,0, $10.54 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+452,Adapter/L.P./Bulkhead Tee//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.015,12.91,0,0, $12.91 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+453,Adapter/L.P./Bulkhead Union//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.008,3.3,0,0, $3.30 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+454,Adapter/L.P./Bulkhead Union//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0072,5.47,0,0, $5.47 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+455,Adapter/L.P./Bulkhead Union/45 deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.024,2.36,0,0, $2.36 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+456,Adapter/L.P./Bulkhead Union/45 deg./Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.024,2.36,0,0, $2.36 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+457,Adapter/L.P./Bulkhead Union/90 deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.013,6.47,0,0, $6.47 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+458,Adapter/L.P./Bulkhead Union/90 deg./Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.01,12.15,0,0, $12.15 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+459,Adapter/L.P./Elbow/FeMale to Male Pipe/90 deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.144,8.63,0,0, $8.63 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+460,Adapter/L.P./Female Flare Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.024,7.55,0,0, $7.55 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+461,Adapter/L.P./Female Flare Tee//Brass,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.01,3.02,0,0, $3.02 ,15-Mar-11,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+462,Adapter/L.P./Female Pipe Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.07,13.1,0,0, $13.10 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+463,Adapter/L.P./FemAle Pipe to Male Flare//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.018,6.45,0,0, $6.45 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+464,Adapter/L.P./Male Branch Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.08,8.92,0,0, $8.92 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+465,Adapter/L.P./Male Flare to Pipe//Aluminum/Nickel-Plated,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.004,4.34,0,0, $4.34 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+466,Adapter/L.P./Male Flare to Pipe//Brass/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0016,1.74,0,0, $1.74 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+467,Adapter/L.P./Male Flare to Pipe//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0006,1.47,0,0, $1.47 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+468,Adapter/L.P./Male Flare to Pipe/45 deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0002,11.55,0,0, $11.55 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+469,Adapter/L.P./Male Flare to Pipe/45 deg./Aluminum/Nickel-Plated,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0004,18.59,0,0, $18.59 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+470,Adapter/L.P./Male Flare to Pipe/45 deg./Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0006,6.78,0,0, $6.78 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+471,Adapter/L.P./Male Flare to Pipe/90 deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0004,5.28,0,0, $5.28 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+472,Adapter/L.P./Male Flare to Pipe/90 deg./Aluminum/Nickel-Plated,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0006,9,0,0, $9.00 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+473,Adapter/L.P./Male Flare to Pipe/90 deg./Brass/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0002,2.11,0,0, $2.11 ,7-May-11,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+474,Adapter/L.P./Male Flare to Pipe/90 deg./Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0003,1.88,0,0, $1.88 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+475,Adapter/L.P./Male Pip Nipple//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.035,3.5,0,0, $3.50 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+476,Adapter/L.P./Male Run Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.066,9.79,0,0, $9.79 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+477,Adapter/L.P./Male Run Tee//Steel/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.069,10.98,0,0, $10.98 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+478,Adapter/L.P./Pipe Coupling//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.067,3.93,0,0, $3.93 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+479,Adapter/L.P./Pipe to Pipe//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.016,7.2,0,0, $7.20 ,11-Mar-09,"[Size1]=Inlet Pipe Size (mm), [Size2]=Outlet Pipe Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure"
+480,Adapter/L.P./Union Reducer//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0063,1.75,0,0, $1.75 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+481,Adapter/L.P./Union Reducer//Brass,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0025,0.7,0,0, $0.70 ,15-Mar-11,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+482,Adapter/L.P./Union Tee//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.012,7.13,0,0, $7.13 ,11-Mar-09,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+483,Adapter/L.P./Union Tee//Brass/,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.005,2.85,0,0, $2.85 ,7-May-11,"[Size1]=Largest Hose Size (mm), [Size2]=2nd Largest Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm (use two largest sizes and ignore 3rd outlet).  Low Pressure."
+484,Adapter/L.P./Union//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0063,1.75,0,0, $1.75 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+485,Adapter/L.P./Union/90 deg./Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0124,9.33,0,0, $9.33 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+486,Adapter/L.P./Union/90 deg./Brass,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.005,3.73,0,0, $3.73 ,15-Mar-11,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+487,Adapter/L.P./Union/FeMale Flare//Aluminum/Anodized,Any,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.0089,4.2,0,0, $4.20 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+488,"Banjo Bolt, Aluminum",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.68,0,0,,0,24-Mar-09,[Size1]=Thread Size (mm).
+489,"Banjo Bolt, Steel",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.68,0,0,,0,24-Mar-09,[Size1]=Thread Size (mm).
+490,"Banjo Fitting, 45 Deg., Aluminum",Any,Plumbing,[C1]*[Size1]+[C2],mm,,1.25,1.875,0,,1.875,24-Mar-09,[Size1]=Inlet Fitting Size (mm).
+491,"Banjo Fitting, 45 Deg., Steel",Any,Plumbing,[C1]*[Size1]+[C2],mm,,2.625,0,0,,0,24-Mar-09,[Size1]=Inlet Fitting Size (mm).
+492,"Banjo Fitting, 90 Deg., Aluminum",Any,Plumbing,[C1]*[Size1]+[C2],mm,,1.5,2.25,0,,2.25,24-Mar-09,[Size1]=Inlet Fitting Size (mm).
+493,"Banjo Fitting, 90 Deg., Steel",Any,Plumbing,[C1]*[Size1]+[C2],mm,,3.15,0,0,,0,24-Mar-09,[Size1]=Inlet Fitting Size (mm).
+494,"Banjo Fitting, Aluminum",Any,Plumbing,[C1]*[Size1]+[C2],mm,,1,1.5,0,,1.5,24-Mar-09,[Size1]=Inlet Fitting Size (mm).
+495,"Banjo Fitting, Double, Aluminum",Any,Plumbing,[C1]*[Size1]+[C2],mm,,1.5,2.25,0,,2.25,24-Mar-09,[Size1]=Largest Inlet Fitting Size (mm).
+496,"Banjo Fitting, Double, Steel",Any,Plumbing,[C1]*[Size1]+[C2],mm,,3.15,0,0,,0,24-Mar-09,[Size1]=Largest Inlet Fitting Size (mm).
+497,"Banjo Fitting, Steel",Any,Plumbing,[C1]*[Size1]+[C2],mm,,2.1,0,0,,0,24-Mar-09,[Size1]=Inlet Fitting Size (mm).
+498,"Bleedscrew, Hydraulic (Brake, clutch, etc.)",Any,Plumbing, $1.00 ,unt,,,,,,,,"Any size, materiAluminum"
+499,"Break Coupling, Dry, Female, KC Engineering",KC Engineering,Plumbing, $85.00 ,unit,,,,,,,23-May-10,Sizes up to 8mm
+500,"Break Coupling, Dry, Female, Staubli",Staubli,Plumbing, $85.00 ,unit,,,,,,,14-Mar-09,Sizes up to 8mm
+501,"Break Coupling, Dry, Male, KC Engineering",KC Engineering,Plumbing, $73.50 ,unit,,,,,,,23-May-10,Sizes up to 8mm
+502,"Break Coupling, Dry, Male, Staubli",Staubli,Plumbing, $73.50 ,unit,,,,,,,14-Mar-09,Sizes up to 8mm
+503,"Check Valve, High Press, Adj, In-Line, Generant",Generant,Plumbing, $10.00 ,unit,,,,,,,19-Apr-09,
+504,Crush Washer,Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.027,0.12,0,,0.12,24-Mar-09,"[Size1]=Inner Diameter (mm).  Any material (steel, aluminum, copper, etc.)"
+505,"Drain Plug, Hex Head, Magnetic",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.093,0.05,0,,0.05,8-Mar-09,[Size1]=Threaded Diameter (mm)
+506,"Drain Plug, Square Head, Magnetic",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.093,0.05,0,,0.05,8-Mar-09,[Size1]=Threaded Diameter (mm)
+507,"Fitting, Fuel Pressure Gauge",Any,Plumbing, $3.00 ,unit,,,,,,,1-Mar-09,"12.7mm Barb End (x2), 3.175mm NPT Female"
+508,"Fitting, JT2000, Quick Con. Plug to Flare, 45 Deg.",Jiffy-Tite,Plumbing, $14.50 ,unit,,,,,,,1-Mar-09,Jiffy-Tite 2000 Series.  Sizes up to 12.7mm Flare
+509,"Fitting, JT2000, Quick Con. Plug to Flare, 90 Deg.",Jiffy-Tite,Plumbing, $14.50 ,unit,,,,,,,1-Mar-09,Jiffy-Tite 2000 Series.  Sizes up to 12.7mm Flare
+510,"Fitting, JT2000, Quick Con. Plug to Flare, Str.",Jiffy-Tite,Plumbing, $11.50 ,unit,,,,,,,1-Mar-09,Jiffy-Tite 2000 Series.  Sizes up to 12.7mm Flare
+511,"Fitting, JT2000, Quick Con. Socket to Flare, 45 Deg.",Jiffy-Tite,Plumbing, $16.00 ,unit,,,,,,,1-Mar-09,Jiffy-Tite 2000 Series.  Sizes up to 12.7mm Flare
+512,"Fitting, JT2000, Quick Con. Socket to Flare, 90 Deg.",Jiffy-Tite,Plumbing, $18.50 ,unit,,,,,,,1-Mar-09,Jiffy-Tite 2000 Series.  Sizes up to 12.7mm Flare
+513,"Fitting, JT2000, Quick Con. Socket to Flare, Straight",Jiffy-Tite,Plumbing, $17.50 ,unit,,,,,,,1-Mar-09,Jiffy-Tite 2000 Series.  Sizes up to 12.7mm Flare
+514,"Fitting, Push-to-Connect, Plastic, Elbow 90°",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.25,0.4,0,,0.4,25-Mar-09,"[Size1]=Tube Outer Diameter, Largest end (mm)."
+515,"Fitting, Push-to-Connect, Plastic, Straight",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.25,0.4,0,,0.4,25-Mar-09,"[Size1]=Tube Outer Diameter, Largest end (mm)."
+516,"Fitting, Push-to-Connect, Plastic, Tee",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.2,0.95,0,,0.95,8-Mar-09,[Size1]=Tube Outer Diameter (mm)
+517,"Fitting, Push-to-Connect, Plastic, Wye",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.2,0.95,0,,0.95,8-Mar-09,[Size1]=Tube Outer Diameter (mm)
+518,"Fitting, Weld-in, Male, Aluminum",,Plumbing, [C1]*EXP([C2]*[Size1]) ,mm,,1.3,0.044,0,, $1.30 ,18-Mar-09,"[Size1]=Flare Size (mm).  For cost as made oil reservoir tanks, etc."
+519,"Fitting, Wiggins, Clamshell Assembly",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.5,16,0,,16,14-Mar-09,[Size1]=Tube Outer Diameter (mm)
+520,"Fitting, Wiggins, Coupling Assembly",Any,Plumbing,[C1]*[Size1]+[C2],mm,,1.6,8,0,,8,14-Mar-09,[Size1]=Tube Outer Diameter (mm)
+521,"Fitting, Wiggins, Weld Ferrule",Any,Plumbing,[C1]*[Size1]+[C2],mm,,0.32,4.5,0,,4.5,14-Mar-09,[Size1]=Tube Outer Diameter (mm)
+522,Fitting/H.P./Elbow/45 deg./Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.9,7.3,0,,7.3,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+523,Fitting/H.P./Elbow/90 deg./Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.6,9.5,0,,9.5,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+524,Fitting/H.P./MAluminume Flare//Brass/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0,11,0,,11,15-Mar-11,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+525,Fitting/H.P./MAluminume Inverted Flare//Brass/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.04,-0.41,0,,-0.41,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+526,Fitting/H.P./MAluminume Inverted Flare//Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.43,6.8,0,,6.8,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+527,Fitting/H.P./MAluminume Inverted Flare/45 deg./Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0,12,0,,12,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+528,Fitting/H.P./MAluminume Inverted Flare/90 deg./Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0,15,0,,15,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+529,Fitting/H.P./MAluminume Pipe//Brass/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.67,-2.1,0,,-2.1,15-Mar-11,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+530,Fitting/H.P./MAluminume Pipe//Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0,8,0,,8,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+531,Fitting/H.P./Straight//Brass/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.87,-3.64,0,,-3.64,15-Mar-11,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+532,Fitting/H.P./Straight//Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.53,3.43,0,,3.43,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  High Pressure."
+533,Fitting/L.P./Cap//Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.66,-2.14,0,,-2.14,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+534,Fitting/L.P./Cap//Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.32,0,0,,0,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+535,Fitting/L.P./Elbow/120 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.35,34.4,0,,34.4,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+536,Fitting/L.P./Elbow/120 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.23,13.11,0,,13.11,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+537,Fitting/L.P./Elbow/150 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.34,25.34,0,,25.34,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+538,Fitting/L.P./Elbow/150 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.52,10.2,0,,10.2,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+539,Fitting/L.P./Elbow/180 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.77,19.75,0,,19.75,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+540,Fitting/L.P./Elbow/180 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,4.42,-19.21,0,,-19.21,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+541,Fitting/L.P./Elbow/30 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.1,4.59,0,,4.59,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+542,Fitting/L.P./Elbow/30 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.59,19,0,,19,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+543,Fitting/L.P./Elbow/45 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.11,-2.68,0,,-2.68,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+544,Fitting/L.P./Elbow/45 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.24,3.86,0,,3.86,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+545,Fitting/L.P./Elbow/45 deg./Aluminum/Nickel-Plated,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.6,13.4,0,,13.4,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+546,Fitting/L.P./Elbow/45 deg./Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,4.72,-8.04,0,,-8.04,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+547,Fitting/L.P./Elbow/60 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.1,4.59,0,,4.59,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+548,Fitting/L.P./Elbow/60 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.06,29.53,0,,29.53,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+549,Fitting/L.P./Elbow/90 deg./Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.46,5.85,0,,5.85,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+550,Fitting/L.P./Elbow/90 deg./Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.37,1.22,0,,1.22,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+551,Fitting/L.P./Elbow/90 deg./Aluminum/Nickel-Plated,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.6,13.6,0,,13.6,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+552,Fitting/L.P./Elbow/90 deg./Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,4.78,-12.53,0,,-12.53,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+553,Fitting/L.P./Male Flare to Pipe//Aluminum/Anodized,,Plumbing, [C1]*[Size1]*[Size2]+[C2] ,mm,mm,0.032,1.33,0,0, $1.33 ,11-Mar-09,"[Size1]=Inlet Hose Size (mm), [Size2]=Outlet Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+554,Fitting/L.P./Male Pipe//Aluminum/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.73,6.7,0,,6.7,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+555,Fitting/L.P./Orb/45 deg./Aluminum/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.2,24,0,,24,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+556,Fitting/L.P./Orb/90 deg./Aluminum/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0,65,0,,65,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+557,Fitting/L.P./Straight/Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.32,-6.08,0,,-6.08,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+558,Fitting/L.P./Straight/Aluminum/Crimp,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.64,-3.15,0,,-3.15,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+559,Fitting/L.P./Straight/Aluminum/Nickel-Plated,,Plumbing, [C1]*[Size1]+[C2] ,mm,,1.8,-6.45,0,,-6.45,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+560,Fitting/L.P./Straight/Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,6.52,-27.18,0,,-27.18,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+561,Fitting/L.P./Tee/Flare-Flare-Pipe/Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.2,8.9,0,,8.9,26-Apr-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+562,Fitting/L.P./Tube Nut//Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.368,-1.34,0,,-1.34,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+563,Fitting/L.P./Tube Nut//Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.11,1.71,0,,1.71,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+564,Fitting/L.P./Tube Sleeve//Aluminum/Anodized,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.18,0,0,,0,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+565,Fitting/L.P./Tube Sleeve/Brass,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.07,0,0,,0,15-Mar-11,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+566,Fitting/L.P./Tube Sleeve/Steel/,,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.23,0,0,,0,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+567,"Grease Nipple, 45 Deg.",,Plumbing, $0.50 ,unit,,,,,,,1-May-09,Any size up to 6.35mm
+568,"Grease Nipple, 90 Deg.",,Plumbing, $0.50 ,unit,,,,,,,1-May-09,Any size up to 6.35mm
+569,"Grease Nipple, Straight",,Plumbing, $0.50 ,unit,,,,,,,1-May-09,Any size up to 6.35mm
+570,"Hose, High Pressure, Stainless Steel Braided Outer",,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.47,-2.71,0,,-2.71,12-Jun-11,"[Size1]=Hose Size (mm).  Cost is per meter of hose.  Hydraulic, CO2, etc. up to 20.7 Mpa."
+571,"Hose, Low Pressure, Fabric Outer",,Plumbing, [C1]*[Size1]+[C2] ,mm,,3.24,9.72,0,,9.72,12-Jun-11,"[Size1]=Hose Size (mm).  Cost is per meter of hose.  Fuel, oil, coolant, air, etc. up to 7 Mpa.  "
+572,"Hose, Low Pressure, Stainless Steel Braided Outer",,Plumbing, [C1]*[Size1]+[C2] ,mm,,2.23,3.52,0,,3.52,12-Jun-11,"[Size1]=Hose Size (mm).  Cost is per meter of hose.  Fuel, oil, coolant, air, etc. up to 7 Mpa.  "
+573,"Hose, Low Presure, Fabric Outer, Socketless",,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.99,4.5,0,,4.5,12-Jun-11,"[Size1]=Hose Size (mm).  Cost is per meter of hose.   Fuel, oil, coolant, air, etc. up to 1.7 Mpa."
+574,"Hose, Polyurethane",Any,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.07,0,0,,0,12-Jun-11,[Size1]=Outer Diameter (mm).  Price per meter of hose (m).   Same cost with and without fiber reinforcement.  For very low pressure applications such as pneumatic shfiters after regulator.
+575,"Hose, Rubber",Any,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.18,0,0,,0,12-Jun-11,"[Size1]=Outer Diameter (mm).  Price per meter of hose (m).   Same cost with and without fiber reinforcement.  For very low pressure applications (cooling system, vacuum, carbereutered fuel systems, etc.)"
+576,"Hose, Rubber",,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.18,0,0,,0,12-Jun-11,"[Size1]=Outer Diameter (mm).  Price per meter of hose (m).  Same cost with and without fiber reinforcement.  For very low pressure applications (cooling system, vacuum, carbereutered fuel systems, etc.)"
+577,"Hose, Silicone",Any,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.47,0,0,,0,12-Jun-11,"[Size1]=Outer Diameter (mm).  Price per meter of hose (m).   Same cost with and without fiber reinforcement.  For very low pressure applications (cooling system, vacuum, carbereutered fuel systems, etc.)"
+578,Locknut/L.P.///Steel/,0.126,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.126,1.57,0,,1.57,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+579,Locknut/L.P./Flare//Aluminum/Anodized,0.385,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.385,0.8,0,,0.8,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+580,Plug/L.P./Flare//Steel/,0.312,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.312,0.905,0,,0.905,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+581,Plug/L.P./O-Ring Boss//Aluminum/Anodized,0.38,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.38,5.418,0,,5.418,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+582,Plug/L.P./Pipe/Allen Head/Aluminum/Anodized,0.36,Plumbing, [C1]*[Size1]+[C2] ,mm,,0.36,1.78,0,,1.78,11-Mar-09,"[Size1]=Hose Size (mm), e.g. AN4 = 4/16 inch = 6.35mm.  Low Pressure."
+583,"Rotating Union, GAT, Rotodisk",GAT,Plumbing, $473.00 ,unit,,,,,,,29-Mar-09,
+584,"Tubing, Steel",,Plumbing, $2.25 ,kg,,,,,,,11-Mar-09,"Cost using area, length and density and include process cost for flaring of tube ends, etc.  Can also cost off steel or stainless steel raw material (same cost)."
+585,Aluminum Metal Matrix Composite,Any,Raw Material, $33.00 ,kg,,,,,,,,
+586,"Aluminum, Normal",Any,Raw Material, $4.20 ,kg,,,,,,,,"e.g. 2024, 6061, A356, A380"
+587,"Aluminum, Premium",Any,Raw Material, $4.20 ,kg,,,,,,,,e.g. 7075
+588,Brass,Any,Raw Material, $2.20 ,kg,,,,,,,,
+589,Bronze,Any,Raw Material, $2.20 ,kg,,,,,,,,
+590,Copper,Any,Raw Material, $2.20 ,kg,,,,,,,,
+591,Cork,Any,Raw Material, $0.0050 ,cm^3,,,,,,,18-Apr-10,
+592,"Foam, Expanding, Non-Structural",Any,Raw Material, $15.00 ,kg,,,,,,,,Expanding foam such as is used for seats.  Not to be used as core in a composite sandwhich panel.
+593,Inconel,Any,Raw Material, $22.00 ,kg,,,,,,,,Please submit an Add Item Request
+594,Iron,Any,Raw Material, $1.00 ,kg,,,,,,,,
+595,Magnesium,Any,Raw Material, $6.00 ,kg,,,,,,,,
+596,Nickel,Any,Raw Material, $2.20 ,kg,,,,,,,,
+597,"Plastic, ABS",Any,Raw Material, $3.30 ,kg,,,,,,,,"PVC, Thermoplastic"
+598,"Plastic, Acetal",Any,Raw Material, $3.30 ,kg,,,,,,,,"Delrin, Turcite, Acetal Copolymer"
+599,"Plastic, Acrylic",Any,Raw Material, $3.30 ,kg,,,,,,,,"Extruded, Cast"
+600,"Plastic, Flouropolymers",Any,Raw Material, $3.30 ,kg,,,,,,,,"Teflon® PTFE, PTFE (polytetrafluoroethylene), ETFE (ethylene tetrafluoroethylene), PFA (perfluoroalkoxy fluorocarbon), CTFE (chlorotrifluoroethylene), PVDF (Kynar), ECTFE (Halar), FEP (fluorinated ethylene-propylene), Rulon®"
+601,"Plastic, Garolite",Any,Raw Material, $3.30 ,kg,,,,,,,,"Industrial Laminates, Phenolics, Thermosets"
+602,"Plastic, Nylon",Any,Raw Material, $3.30 ,kg,,,,,,,,"Nylon 6/6, Nylon 6/12"
+603,"Plastic, PEEK",Any,Raw Material, $3.30 ,kg,,,,,,,,
+604,"Plastic, Polycarbonate",Any,Raw Material, $3.30 ,kg,,,,,,,,
+605,"Plastic, Polyethelene",Any,Raw Material, $3.30 ,kg,,,,,,,,"LDPE (low density polyethylene), UHMW (ultra high molecular weight), HDPE (high density polyethylene), VHMW (very high molecular weight)"
+606,"Plastic, Polyoxymethylene (POM)",Any,Raw Material, $3.30 ,kg,,,,,,,,Delrin
+607,"Plastic, Polypropolene",Any,Raw Material, $3.30 ,kg,,,,,,,,
+608,"Plastic, PVC",Any,Raw Material, $3.30 ,kg,,,,,,,,"Type I, Type II, CPVC, Expanded Rigid PVC"
+609,Rubber,Any,Raw Material, $3.30 ,kg,,,,,,,,
+610,Silicon Carbide (or any ceramic),Any,Raw Material, AIR ,kg,,,,,,,,Please submit an Add Item Request
+611,"Steel, Alloy",Any,Raw Material, $2.25 ,kg,,,,,,,,"e.g. 4130, Chrome Moly, etc."
+612,"Steel, Mild",Any,Raw Material, $2.25 ,kg,,,,,,,,"e.g. 1010, 1025 etc."
+613,"Steel, Stainless",Any,Raw Material, $2.25 ,kg,,,,,,,2-Mar-09,
+614,Titanium,Any,Raw Material, $22.00 ,kg,,,,,,,,e.g. Ti6Al4V
+615,"Wood, Hard",Any,Raw Material, $0.004 ,cm^3,,,,,,,,"Oak, Maple, Birch"
+616,"Wood, Soft",Any,Raw Material, $0.003 ,cm^3,,,,,,,29-Sep-09,"Balsa, Bass"
+617,"Wood, Medium Density Fiberboard",Any,Raw Material, $0.002 ,cm^3,,,,,,,20-Apr-10,MDF
+618,"Harness, Driver",Any,Safety, $45.00 ,unit,,,,,,,,"Any harness, any latch style, any number of belts.  Includes harness with built in attachment points but no hardware."
+619,"Seal, O-Ring, Elastomer",Any,Seals, $0.05 ,unit,,,,,,,,"Any size, any material"
+620,"Seal, Radial Lip Seal",Any,Seals, $1.00 ,unit,,,,,,,,"Any Size, any style"
+621,"Sensor, Accelerometer, 1 Axis",Any,Sensors, $4.00 ,unit,,,,,,,,
+622,"Sensor, Accelerometer, 3 Axis",Any,Sensors, $8.00 ,unit,,,,,,,,
+623,"Sensor, Air Temperature",Any,Sensors, $4.00 ,unit,,,,,,,,OEM quality sensor
+624,"Sensor, Angular Position",Any,Sensors, $4.00 ,unit,,,,,,,,e.g. Throttle Position Sensor (TPS)
+625,"Sensor, Fluid Pressure",Any,Sensors, $4.00 ,unit,,,,,,,,
+626,"Sensor, Fluid Pressure & Temperature",Any,Sensors, $10.00 ,unit,,,,,,,,
+627,"Sensor, Hall Effect",Any,Sensors, $4.00 ,unit,,,,,,,,e.g. Wheel Speed Sensor
+628,"Sensor, LVDT",Any,Sensors, $12.00 ,unit,,,,,,,,
+629,"Sensor, Manifold Absolute Pressure (MAP)",Any,Sensors, $4.00 ,unit,,,,,,,,OEM quality sensor
+630,"Sensor, Mass Air Flow (MAF)",Any,Sensors, $25.00 ,unit,,,,,,,,OEM quality sensor
+631,"Sensor, Switching Air Fuel Ratio",Any,Sensors, $15.00 ,unit,,,,,,,,Switches output (high/low) when transition from rich to lean detected
+632,"Sensor, Temperature",Any,Sensors, $8.00 ,unit,,,,,,,10-May-09,
+633,"Sensor, Thermocouple",Any,Sensors, $8.00 ,unit,,,,,,,,
+634,"Sensor, Two State Position",Any,Sensors, $4.00 ,unit,,,,,,,,
+635,"Sensor, Wide Band Air Fuel Raito",Any,Sensors, $35.00 ,unit,,,,,,,,Output proportional to air fuel ratio
+636,Fabric,Any,Sheet Material,$2.50,m^2,,,,,,,1-Mar-09,"Any fabric including dacron for body covering, seats, etc."
+637,Glass,Any,Sheet Material, $10.00 ,m^2,,,,,,,,
+638,Leather,Any,Sheet Material,$100.00,m^2,,,,,,,1-Mar-09,
+639,Suede,Any,Sheet Material,$100.00,m^2,,,,,,,1-Mar-09,
+640,Air Pressure Regulator,Any,Shifter,$10.00,unit,,,,,,,23-May-10,
+641,CO2 Regulator,Any,Shifter, $50.00 ,unit,,,,,,,22-Feb-09,
+642,"CO2 Tank, Composite",Any,Shifter,[C1]*[Size1]+[C2],cc,,0.05,0.85,0,,0.85,2-Feb-09,
+643,"CO2 Tank, Metallic",Any,Shifter,[C1]*[Size1]+[C2],cc,,0.044,-5.44,0,,-5.44,2-Feb-09,
+644,N2 Regulator,Any,Shifter, $50.00 ,unit,,,,,,,22-Feb-09,
+645,"N2 Tank, Composite",Any,Shifter,[C1]*[Size1]+[C2],cc,,0.05,0.85,0,,0.85,2-Feb-09,
+646,"N2 Tank, Metallic",Any,Shifter,[C1]*[Size1]+[C2],cc,,0.044,-5.44,0,,-5.44,2-Feb-09,
+647,"Pneumatic Cylinder, Double Acting",Any,Shifter, $25.00 ,unit,,,,,,,22-Feb-09,
+648,"Pneumatic Cylinder, Single Acting",Any,Shifter, $20.00 ,unit,,,,,,,22-Feb-09,
+649,"Pneumatic Valve, Two Position",Any,Shifter, $25.00 ,unit,,,,,,,22-Feb-09,Two position valve (open/closed).
+650,"Shift Lever, Bicycle OEM",Any,Shifter, $20.00 ,unit,,,,,,,23-May-10,Any make/model of bicycle (push bike) handle bar lever.  Includes lever only.
+651,"Shift Lever, Honda, 0143719",Honda,Shifter, $25.00 ,unit,,,,,,,10-Mar-10,
+652,"Shifter, Automatic, Flat Shifter Expert",Flat Shifter,Shifter, $446.00 ,unit,,,,,,,1-Mar-10,
+653,"Shifter, Automatic, Flat Shifter Max",Flat Shifter,Shifter, $370.00 ,unit,,,,,,,1-Mar-10,
+654,"Shifter, Automatic, Kartech, Me-Shifter F1",Kartech,Shifter, $590.00 ,unit,,,,,,,1-Mar-09,
+655,"Shifter, Automatic, Kliktronics",Kliktronics,Shifter, $360.00 ,unit,,,,,,,1-Mar-09,
+656,"Shifter, Automatic, Pingel Easy Shift Kit",Pingel,Shifter, $375.00 ,unit,,,,,,,1-Mar-09,
+657,"Shifter, Automatic, TransLogic TLS-PS1",TransLogic,Shifter, $400.00 ,units,,,,,,,,"Includes actuator, wiring and 2 buttons."
+658,"Spring, Compression (General)",Any,Springs, $1.00 ,unit,,,,,,,,For all uses requiring forces < 100 N.  Not for suspensions.
+659,"Spring, Tension (General)",Any,Springs, $1.00 ,unit,,,,,,,,For all uses requiring forces < 100 N.  Not for suspensions.
+660,"Spring, Torsion (General)",,Springs, $1.00 ,unit,,,,,,,17-Mar-09,For all uses requiring forces < 100 N.  Not for suspensions.
+661,"Suspension Springs, Coil Spring, Steel",Any,Springs, $25.00 ,unit,,,,,,,,Any Steel coil compression spring
+662,"Suspension Springs, Coil Spring, Titanium",Any,Springs, $110.00 ,unit,,,,,,,,Titanium Spring
+663,Steering Column Universal Joint,Any,Steering, $20.00 ,unit,,,,,,,,
+664,Steering Pinion (All Cost as Made),Any,Steering, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+665,Steering Rack (All Cost as Made),Any,Steering, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+666,Steering Rack Housing (All Cost as Made),Any,Steering, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+667,Steering Wheel (All Cost as Made),Any,Steering, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+668,"Steering Wheel, Quick Release (All Cost as Made)",Any,Steering, $-   ,unit,,,,,,,,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+669,A-Arms (All Cost as Made),Any,Suspension, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+670,Wishbones (All Cost as Made),Any,Suspension, $-   ,unit,,,,,,,26-Mar-10,This item should be cost as made whether the team made it or bought it.  Please see Rule C3.12 for more information.
+671,"Tire, Avon, A45, 13""-20.0 x 6.2",Avon,Tire, $100.00 ,unit,,,,,,,,
+672,"Tire, Avon, A45, 13""-20.0 x 7.2",Avon,Tire, $100.00 ,unit,,,,,,,,
+673,"Tire, Avon, A45, 13""-20.0 x 8.2",Avon,Tire, $100.00 ,unit,,,,,,,,
+674,"Tire, Bridgestone, 13""-180mm/510mm",Bridgestone,Tire, $100.00 ,unit,,,,,,,,
+675,"Tire, Dunlop Motorsport, 13"", 175mm/505mm",Dunlop,Tire, $87.00 ,unit,,,,,,,6-May-09,
+676,"Tire, Goodyear, D2692, 13""-20.0 x 7.0",Goodyear,Tire, $100.00 ,unit,,,,,,,22-Feb-09,
+677,"Tire, Goodyear, R065, 13""-20.0 x 7.0",Goodyear,Tire, $100.00 ,unit,,,,,,,,
+678,"Tire, Goodyear, R075, 13""-20.0 x 7.0",Goodyear,Tire, $100.00 ,unit,,,,,,,,
+679,"Tire, Hoosier, LC0, 10""-18.0 x 6.0",Hoosier,Tire, $85.00 ,unit,,,,,,,29-Mar-09,
+680,"Tire, Hoosier, LC0, 10""-18.0 x 7.0",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+681,"Tire, Hoosier, R25B, 10""-18.0 x 6.0",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+682,"Tire, Hoosier, R25B, 10""-18.0 x 7.5",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+683,"Tire, Hoosier, R25B, 10""-19.5 x 6.5",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+684,"Tire, Hoosier, R25B, 10""-19.5 x 7.5",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+685,"Tire, Hoosier, R25B, 13""-20.0 x 7.5",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+686,"Tire, Hoosier, R25B, 13""-20.0 x 8.0",Hoosier,Tire, $85.00 ,unit,,,,,,,22-Feb-09,
+687,"Tire, Hoosier, R25B, 13""-20.0 x 9.0",Hoosier,Tire, $85.00 ,unit,,,,,,,22-Feb-09,
+688,"Tire, Hoosier, R25B, 13""-20.5 x 6.0",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+689,"Tire, Hoosier, R25B, 13""-20.5 x 7.0",Hoosier,Tire, $85.00 ,unit,,,,,,,,
+690,"Tire, Hoosier, Wet, 10""-19.5 x 6.5",Hoosier,Tire, $80.00 ,unit,,,,,,,,
+691,"Tire, Hoosier, Wet, 13""-20.0 x 7.5",Hoosier,Tire, $100.00 ,unit,,,,,,,,
+692,"Tire, Hoosier, Wet, 13""-21.0 x 6.5",Hoosier,Tire, $100.00 ,unit,,,,,,,,
+693,"Tire, Kumho, ECSTA, 13""-170mm/515mm",Kumoh,Tire, $80.00 ,unit,,,,,,,,
+694,"Tire, Michelin, P220, 13""-20.9 x 6.3",Michelin,Tire, $100.00 ,unit,,,,,,,,
+695,"Tire, Michelin, S6B, 13""-20.9 x 6.3",Michelin,Tire, $100.00 ,unit,,,,,,,,
+696,"Tire, Treaded Production Car Not Listed Above",Any,Tire, $40.00 ,unit,,,,,,,,
+697,"Tire, Yokohoma, ADVAN Dry, 13"" 160-55",Yokohoma,Tire, $135.00 ,unit,,,,,,,7-May-11,
+698,"Tire, Yokohoma, ADVAN Wet, 13"" 160-55",Yokohoma,Tire, $160.00 ,unit,,,,,,,7-May-11,
+699,Valve Stem (and Tire Inflation),Any,Tire, $1.00 ,unit,,,,,,,22-Feb-09,Includes tire inflation
+700,"Wheel Center, Any Size, Student Made",Student Built,Wheel, $-   ,unit,,,,,,,27-Dec-11,
+701,"Wheel Shells, 10"", 3 Piece, Keizer, Aluminum",Keizer,Wheel, $57.50 ,unit,,,,,,,8-Mar-09,Wheel shells include outer rim but no center
+702,"Wheel Shells, 13"" Inner, 4"" Wide, Kodiak, Aluminum",Kodiak,Wheel, $93.00 ,unit,,,,,,,3-Aug-09,Kodiak Part Number I13406
+703,"Wheel Shells, 13"" Inner, 4.5"" Wide, Kodiak, Alum.",Kodiak,Wheel, $93.00 ,unit,,,,,,,3-Aug-09,Aluminum.  Kodiak Part Number I134506
+704,"Wheel Shells, 13"" Inner, 5"" Wide, Kodiak, Alum.",Kodiak,Wheel, $100.00 ,unit,,,,,,,3-Aug-09,Aluminum.  Kodiak Part Number I113506
+705,"Wheel Shells, 13"" Inner, 6"" Wide, Kodiak, Alum.",Kodiak,Wheel, $104.00 ,unit,,,,,,,3-Aug-09,Aluminum.  Kodiak Part Number I13606
+706,"Wheel Shells, 13"" Outer, 1"" Wide, Kodiak, Alum.",Kodiak,Wheel, $85.00 ,unit,,,,,,,3-Aug-09,Aluminum.  Kodiak Part Number O13106
+707,"Wheel Shells, 13"" Outer, 1.5"" Wide, Kodiak, Alum.",Kodiak,Wheel, $91.50 ,unit,,,,,,,3-Aug-09,Aluminum.  Kodiak Part Number O131506
+708,"Wheel Shells, 13"" Outer, 2"" Wide, Kodiak, Alum.",Kodiak,Wheel, $91.50 ,unit,,,,,,,3-Aug-09,Aluminum.  Kodiak Part Number O13206
+709,"Wheel Shells, 13"", 3 Piece, Jongbloed, Alum.",Jongbloed,Wheel, $287.50 ,unit,,,,,,,8-Mar-09,"Wheel comes with solid center,  no machining for hub attachment"
+710,"Wheel Shells, 13"", 3 Piece, Jongbloed, Magnesium",Jongbloed,Wheel, $287.50 ,unit,,,,,,,8-Mar-09,"Wheel comes with solid center,  no machining for hub attachment"
+711,"Wheel Shells, 13"", 3 Piece, Keizer, Aluminum",Keizer,Wheel, $82.50 ,unit,,,,,,,17-Mar-09,Wheel shells include inner & outer rim but no center
+712,"Wheel Shells, 13"", 3 Piece, Weld, Aluminum",Weld,Wheel, $114.00 ,unit,,,,,,,3-Aug-09,Includes  Inner (P850-3478) and Outer (P851-3318)
+713,Wheel Weights (and Balancing),Any,Wheel, $4.00 ,unit,,,,,,,,"Includes weights, balancing and installation labor for wheel weight"
+714,"Wheel, 10"", 1 Piece OEM, Aluminum",Any,Wheel, $77.50 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+715,"Wheel, 10"", 1 Piece OEM, Magnesium",Any,Wheel, $108.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+716,"Wheel, 10"", 1 Piece OEM, Steel",Any,Wheel, $40.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+717,"Wheel, 10"", 1 Piece, Carbon Fiber, Purchased",Any,Wheel, AIR ,unit,,,,,,,,Please submit Add Item Request
+718,"Wheel, 10"", 1 Piece, Carbon Fiber, Student Made",Student Built,Wheel, $-   ,unit,,,,,,,,
+719,"Wheel, 10"", 2 Piece, HiPer Racing, Carbon-plastic, Tec 3, Inner Half",HiPer Racing,Wheel, $22.50 ,unit,,,,,,,31-Mar-10,
+720,"Wheel, 10"", 2 Piece, HiPer Racing, Carbon-plastic, CF1, Inner Half",HiPer Racing,Wheel, $37.50 ,unit,,,,,,,31-Mar-10,
+721,"Wheel, 10"", 3 Piece, Keizer, Aluminum",Keizer,Wheel, $77.50 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+722,"Wheel, 13"", 1 Piece OEM, Aluminum",Any,Wheel, $115.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+723,"Wheel, 13"", 1 Piece OEM, Magnesium",Any,Wheel, $161.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+724,"Wheel, 13"", 1 Piece OEM, Steel",Any,Wheel, $50.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+725,"Wheel, 13"", 1 Piece, Orbital 861, Aluminum",Orbital,Wheel, $80.00 ,unit,,,,,,,7-May-11,
+726,"Wheel, 13"", 1 Piece, Carbon Fiber, Purchased",Any,Wheel, AIR ,unit,,,,,,,,Please submit Add Item Request
+727,"Wheel, 13"", 1 Piece, Carbon Fiber, Student Made",Student Built,Wheel, $-   ,unit,,,,,,,,
+728,"Wheel, 13"", 1 Piece, Compomotive XR1380",Compomotive,Wheel, $94.00 ,unit,,,,,,,23-May-10,
+729,"Wheel, 13"", 1 Piece, Braid, Formrace, Aluminum, Model 16, 7"" Wide",Braid,Wheel, s ,unit,,,,,,,9-May-10,
+730,"Wheel, 13"", 1 Piece, Watanabe, Magnesium, 6-Spoke, Widths 8-9.5",Watanabe,Wheel, $235.00 ,unit,,,,,,,18-Apr-10,
+731,"Wheel, 13"", 1 Piece, Watanabe, Magnesium, 6-Spoke, Widths 10-12",Watanabe,Wheel, $250.00 ,unit,,,,,,,18-Apr-10,
+732,"Wheel, 13"", 1 Piece, Volk  TE37, Aluminum",Volk,Wheel, $200.00 ,unit,,,,,,,,
+733,"Wheel, 13"", 2 Piece, Braid, Formrace, Aluminum, Model 16, 6"" Wide",Braid,Wheel, $96.50 ,unit,,,,,,,9-May-10,
+734,"Wheel, 13"", 3 Piece, Bogar RT-4, Aluminum",Bogar,Wheel, $150.00 ,unit,,,,,,,1-Mar-09,
+735,"Wheel, 13"", 3 Piece, Jongbloed, Aluminum",Jongbloed,Wheel, $287.50 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+736,"Wheel, 13"", 3 Piece, Jongbloed, Magnesium",Jongbloed,Wheel, $287.50 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+737,"Wheel, 13"", 3 Piece, Keizer, Aluminum",Keizer,Wheel, $115.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+738,"Wheel, 13"", 3 Piece, Keizer, Magnesium",Keizer,Wheel, $140.00 ,unit,,,,,,,,"Wheel comes with solid center,  no machining for hub attachment"
+739,"Wheel, 13"", 3 Piece, Weld, Aluminum",Weld,Wheel, $201.50 ,unit,,,,,,,8-Mar-09,"Includes center (P613-7096), Inner (P850-3478) and Outer (P851-3318)"
+740,"Wheel, 13"", BBS, Magnesium, Cast, R-RE-325",BBS,Wheel, $340.00 ,unit,,,,,,,1-Mar-09,
+741,"Wheel, 13"", Magnesium, BBS, Forged",BBS,Wheel, AIR ,unit,,,,,,,,Please submit Add Item Request
+742,"Wheel, 15"", 1 Piece OEM, Aluminum",Any,Wheel, $140.00 ,unit,,,,,,,,
+743,"Wheel, 15"", 1 Piece OEM, Magnesium",Any,Wheel, $196.00 ,unit,,,,,,,,
+744,"Wheel, 15"", 1 Piece OEM, Steel",Any,Wheel, $60.00 ,unit,,,,,,,,
+745,"Wheel, 15"", 1 Piece, Carbon Fiber, Purchased",,Wheel, AIR ,unit,,,,,,,,
+746,"Wheel, 15"", 1 Piece, Carbon Fiber, Student Made",Student Built,Wheel, $-   ,unit,,,,,,,,
+747,Aluminum Metal Matrix Composite (per kg),Any,Raw Material (per kg), $33.00 ,kg,,,,,,,29-Sep-09,
+748,"Aluminum, Normal (per kg)",Any,Raw Material (per kg), $4.20 ,kg,,,,,,,29-Sep-09,"e.g. 2024, 6061, A356, A380"
+749,"Aluminum, Premium (per kg)",Any,Raw Material (per kg), $4.20 ,kg,,,,,,,29-Sep-09,e.g. 7075
+750,Brass (per kg),Any,Raw Material (per kg), $2.20 ,kg,,,,,,,29-Sep-09,
+751,Bronze (per kg),Any,Raw Material (per kg), $2.20 ,kg,,,,,,,29-Sep-09,
+752,Copper (per kg),Any,Raw Material (per kg), $2.20 ,kg,,,,,,,29-Sep-09,
+753,"Foam, Expanding, Non-Structural (per kg)",Any,Raw Material (per kg), $15.00 ,kg,,,,,,,29-Sep-09,Expanding foam such as is used for seats.  Not to be used as core in a composite sandwhich panel.
+754,Iron (per kg),Any,Raw Material (per kg), $1.00 ,kg,,,,,,,29-Sep-09,
+755,Magnesium (per kg),Any,Raw Material (per kg), $6.00 ,kg,,,,,,,29-Sep-09,
+756,Nickel (per kg),Any,Raw Material (per kg), $2.20 ,kg,,,,,,,29-Sep-09,
+757,"Plastic, ABS (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"PVC, Thermoplastic"
+758,"Plastic, Acetal (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"Delrin, Turcite, Acetal Copolymer"
+759,"Plastic, Acrylic (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"Extruded, Cast"
+760,"Plastic, Flouropolymers (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"Teflon® PTFE, PTFE (polytetrafluoroethylene), ETFE (ethylene tetrafluoroethylene), PFA (perfluoroalkoxy fluorocarbon), CTFE (chlorotrifluoroethylene), PVDF (Kynar), ECTFE (Halar), FEP (fluorinated ethylene-propylene), Rulon®"
+761,"Plastic, Garolite (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"Industrial Laminates, Phenolics, Thermosets"
+762,"Plastic, Nylon (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"Nylon 6/6, Nylon 6/12"
+763,"Plastic, PEEK (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,
+764,"Plastic, Polycarbonate (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,
+765,"Plastic, Polyethelene (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"LDPE (low density polyethylene), UHMW (ultra high molecular weight), HDPE (high density polyethylene), VHMW (very high molecular weight)"
+766,"Plastic, Polyoxymethylene (POM) (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,Delrin
+767,"Plastic, Polypropolene (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,
+768,"Plastic, PVC (per kg)",Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,"Type I, Type II, CPVC, Expanded Rigid PVC"
+769,Rubber (per kg),Any,Raw Material (per kg), $3.30 ,kg,,,,,,,29-Sep-09,
+770,"Steel, Alloy (per kg)",Any,Raw Material (per kg), $2.25 ,kg,,,,,,,29-Sep-09,"e.g. 4130, Chrome Moly, etc."
+771,"Steel, Mild (per kg)",Any,Raw Material (per kg), $2.25 ,kg,,,,,,,29-Sep-09,"e.g. 1010, 1025 etc."
+772,"Steel, Stainless (per kg)",Any,Raw Material (per kg), $2.25 ,kg,,,,,,,29-Sep-09,
+773,Titanium (per kg),Any,Raw Material (per kg), $22.00 ,kg,,,,,,,29-Sep-09,e.g. Ti6Al4V
