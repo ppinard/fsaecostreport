@@ -25,6 +25,8 @@ import os.path
 import csv
 
 # Third party modules.
+from openpyxl import Workbook
+from openpyxl.style import NumberFormat, Fill
 
 # Local modules.
 from fsaecostreport.latex import \
@@ -442,7 +444,6 @@ class CostReportLaTeXWriter(object):
         lines += [r'\listoffigures']
 
         return lines
-
 
 class SystemLaTeXWriter(object):
     def write(self, system):
@@ -1052,3 +1053,327 @@ class eBOMWriter(object):
 
         return (rows, materials_totalcost, processes_totalcost,
                 fasteners_totalcost, toolings_totalcost, system_totalcost)
+
+class FSGBOMWriter(object):
+    
+    def write(self, basepath, metadata):
+        wb = Workbook()
+        
+        # create cost tables
+        for system in metadata.systems:
+            self._write_system(wb, system, metadata)
+
+        # remove first sheet
+        wb.remove_sheet(wb.worksheets[0])
+
+        filepath = os.path.join(basepath, 'costreport.xlsx')
+        wb.save(filepath)
+        
+    def _write_system(self, wb, system, metadata):
+        hierarchy = system.get_hierarchy()
+
+        for component in hierarchy:
+            sheet = wb.create_sheet(title=component.partnumber)
+
+            if isinstance(component, Part):
+                self._write_costtable_part(sheet, component, system, metadata)
+            elif isinstance(component, Assembly):
+                self._write_costtable_assembly(sheet, component, system, metadata)
+
+            sheet.column_dimensions['A'].width = 20
+            sheet.column_dimensions['B'].width = 30
+            sheet.column_dimensions['C'].width = 12
+            sheet.column_dimensions['D'].width = 12
+            sheet.column_dimensions['E'].width = 12
+            sheet.column_dimensions['F'].width = 12
+            sheet.column_dimensions['G'].width = 12
+            sheet.column_dimensions['H'].width = 12
+
+    def _write_costtable_part(self, sheet, component, system, metadata):
+        row = self._write_header_part(sheet, component, system, metadata)
+        row = self._write_table_materials(sheet, component, row) + 1
+        row = self._write_table_processes(sheet, component, row) + 1
+        row = self._write_table_fasteners(sheet, component, row) + 1
+        row = self._write_table_toolings(sheet, component, row) + 1
+    
+    def _write_costtable_assembly(self, sheet, component, system, metadata):
+        row = self._write_header_assembly(sheet, component, system, metadata)
+        row = self._write_table_parts(sheet, component, row) + 1
+        row = self._write_table_materials(sheet, component, row) + 1
+        row = self._write_table_processes(sheet, component, row) + 1
+        row = self._write_table_fasteners(sheet, component, row) + 1
+        row = self._write_table_toolings(sheet, component, row) + 1
+        
+    def _set_header_cell(self, cell, value):
+        cell.value = value
+        cell.style.font.bold = True
+        cell.style.fill.fill_type = Fill.FILL_PATTERN_LIGHTGRAY
+
+    def _set_money_cell(self, cell, value):
+        cell.value = value
+        cell.style.number_format.format_code = NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
+
+    def _write_header_part(self, sheet, component, system, metadata):
+        self._set_header_cell(sheet.cell('A1'), 'University')
+        sheet.cell('B1').value = metadata.university
+
+        self._set_header_cell(sheet.cell('D1'), 'Car #')
+        sheet.cell('E1').value = metadata.car_number
+
+        self._set_header_cell(sheet.cell('A2'), 'System')
+        sheet.cell('B2').value = system.name
+
+        self._set_header_cell(sheet.cell('A3'), 'Assembly')
+        sheet.cell('B3').value = ', '.join(assembly.name for assembly in component.parents)
+        
+        self._set_header_cell(sheet.cell('A4'), 'Part')
+        sheet.cell('B4').value = component.name
+
+        self._set_header_cell(sheet.cell('A5'), 'P/N Base')
+        sheet.cell('B5').value = component.pn_base
+
+        self._set_header_cell(sheet.cell('A6'), 'Suffix')
+        sheet.cell('B6').value = component.revision
+
+        self._set_header_cell(sheet.cell('A7'), 'Details')
+        sheet.cell('B7').value = component.details
+
+        self._set_header_cell(sheet.cell('G1'), 'Unit cost')
+        self._set_money_cell(sheet.cell('H1'), component.unitcost)
+
+        self._set_header_cell(sheet.cell('G2'), 'Quantity')
+        sheet.cell('H2').value = component.quantity
+
+        self._set_header_cell(sheet.cell('G4'), 'Total cost')
+        self._set_money_cell(sheet.cell('H4'),
+                             component.unitcost * component.quantity)
+
+        return 9
+
+    def _write_header_assembly(self, sheet, component, system, metadata):
+        self._set_header_cell(sheet.cell('A1'), 'University')
+        sheet.cell('B1').value = metadata.university
+
+        self._set_header_cell(sheet.cell('D1'), 'Car #')
+        sheet.cell('E1').value = metadata.car_number
+
+        self._set_header_cell(sheet.cell('A2'), 'System')
+        sheet.cell('B2').value = system.name
+
+        self._set_header_cell(sheet.cell('A3'), 'Assembly')
+        sheet.cell('B3').value = component.name
+
+        self._set_header_cell(sheet.cell('A4'), 'P/N Base')
+        sheet.cell('B4').value = component.pn_base
+
+        self._set_header_cell(sheet.cell('A5'), 'Suffix')
+        sheet.cell('B5').value = component.revision
+
+        self._set_header_cell(sheet.cell('A6'), 'Details')
+        sheet.cell('B6').value = component.details
+
+        self._set_header_cell(sheet.cell('G1'), 'Unit cost')
+        self._set_money_cell(sheet.cell('H1'), component.unitcost)
+
+        self._set_header_cell(sheet.cell('G2'), 'Table cost')
+        self._set_money_cell(sheet.cell('H2'), component.tablecost)
+
+        self._set_header_cell(sheet.cell('G3'), 'Quantity')
+        sheet.cell('H3').value = component.quantity
+
+        self._set_header_cell(sheet.cell('G4'), 'Total cost')
+        self._set_money_cell(sheet.cell('H4'),
+                             component.unitcost * component.quantity)
+
+        return 8
+
+    def _write_table_parts(self, sheet, component, row):
+        sheet.cell(row=row, column=0).value = 'Parts'
+        sheet.cell(row=row, column=0).style.font.bold = True
+
+        # header
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=0), 'P/N')
+        self._set_header_cell(sheet.cell(row=row, column=1), 'Part')
+        self._set_header_cell(sheet.cell(row=row, column=2), 'Part cost')
+        self._set_header_cell(sheet.cell(row=row, column=3), 'Quantity')
+        self._set_header_cell(sheet.cell(row=row, column=4), 'Sub total')
+        
+        # values
+        totalcost = 0.0
+        parts = component.components
+        for part, quantity in reversed(sorted(parts.iteritems())):
+            row += 1
+
+            subtotal = part.unitcost * quantity
+            totalcost += subtotal
+
+            sheet.cell(row=row, column=0).value = part.pn
+            sheet.cell(row=row, column=1).value = part.name
+            self._set_money_cell(sheet.cell(row=row, column=2),
+                                 part.unitcost)
+            sheet.cell(row=row, column=3).value = quantity
+            self._set_money_cell(sheet.cell(row=row, column=4), subtotal)
+        
+        # total
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=3), 'Sub total')
+        self._set_header_cell(sheet.cell(row=row, column=4), totalcost)
+        sheet.cell(row=row, column=4).style.number_format.format_code = \
+            NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
+
+        return row + 1
+    
+    def _write_table_materials(self, sheet, component, row):
+        sheet.cell(row=row, column=0).value = 'Materials'
+        sheet.cell(row=row, column=0).style.font.bold = True
+
+        # header
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=0), 'Material')
+        self._set_header_cell(sheet.cell(row=row, column=1), 'Use')
+        self._set_header_cell(sheet.cell(row=row, column=2), 'Size 1')
+        self._set_header_cell(sheet.cell(row=row, column=3), 'Size 2')
+        self._set_header_cell(sheet.cell(row=row, column=4), 'Unit cost')
+        self._set_header_cell(sheet.cell(row=row, column=5), 'Quantity')
+        self._set_header_cell(sheet.cell(row=row, column=6), 'Sub total')
+
+        # values
+        materials = component.materials
+        for material in materials:
+            row += 1
+
+            sheet.cell(row=row, column=0).value = material.name
+            sheet.cell(row=row, column=1).value = material.use
+            if material.size1:
+                sheet.cell(row=row, column=2).value = \
+                    '%s %s' % (decimal(material.size1), material.unit1)
+            if material.size2:
+                sheet.cell(row=row, column=3).value = \
+                    '%s %s' % (decimal(material.size2), material.unit2)
+            self._set_money_cell(sheet.cell(row=row, column=4), material.unitcost)
+            sheet.cell(row=row, column=5).value = material.quantity
+            self._set_money_cell(sheet.cell(row=row, column=6), material.subtotal)
+
+        # total
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=5), 'Sub total')
+        self._set_header_cell(sheet.cell(row=row, column=6), 
+                              sum(map(SUBTOTAL, materials)))
+        sheet.cell(row=row, column=6).style.number_format.format_code = \
+            NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
+
+        return row + 1
+
+    def _write_table_processes(self, sheet, component, row):
+        sheet.cell(row=row, column=0).value = 'Processes'
+        sheet.cell(row=row, column=0).style.font.bold = True
+
+        # header
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=0), 'Process')
+        self._set_header_cell(sheet.cell(row=row, column=1), 'Use')
+        self._set_header_cell(sheet.cell(row=row, column=2), 'Cost')
+        self._set_header_cell(sheet.cell(row=row, column=3), 'Quantity')
+        self._set_header_cell(sheet.cell(row=row, column=4), 'Multiplier')
+        self._set_header_cell(sheet.cell(row=row, column=5), 'Sub total')
+
+        # values
+        processes = component.processes
+        for process in processes:
+            row += 1
+
+            sheet.cell(row=row, column=0).value = process.name
+            sheet.cell(row=row, column=1).value = process.use
+            sheet.cell(row=row, column=2).value = \
+                "%4.2f / %s" % (process.unitcost, process.unit)
+            sheet.cell(row=row, column=3).value = process.quantity
+            sheet.cell(row=row, column=4).value = process.multiplier or 1.0
+            self._set_money_cell(sheet.cell(row=row, column=5), process.subtotal)
+
+        # total
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=4), 'Sub total')
+        self._set_header_cell(sheet.cell(row=row, column=5),
+                              sum(map(SUBTOTAL, processes)))
+        sheet.cell(row=row, column=5).style.number_format.format_code = \
+            NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
+
+        return row + 1
+
+    def _write_table_fasteners(self, sheet, component, row):
+        sheet.cell(row=row, column=0).value = 'Fasteners'
+        sheet.cell(row=row, column=0).style.font.bold = True
+
+        # header
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=0), 'Fastener')
+        self._set_header_cell(sheet.cell(row=row, column=1), 'Use')
+        self._set_header_cell(sheet.cell(row=row, column=2), 'Size 1')
+        self._set_header_cell(sheet.cell(row=row, column=3), 'Size 2')
+        self._set_header_cell(sheet.cell(row=row, column=4), 'Unit cost')
+        self._set_header_cell(sheet.cell(row=row, column=5), 'Quantity')
+        self._set_header_cell(sheet.cell(row=row, column=6), 'Sub total')
+
+        # values
+        fasteners = component.fasteners
+        for fastener in fasteners:
+            row += 1
+
+            sheet.cell(row=row, column=0).value = fastener.name
+            sheet.cell(row=row, column=1).value = fastener.use
+            if fastener.size1:
+                sheet.cell(row=row, column=2).value = \
+                    '%s %s' % (decimal(fastener.size1), fastener.unit1)
+            if fastener.size2:
+                sheet.cell(row=row, column=3).value = \
+                    '%s %s' % (decimal(fastener.size2), fastener.unit2)
+            self._set_money_cell(sheet.cell(row=row, column=4), fastener.unitcost)
+            sheet.cell(row=row, column=5).value = fastener.quantity
+            self._set_money_cell(sheet.cell(row=row, column=6), fastener.subtotal)
+
+        # total
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=5), 'Sub total')
+        self._set_header_cell(sheet.cell(row=row, column=6),
+                              sum(map(SUBTOTAL, fasteners)))
+        sheet.cell(row=row, column=6).style.number_format.format_code = \
+            NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
+
+        return row + 1
+
+    def _write_table_toolings(self, sheet, component, row):
+        sheet.cell(row=row, column=0).value = 'Tooling'
+        sheet.cell(row=row, column=0).style.font.bold = True
+
+        # header
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=0), 'Tooling')
+        self._set_header_cell(sheet.cell(row=row, column=1), 'Use')
+        self._set_header_cell(sheet.cell(row=row, column=2), 'Unit cost')
+        self._set_header_cell(sheet.cell(row=row, column=3), 'Quantity')
+        self._set_header_cell(sheet.cell(row=row, column=4), 'PVF')
+        self._set_header_cell(sheet.cell(row=row, column=5), 'Sub total')
+
+        # values
+        toolings = component.toolings
+        for tooling in toolings:
+            row += 1
+
+            sheet.cell(row=row, column=0).value = tooling.name
+            sheet.cell(row=row, column=1).value = tooling.use
+            sheet.cell(row=row, column=2).value = \
+                '%4.2f / %s' % (tooling.unitcost, tooling.unit)
+            sheet.cell(row=row, column=3).value = tooling.quantity
+            sheet.cell(row=row, column=4).value = tooling.pvf
+            self._set_money_cell(sheet.cell(row=row, column=5), tooling.subtotal)
+
+        # total
+        row += 1
+        self._set_header_cell(sheet.cell(row=row, column=4), 'Sub total')
+        self._set_header_cell(sheet.cell(row=row, column=5),
+                              sum(map(SUBTOTAL, toolings)))
+        sheet.cell(row=row, column=5).style.number_format.format_code = \
+            NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
+
+        return row + 1
