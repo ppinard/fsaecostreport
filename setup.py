@@ -22,7 +22,7 @@ build_exe_options = {"excludes": ["Tkinter", "wx", "scipy", 'PIL'],
                      "includes": ['encodings.ascii']}
 
 setup(name="fsaecostreport",
-      version="0.5.1",
+      version="0.5.2",
       url='http://fsae.mcgill.ca',
       description="Generator of the FSAE Cost Report",
       author="Philippe T. Pinard",

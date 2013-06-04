@@ -28,7 +28,8 @@ from operator import attrgetter
 # Local modules.
 from fsaecostreport.xlscsv import xlstocsv
 from fsaecostreport.reader import SystemFileReader, MetadataReader
-from fsaecostreport.writer import CostReportLaTeXWriter, eBOMWriter
+from fsaecostreport.writer import \
+    CostReportLaTeXWriter, eBOMWriter, FSGBOMWriter, FSGAppendixLaTeXWriter
 
 # Globals and constants variables.
 
@@ -56,6 +57,10 @@ def run():
     parser.add_option('-e', '--ebom', action="store_true",
                       dest='ebom', default=False,
                       help="Read, process and write the eBOM")
+
+    parser.add_option('--fsg', action="store_true",
+                      dest='fsg', default=False,
+                      help="Read, process and write FSG related documents")
 
     options, args = parser.parse_args()
 
@@ -99,7 +104,7 @@ def run():
                 logging.info("Converting %s... DONE" % input_file)
 
     # read systems
-    if options.read or options.write or options.ebom:
+    if options.read or options.write or options.ebom or options.fsg:
         for system in metadata.systems:
             logging.info("Reading system %s..." % system)
             SystemFileReader().read(basepath, system)
@@ -116,6 +121,13 @@ def run():
         logging.info("Writing eBOM...")
         eBOMWriter().write(basepath, metadata)
         logging.info("Writing eBOM... DONE")
+
+    # write FSG related documents
+    if options.fsg:
+        logging.info("Writing FSG...")
+        FSGBOMWriter().write(basepath, metadata)
+        FSGAppendixLaTeXWriter().write(basepath, metadata)
+        logging.info("Writing FSG... DONE")
 
 if __name__ == '__main__':
     run()
