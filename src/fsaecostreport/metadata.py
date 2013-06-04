@@ -43,6 +43,6 @@ class Metadata(object):
         self.systems = list(systems)
 
     @property
-    def ebom_filename(self):
+    def filename(self):
         return str(self.car_number).zfill(3) + "_" + self.university + "_" + \
                 self.competition_abbrev + "_CR"

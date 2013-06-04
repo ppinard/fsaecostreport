@@ -26,7 +26,7 @@ import csv
 
 # Third party modules.
 from openpyxl import Workbook
-from openpyxl.style import NumberFormat, Fill
+from openpyxl.style import NumberFormat, Fill, Color
 
 # Local modules.
 from fsaecostreport.latex import \
@@ -107,14 +107,14 @@ def _create_bom_row(component):
     return row
 
 class CostReportLaTeXWriter(object):
+
     def write(self, basepath, metadata):
-        filename = 'costreport%i.tex' % metadata.year
         lines = self._write(basepath, metadata)
 
+        filename = metadata.filename + '.tex'
         with open(os.path.join(basepath, filename), 'w') as out:
             for line in lines:
                 out.write(line + "\n")
-        out.close()
 
     def _write(self, basepath, metadata):
         lines = []
@@ -906,7 +906,7 @@ class eBOMWriter(object):
     def write(self, basepath, metadata):
         pagerefs = AuxReader().read(basepath)
 
-        filepath = os.path.join(basepath, metadata.ebom_filename + ".csv")
+        filepath = os.path.join(basepath, metadata.filename + ".csv")
         writer = csv.writer(open(filepath, 'w'))
 
         rows = self._create_rows(metadata, pagerefs)
@@ -1061,26 +1061,26 @@ class FSGBOMWriter(object):
         
         # create cost tables
         for system in metadata.systems:
-            self._write_system(wb, system, metadata)
+            self.write_system(wb, system, metadata)
 
         # remove first sheet
         wb.remove_sheet(wb.worksheets[0])
 
-        filepath = os.path.join(basepath, 'costreport.xlsx')
-        wb.save(filepath)
+        filename = metadata.filename + '.xlsx'
+        wb.save(os.path.join(basepath, filename))
         
-    def _write_system(self, wb, system, metadata):
+    def write_system(self, wb, system, metadata):
         hierarchy = system.get_hierarchy()
 
         for component in hierarchy:
             sheet = wb.create_sheet(title=component.partnumber)
 
             if isinstance(component, Part):
-                self._write_costtable_part(sheet, component, system, metadata)
+                self.write_costtable_part(sheet, component, system, metadata)
             elif isinstance(component, Assembly):
-                self._write_costtable_assembly(sheet, component, system, metadata)
+                self.write_costtable_assembly(sheet, component, system, metadata)
 
-            sheet.column_dimensions['A'].width = 20
+            sheet.column_dimensions['A'].width = 30
             sheet.column_dimensions['B'].width = 30
             sheet.column_dimensions['C'].width = 12
             sheet.column_dimensions['D'].width = 12
@@ -1089,31 +1089,33 @@ class FSGBOMWriter(object):
             sheet.column_dimensions['G'].width = 12
             sheet.column_dimensions['H'].width = 12
 
-    def _write_costtable_part(self, sheet, component, system, metadata):
-        row = self._write_header_part(sheet, component, system, metadata)
-        row = self._write_table_materials(sheet, component, row) + 1
-        row = self._write_table_processes(sheet, component, row) + 1
-        row = self._write_table_fasteners(sheet, component, row) + 1
-        row = self._write_table_toolings(sheet, component, row) + 1
+    def write_costtable_part(self, sheet, component, system, metadata):
+        row = self.write_header_part(sheet, component, system, metadata)
+        row = self.write_table_materials(sheet, component, row) + 1
+        row = self.write_table_processes(sheet, component, row) + 1
+        row = self.write_table_fasteners(sheet, component, row) + 1
+        row = self.write_table_toolings(sheet, component, row) + 1
     
-    def _write_costtable_assembly(self, sheet, component, system, metadata):
-        row = self._write_header_assembly(sheet, component, system, metadata)
-        row = self._write_table_parts(sheet, component, row) + 1
-        row = self._write_table_materials(sheet, component, row) + 1
-        row = self._write_table_processes(sheet, component, row) + 1
-        row = self._write_table_fasteners(sheet, component, row) + 1
-        row = self._write_table_toolings(sheet, component, row) + 1
+    def write_costtable_assembly(self, sheet, component, system, metadata):
+        row = self.write_header_assembly(sheet, component, system, metadata)
+        row = self.write_table_parts(sheet, component, row) + 1
+        row = self.write_table_materials(sheet, component, row) + 1
+        row = self.write_table_processes(sheet, component, row) + 1
+        row = self.write_table_fasteners(sheet, component, row) + 1
+        row = self.write_table_toolings(sheet, component, row) + 1
         
     def _set_header_cell(self, cell, value):
         cell.value = value
         cell.style.font.bold = True
-        cell.style.fill.fill_type = Fill.FILL_PATTERN_LIGHTGRAY
+        cell.style.fill.fill_type = Fill.FILL_SOLID
+        cell.style.fill.start_color = Color('FFC0C0C0')
+        cell.style.fill.end_color = Color('FFC0C0C0')
 
     def _set_money_cell(self, cell, value):
         cell.value = value
         cell.style.number_format.format_code = NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
 
-    def _write_header_part(self, sheet, component, system, metadata):
+    def write_header_part(self, sheet, component, system, metadata):
         self._set_header_cell(sheet.cell('A1'), 'University')
         sheet.cell('B1').value = metadata.university
 
@@ -1150,7 +1152,7 @@ class FSGBOMWriter(object):
 
         return 9
 
-    def _write_header_assembly(self, sheet, component, system, metadata):
+    def write_header_assembly(self, sheet, component, system, metadata):
         self._set_header_cell(sheet.cell('A1'), 'University')
         sheet.cell('B1').value = metadata.university
 
@@ -1187,7 +1189,7 @@ class FSGBOMWriter(object):
 
         return 8
 
-    def _write_table_parts(self, sheet, component, row):
+    def write_table_parts(self, sheet, component, row):
         sheet.cell(row=row, column=0).value = 'Parts'
         sheet.cell(row=row, column=0).style.font.bold = True
 
@@ -1224,7 +1226,7 @@ class FSGBOMWriter(object):
 
         return row + 1
     
-    def _write_table_materials(self, sheet, component, row):
+    def write_table_materials(self, sheet, component, row):
         sheet.cell(row=row, column=0).value = 'Materials'
         sheet.cell(row=row, column=0).style.font.bold = True
 
@@ -1265,7 +1267,7 @@ class FSGBOMWriter(object):
 
         return row + 1
 
-    def _write_table_processes(self, sheet, component, row):
+    def write_table_processes(self, sheet, component, row):
         sheet.cell(row=row, column=0).value = 'Processes'
         sheet.cell(row=row, column=0).style.font.bold = True
 
@@ -1301,7 +1303,7 @@ class FSGBOMWriter(object):
 
         return row + 1
 
-    def _write_table_fasteners(self, sheet, component, row):
+    def write_table_fasteners(self, sheet, component, row):
         sheet.cell(row=row, column=0).value = 'Fasteners'
         sheet.cell(row=row, column=0).style.font.bold = True
 
@@ -1342,7 +1344,7 @@ class FSGBOMWriter(object):
 
         return row + 1
 
-    def _write_table_toolings(self, sheet, component, row):
+    def write_table_toolings(self, sheet, component, row):
         sheet.cell(row=row, column=0).value = 'Tooling'
         sheet.cell(row=row, column=0).style.font.bold = True
 
@@ -1377,3 +1379,164 @@ class FSGBOMWriter(object):
             NumberFormat.FORMAT_CURRENCY_USD_SIMPLE
 
         return row + 1
+
+class FSGAppendixLaTeXWriter(CostReportLaTeXWriter):
+    
+    def write_header(self, metadata):
+        lines = []
+
+        lines += [r'\documentclass[letterpaper,landscape]{report}']
+
+        lines += [r'\usepackage[scaled]{helvet}']
+        lines += [r'\renewcommand*\familydefault{\sfdefault}']
+        lines += [r'\usepackage[T1]{fontenc}']
+        lines += [r'\usepackage[top=3cm, bottom=3cm, right=1cm, left=1cm]{geometry}']
+        lines += [r'\usepackage{graphicx}']
+        lines += [r'\usepackage{multirow}']
+        lines += [r'\usepackage{url}']
+        lines += [r'\usepackage{amsmath}']
+        lines += [r'\usepackage{longtable}']
+        lines += [r'\usepackage{titlesec}']
+        lines += [r'\usepackage{array}']
+        lines += [r'\usepackage{colortbl}']
+        lines += [r'\usepackage{multicol}']
+        lines += [r'\usepackage{setspace}']
+        lines += [r'\usepackage[final]{pdfpages}']
+        lines += [r'\usepackage[english]{babel}']
+        lines += [r'\usepackage[latin1]{inputenc}']
+        lines += [r'\usepackage{fancyhdr}']
+        lines += [r'\usepackage[pdftitle={Cost Report %i - Supporting material}, ' % metadata.year,
+                  r'pdfsubject={%s}, ' % metadata.competition_name,
+                  r'pdfauthor={%s}, ' % metadata.team_name,
+                  r'colorlinks=true, ',
+                  r'linkcolor=blue, ',
+                  r'pdfborder = 0 0 0, ',
+                  r'pdfhighlight = /I, ',
+                  r'pdfpagelabels]{hyperref}']
+
+        return lines
+
+    def write_fancy_header(self, metadata):
+        team_name = metadata.team_name
+        year = metadata.year
+
+        lines = []
+
+        lines += [r'\pagestyle{fancy}']
+        lines += [r'\fancyhf{}']
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s}\hspace{10pt} %s -- %i Cost Report -- Supporting Material}' % (LOGO_FILE, team_name, year)]
+        lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
+        lines += [r'\rfoot{\thepage}']
+        lines += [r'\fancypagestyle{plain}{']
+        lines += [r'\fancyhf{}']
+        lines += [r'\lhead{\includegraphics[height=0.25cm]{%s}\hspace{10pt} %s -- %i Cost Report -- Supporting Material}' % (LOGO_FILE, team_name, year)]
+        lines += [r'\lfoot{\small\nouppercase{\leftmark}}']
+        lines += [r'\rfoot{\thepage}}']
+
+        return lines
+
+    def write_sae_parts_bom(self, metadata):
+        lines = []
+
+        lines += [r'\section{SAE common parts}']
+        lines += [r'\noindent\emph{As per SAE Appendix C3}']
+        lines += [r'\renewcommand{\arraystretch}{1.1}']
+
+        data = self._write_sae_parts_bom_rows(metadata)
+        lines += \
+            create_tabular(data, environment='longtable',
+                               tableparameters='l',
+                               tablespec=r'p{13em} | p{3em} | p{2em} | p{10em} | p{12em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em}',
+                               format_before_tabular=r'\rowcolor[gray]{0}',
+                               format_after_header=r'\hline\endhead',
+                               format_between_rows=r'\hline', header_endrow=1)
+
+        lines += [r'\renewcommand{\arraystretch}{1}']
+
+        return lines
+
+    def _write_sae_parts_bom_rows(self, metadata):
+        rows = []
+
+        header = [r'\color{white} Component',
+                  r'\color{white}\centering Asm / Prt \#',
+                  r'\color{white}\centering Rev.',
+                  r'\color{white}\centering Assembly',
+                  r'\color{white} Description',
+                  r'\color{white}\centering Qty',
+                  r'\color{white}\centering Unit\\ Cost',
+                  r'\color{white}\centering Cost',
+                  r'\color{white}\centering Drawing(s)',
+                  r'\color{white}\centering Photo(s)']
+        rows.append(header)
+
+        for system in metadata.systems:
+            row = r'\multicolumn{10}{l}{\cellcolor{color%s}\textbf{%s}}' % \
+                        (system.label, e(system.name))
+            rows.append([row])
+
+            for component_name, pn in metadata.sae_parts.get(system, []):
+                if pn:
+                    component = system.get_component(pn)
+                    row = _create_bom_row(component)
+                    row.pop(8)
+                else:
+                    row = [r'%s' % e(capitalize(component_name)),
+                           r'\multicolumn{9}{l}{\emph{%s}}' % e('Not available')]
+
+                rows.append(row)
+
+        return rows
+
+    def write_systems(self, metadata):
+        lines = []
+
+        for system in metadata.systems:
+            lines += self.write_system(system)
+            lines += ['']
+
+        return lines
+
+    def write_system(self, system):
+        lines = []
+
+        lines += [r'\chapter{%s}' % e(system.name)]
+        lines += [r'\newpage', '']
+
+        # Drawings and pictures
+        hierarchy = system.get_hierarchy()
+        for component in hierarchy:
+            lines += self.write_component(system, component)
+            lines += [r'\newpage', '']
+
+        return lines
+
+    def write_component(self, system, component):
+        name = component.name
+        pn = component.pn
+
+        lines = []
+
+        lines += [r'\section{%s (%s)}' % (name, pn)]
+
+        if component.pictures:
+            for index, picture in enumerate(component.pictures):
+                path = posixpath.join(system.label, PICTURES_DIR, os.path.basename(picture))
+                lines += [r'\begin{center}']
+                lines += [r'\includegraphics[height=0.8\textheight]{%s}' % path]
+                lines += [r'\label{img:%s-%i}' % (pn, index)]
+                lines += [r'\end{center}']
+                lines += [r'\newpage']
+        else:
+            lines += [r'No picture']
+
+        for index, drawing in enumerate(component.drawings):
+            path = posixpath.join(system.label, DRAWINGS_DIR, os.path.basename(drawing))
+            lines += [r'\includepdf[pages={1}, addtolist={1,figure,%s (%s),dwg:%s-%i}]{%s}' % \
+                      (name, pn, pn, index, path)]
+            lines += [r'\addcontentsline{toc}{subsection}{Drawing %i}' % (index + 1,)]
+
+        return lines
+
+    def write_backmatter(self):
+        return []
