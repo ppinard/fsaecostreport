@@ -25,7 +25,7 @@ from fsaecostreport.reader import \
     PartFileReader, AssemblyFileReader, SystemFileReader, MetadataReader
 
 # Globals and constants variables.
-TM = System("TM", "Random stuff", (255, 0, 0))
+TM = System(1, "TM", "Random stuff", (255, 0, 0))
 
 class TestPartReader(unittest.TestCase):
 

@@ -48,26 +48,29 @@ def ascii(unistr):
     """
     Convert unicode to ascii.
     """
-    if isinstance(unistr, unicode):
-        ascii_chrs = []
+    try:
+        if isinstance(unistr, unicode):
+            ascii_chrs = []
 
-        for char in unistr:
-            decomposition = unicodedata.decomposition(char)
+            for char in unistr:
+                decomposition = unicodedata.decomposition(char)
 
-            try:
-                root, _modifier = decomposition.split()
-            except: #Not a unicode character
-                ascii_chrs.append(char)
-            else: #Convert to ascii
                 try:
-                    ascii_chr = chr(int(root, 16)) #root is in hex base
-                    ascii_chrs.append(ascii_chr)
-                except:
-                    pass
+                    root, _modifier = decomposition.split()
+                except: #Not a unicode character
+                    ascii_chrs.append(char)
+                else: #Convert to ascii
+                    try:
+                        ascii_chr = chr(int(root, 16)) #root is in hex base
+                        ascii_chrs.append(ascii_chr)
+                    except:
+                        pass
 
-        return ''.join(ascii_chrs)
-    else:
-        return unistr
+            return ''.join(ascii_chrs)
+        else:
+            return unistr
+    except Exception as ex:
+        raise "Reading %s: %s" % (unistr, str(ex))
 
 class _ComponentFileReader(object):
     def _read(self, component, lines):
@@ -521,13 +524,14 @@ class MetadataReader(object):
             if not parser.has_section(label):
                 raise ValueError, 'No section for system: %s' % label
 
+            order = int(parser.get(label, 'order'))
             name = parser.get(label, 'name')
             colour = parser.get(label, 'colour')
             colour = COMMA_SPLIT_PATTERN.findall(colour)
             colour = map(int, colour)
             colour = tuple(colour)
 
-            system = System(label, name, colour)
+            system = System(order, label, name, colour)
             systems.append(system)
 
         systems = sorted(systems) # Sort by letters
