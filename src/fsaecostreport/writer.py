@@ -1436,57 +1436,58 @@ class FSGAppendixLaTeXWriter(CostReportLaTeXWriter):
         return lines
 
     def write_sae_parts_bom(self, metadata):
-        lines = []
-
-        lines += [r'\section{SAE common parts}']
-        lines += [r'\noindent\emph{As per SAE Appendix C3}']
-        lines += [r'\renewcommand{\arraystretch}{1.1}']
-
-        data = self._write_sae_parts_bom_rows(metadata)
-        lines += \
-            create_tabular(data, environment='longtable',
-                               tableparameters='l',
-                               tablespec=r'p{13em} | p{3em} | p{2em} | p{10em} | p{12em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em}',
-                               format_before_tabular=r'\rowcolor[gray]{0}',
-                               format_after_header=r'\hline\endhead',
-                               format_between_rows=r'\hline', header_endrow=1)
-
-        lines += [r'\renewcommand{\arraystretch}{1}']
-
-        return lines
-
-    def _write_sae_parts_bom_rows(self, metadata):
-        rows = []
-
-        header = [r'\color{white} Component',
-                  r'\color{white}\centering Asm / Prt \#',
-                  r'\color{white}\centering Rev.',
-                  r'\color{white}\centering Assembly',
-                  r'\color{white} Description',
-                  r'\color{white}\centering Qty',
-                  r'\color{white}\centering Unit\\ Cost',
-                  r'\color{white}\centering Cost',
-                  r'\color{white}\centering Drawing(s)',
-                  r'\color{white}\centering Photo(s)']
-        rows.append(header)
-
-        for system in metadata.systems:
-            row = r'\multicolumn{10}{l}{\cellcolor{color%s}\textbf{%s}}' % \
-                        (system.label, e(system.name))
-            rows.append([row])
-
-            for component_name, pn in metadata.sae_parts.get(system, []):
-                if pn:
-                    component = system.get_component(pn)
-                    row = _create_bom_row(component)
-                    row.pop(8)
-                else:
-                    row = [r'%s' % e(capitalize(component_name)),
-                           r'\multicolumn{9}{l}{\emph{%s}}' % e('Not available')]
-
-                rows.append(row)
-
-        return rows
+        return []
+#        lines = []
+#
+#        lines += [r'\section{SAE common parts}']
+#        lines += [r'\noindent\emph{As per SAE Appendix C3}']
+#        lines += [r'\renewcommand{\arraystretch}{1.1}']
+#
+#        data = self._write_sae_parts_bom_rows(metadata)
+#        lines += \
+#            create_tabular(data, environment='longtable',
+#                               tableparameters='l',
+#                               tablespec=r'p{13em} | p{3em} | p{2em} | p{10em} | p{12em} | p{2em} | p{4.5em} | p{4.5em} | p{5em} | p{5em}',
+#                               format_before_tabular=r'\rowcolor[gray]{0}',
+#                               format_after_header=r'\hline\endhead',
+#                               format_between_rows=r'\hline', header_endrow=1)
+#
+#        lines += [r'\renewcommand{\arraystretch}{1}']
+#
+#        return lines
+#
+#    def _write_sae_parts_bom_rows(self, metadata):
+#        rows = []
+#
+#        header = [r'\color{white} Component',
+#                  r'\color{white}\centering Asm / Prt \#',
+#                  r'\color{white}\centering Rev.',
+#                  r'\color{white}\centering Assembly',
+#                  r'\color{white} Description',
+#                  r'\color{white}\centering Qty',
+#                  r'\color{white}\centering Unit\\ Cost',
+#                  r'\color{white}\centering Cost',
+#                  r'\color{white}\centering Drawing(s)',
+#                  r'\color{white}\centering Photo(s)']
+#        rows.append(header)
+#
+#        for system in metadata.systems:
+#            row = r'\multicolumn{10}{l}{\cellcolor{color%s}\textbf{%s}}' % \
+#                        (system.label, e(system.name))
+#            rows.append([row])
+#
+#            for component_name, pn in metadata.sae_parts.get(system, []):
+#                if pn:
+#                    component = system.get_component(pn)
+#                    row = _create_bom_row(component)
+#                    row.pop(8)
+#                else:
+#                    row = [r'%s' % e(capitalize(component_name)),
+#                           r'\multicolumn{9}{l}{\emph{%s}}' % e('Not available')]
+#
+#                rows.append(row)
+#
+#        return rows
 
     def write_systems(self, metadata):
         lines = []
@@ -1506,20 +1507,25 @@ class FSGAppendixLaTeXWriter(CostReportLaTeXWriter):
         # Drawings and pictures
         hierarchy = system.get_hierarchy()
         for component in hierarchy:
-            lines += self.write_component(system, component)
-            lines += [r'\newpage', '']
+            component_lines = self.write_component(system, component)
+            if component_lines:
+                lines += component_lines
+                lines += [r'\newpage', '']
 
         return lines
 
     def write_component(self, system, component):
+        if not component.pictures and not component.drawings:
+            return []
+
         name = component.name
         pn = component.pn
 
         lines = []
 
-        lines += [r'\section{%s (%s)}' % (name, pn)]
-
         if component.pictures:
+            lines += [r'\section{%s (%s)}' % (e(name), pn)]
+
             for index, picture in enumerate(component.pictures):
                 path = posixpath.join(system.label, PICTURES_DIR, os.path.basename(picture))
                 lines += [r'\begin{center}']
@@ -1527,15 +1533,20 @@ class FSGAppendixLaTeXWriter(CostReportLaTeXWriter):
                 lines += [r'\label{img:%s-%i}' % (pn, index)]
                 lines += [r'\end{center}']
                 lines += [r'\newpage']
+                
+            for index, drawing in enumerate(component.drawings):
+                path = posixpath.join(system.label, DRAWINGS_DIR, os.path.basename(drawing))
+                lines += [r'\includepdf[pages={1}, addtolist={1,figure,%s (%s),dwg:%s-%i}]{%s}' % \
+                          (e(name), pn, pn, index, path)]
+#                lines += [r'\addcontentsline{toc}{subsection}{Drawing %i}' % (index + 1,)]
         else:
-            lines += [r'No picture']
-
-        for index, drawing in enumerate(component.drawings):
-            path = posixpath.join(system.label, DRAWINGS_DIR, os.path.basename(drawing))
-            lines += [r'\includepdf[pages={1}, addtolist={1,figure,%s (%s),dwg:%s-%i}]{%s}' % \
-                      (name, pn, pn, index, path)]
-            lines += [r'\addcontentsline{toc}{subsection}{Drawing %i}' % (index + 1,)]
-
+            for index, drawing in enumerate(component.drawings):
+                path = posixpath.join(system.label, DRAWINGS_DIR, os.path.basename(drawing))
+                lines += [r'\includepdf[pages={1}, addtolist={1,figure,%s (%s),dwg:%s-%i}]{%s}' % \
+                      (e(name), pn, pn, index, path)]
+#                lines += [r'\addcontentsline{toc}{subsection}{Drawing %i}' % (index + 1,)]
+                if index == 0:
+                    lines += [r'\addcontentsline{toc}{section}{%s (%s)}' % (e(name), pn)]
         return lines
 
     def write_backmatter(self):

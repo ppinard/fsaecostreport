@@ -121,7 +121,7 @@ class TestFSGAppendixLaTeXWriter(unittest.TestCase):
 
     def testwrite(self):
         lines = self.writer._write(self.basepath, self.metadata)
-        self.assertEqual(148, len(lines))
+        self.assertEqual(116, len(lines))
 
 if __name__ == '__main__': #pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
