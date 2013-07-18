@@ -31,7 +31,7 @@ class System(object):
     The cost report has 8 systems.
     """
 
-    def __init__(self, label, name, colour):
+    def __init__(self, order, label, name, colour):
         """
         Creates a new system.
         
@@ -47,6 +47,8 @@ class System(object):
             * :attr:`colour`: RGB of the colour
         """
         # arguments
+        self._order = order
+
         if len(label) != 2:
             raise ValueError, "The label (%s) must be two characters." % label
         self._label = label.upper()
@@ -74,7 +76,7 @@ class System(object):
         return hash(self.label)
 
     def __cmp__(self, other):
-        return cmp(self.label, other.label)
+        return cmp(self._order, other._order)
 
     @property
     def label(self):
