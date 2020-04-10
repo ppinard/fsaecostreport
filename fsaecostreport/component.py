@@ -28,11 +28,13 @@ from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
 
+
 class _Component(object):
     """
     Abstract class for parts and assemblies.
     """
-    def __init__(self, filepath, system_label, name, pn_base, revision, details=''):
+
+    def __init__(self, filepath, system_label, name, pn_base, revision, details=""):
         """
         Creates a component.
         
@@ -114,25 +116,25 @@ class _Component(object):
 
         # assembly or part number
         if self.pn_base[0] != other.pn_base[0]:
-            if self.pn_base[0] == 'A':
+            if self.pn_base[0] == "A":
                 return 1
             else:
                 return -1
 
         # designation
         if self.pn_base[1] != other.pn_base[1]:
-            if self.pn_base[1] == '0':
+            if self.pn_base[1] == "0":
                 return -1
-            elif other.pn_base[2] == '0':
+            elif other.pn_base[2] == "0":
                 return 1
             else:
                 return -1 * cmp(self.pn_base[1], other.pn_base[1])
 
         # category
         if self.pn_base[2] != other.pn_base[2]:
-            if self.pn_base[2] == '0':
+            if self.pn_base[2] == "0":
                 return -1
-            elif other.pn_base[2] == '0':
+            elif other.pn_base[2] == "0":
                 return 1
             else:
                 return -1 * cmp(self.pn_base[2], other.pn_base[2])
@@ -149,13 +151,15 @@ class _Component(object):
         return hash(self.partnumber)
 
     def _validate_pn(self):
-        return SYS_ASSY_PN.match(self.pn) or \
-                SUB_ASSY_PN.match(self.pn) or \
-                PART_PN.match(self.pn)
+        return (
+            SYS_ASSY_PN.match(self.pn)
+            or SUB_ASSY_PN.match(self.pn)
+            or PART_PN.match(self.pn)
+        )
 
     @property
     def partnumber(self):
-        return '%s-%s-%s' % (self._system_label, self.pn_base, self.revision)
+        return "%s-%s-%s" % (self._system_label, self.pn_base, self.revision)
 
     pn = partnumber
 
@@ -192,7 +196,7 @@ class _Component(object):
         Returns the cost of the materials, processes, fasteners and toolings.
         For assemblies, the cost of other parts is NOT included.
         """
-        subtotal_getter = operator.attrgetter('subtotal')
+        subtotal_getter = operator.attrgetter("subtotal")
 
         cost = 0.0
 
@@ -214,14 +218,18 @@ class _Component(object):
 
         return hierarchy
 
+
 class Part(_Component):
     """
     A part.
     """
+
     pass
+
 
 class Assembly(_Component):
     """
     An assembly.
     """
+
     pass

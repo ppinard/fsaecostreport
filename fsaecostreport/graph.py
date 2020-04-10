@@ -30,6 +30,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 # Globals and constants variables.
 
+
 def cost_summary(basepath, metadata):
     def calculate_values(systems):
         names = []
@@ -45,25 +46,30 @@ def cost_summary(basepath, metadata):
                 system_cost += component.tablecost * component.quantity
 
             names.append(system.name)
-            colours.append((system.colour[0] / 255.0, system.colour[1] / 255.0, system.colour[2] / 255.0))
+            colours.append(
+                (
+                    system.colour[0] / 255.0,
+                    system.colour[1] / 255.0,
+                    system.colour[2] / 255.0,
+                )
+            )
             values.append(system_cost)
 
         return names, colours, values
 
-    fig = Figure(figsize=(12, 7), facecolor='w')
+    fig = Figure(figsize=(12, 7), facecolor="w")
     ax = Axes(fig, rect=[0.1, 0.1, 0.5, 0.8])
     fig.add_axes(ax)
 
     names, colours, values = calculate_values(metadata.systems)
-    labels = ['$%.2f' % value for value in values]
+    labels = ["$%.2f" % value for value in values]
 
-    patches, _texts, _autotexts = \
-        ax.pie(values, labels=labels, colors=colours, autopct='%1.1f%%', shadow=True)
+    patches, _texts, _autotexts = ax.pie(
+        values, labels=labels, colors=colours, autopct="%1.1f%%", shadow=True
+    )
 
-    fig.legend(patches, names, 'center right')
+    fig.legend(patches, names, "center right")
 
     path = os.path.join(basepath, "cost_summary.pdf")
-    fig.set_canvas(FigureCanvasAgg(fig));
+    fig.set_canvas(FigureCanvasAgg(fig))
     fig.savefig(path)
-
-

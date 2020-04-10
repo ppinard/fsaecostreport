@@ -38,11 +38,17 @@ from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 from fsaecostreport.system import System
 
 # Globals and constants variables.
-from fsaecostreport.constants import \
-    (COMPONENTS_DIR, DRAWINGS_DIR, PICTURES_DIR, CONFIG_FILE, INTRODUCTION_FILE,
-     SAE_PARTS_FILE)
+from fsaecostreport.constants import (
+    COMPONENTS_DIR,
+    DRAWINGS_DIR,
+    PICTURES_DIR,
+    CONFIG_FILE,
+    INTRODUCTION_FILE,
+    SAE_PARTS_FILE,
+)
 
-COMMA_SPLIT_PATTERN = re.compile(r'[^,;\s]+')
+COMMA_SPLIT_PATTERN = re.compile(r"[^,;\s]+")
+
 
 def ascii(unistr):
     """
@@ -57,20 +63,21 @@ def ascii(unistr):
 
                 try:
                     root, _modifier = decomposition.split()
-                except: #Not a unicode character
+                except:  # Not a unicode character
                     ascii_chrs.append(char)
-                else: #Convert to ascii
+                else:  # Convert to ascii
                     try:
-                        ascii_chr = chr(int(root, 16)) #root is in hex base
+                        ascii_chr = chr(int(root, 16))  # root is in hex base
                         ascii_chrs.append(ascii_chr)
                     except:
                         pass
 
-            return ''.join(ascii_chrs)
+            return "".join(ascii_chrs)
         else:
             return unistr
     except Exception as ex:
         raise "Reading %s: %s" % (unistr, str(ex))
+
 
 class _ComponentFileReader(object):
     def _read(self, component, lines):
@@ -86,7 +93,7 @@ class _ComponentFileReader(object):
 
     def _get_lines(self, filepath):
         logging.debug("Reading csv")
-        reader = csv.reader(open(filepath, 'r'))
+        reader = csv.reader(open(filepath, "r"))
         logging.debug("Reading csv... DONE")
         return list(reader)
 
@@ -103,13 +110,12 @@ class _ComponentFileReader(object):
     def _check_filename(self, filepath, pn):
         filename = os.path.splitext(os.path.basename(filepath))[0]
         if filename != pn:
-            raise AssertionError, \
-                "filename (%s) != part number (%s)" % (filename, pn)
+            raise AssertionError, "filename (%s) != part number (%s)" % (filename, pn)
 
     def _read_materials(self, lines):
         logging.debug("Reading materials ...")
 
-        firstline_index = self._find_line('Materials', lines) + 2
+        firstline_index = self._find_line("Materials", lines) + 2
         materials = []
 
         for line in lines[firstline_index:]:
@@ -141,7 +147,9 @@ class _ComponentFileReader(object):
 
         quantity = float(line[8])
 
-        material = Material(id, name, use, unitcost, size1, unit1, size2, unit2, quantity)
+        material = Material(
+            id, name, use, unitcost, size1, unit1, size2, unit2, quantity
+        )
 
         # check
         self._assert_equal(material.subtotal, float(line[9]), "material subtotal")
@@ -151,7 +159,7 @@ class _ComponentFileReader(object):
     def _read_processes(self, lines):
         logging.debug("Reading processes ...")
 
-        firstline_index = self._find_line('Processes', lines) + 2
+        firstline_index = self._find_line("Processes", lines) + 2
         processes = []
 
         for line in lines[firstline_index:]:
@@ -177,7 +185,9 @@ class _ComponentFileReader(object):
         else:
             multiplier_id = multiplier = None
 
-        process = Process(id, name, use, unitcost, unit, quantity, multiplier_id, multiplier)
+        process = Process(
+            id, name, use, unitcost, unit, quantity, multiplier_id, multiplier
+        )
 
         # check
         self._assert_equal(process.subtotal, float(line[8]), "process subtotal")
@@ -187,7 +197,7 @@ class _ComponentFileReader(object):
     def _read_fasteners(self, lines):
         logging.debug("Reading fasteners ... ")
 
-        firstline_index = self._find_line('Fasteners', lines) + 2
+        firstline_index = self._find_line("Fasteners", lines) + 2
         fasteners = []
 
         for line in lines[firstline_index:]:
@@ -219,7 +229,9 @@ class _ComponentFileReader(object):
 
         quantity = float(line[8])
 
-        fastener = Fastener(id, name, use, unitcost, size1, unit1, size2, unit2, quantity)
+        fastener = Fastener(
+            id, name, use, unitcost, size1, unit1, size2, unit2, quantity
+        )
 
         # check
         self._assert_equal(fastener.subtotal, float(line[9]), "fastener subtotal")
@@ -229,7 +241,7 @@ class _ComponentFileReader(object):
     def _read_toolings(self, lines):
         logging.debug("Reading toolings ...")
 
-        firstline_index = self._find_line('Tooling', lines) + 2
+        firstline_index = self._find_line("Tooling", lines) + 2
         toolings = []
 
         for line in lines[firstline_index:]:
@@ -260,7 +272,9 @@ class _ComponentFileReader(object):
     def _read_drawings(self, filepath):
         logging.debug("Reading drawings...")
 
-        drawings_dir = os.path.abspath(os.path.join(os.path.dirname(filepath), '..', DRAWINGS_DIR))
+        drawings_dir = os.path.abspath(
+            os.path.join(os.path.dirname(filepath), "..", DRAWINGS_DIR)
+        )
         logging.debug("Drawings dir: %s" % drawings_dir)
 
         basename = os.path.splitext(os.path.basename(filepath))[0]
@@ -274,7 +288,9 @@ class _ComponentFileReader(object):
     def _read_pictures(self, filepath):
         logging.debug("Reading pictures...")
 
-        pictures_dir = os.path.abspath(os.path.join(os.path.dirname(filepath), '..', PICTURES_DIR))
+        pictures_dir = os.path.abspath(
+            os.path.join(os.path.dirname(filepath), "..", PICTURES_DIR)
+        )
         logging.debug("Pictures dir: %s" % pictures_dir)
 
         basename = os.path.splitext(os.path.basename(filepath))[0]
@@ -285,15 +301,15 @@ class _ComponentFileReader(object):
         logging.debug("Reading pictures... DONE")
         return pictures
 
-class PartFileReader(_ComponentFileReader):
 
+class PartFileReader(_ComponentFileReader):
     def read(self, filepath, system):
         logging.debug("Reading part %s ..." % filepath)
 
         lines = self._get_lines(filepath)
 
         header = self._read_header(lines)
-        header['system_label'] = system.label
+        header["system_label"] = system.label
 
         part = Part(filepath, **header)
         self._read(part, lines)
@@ -312,8 +328,13 @@ class PartFileReader(_ComponentFileReader):
         details = ascii(lines[6][1].strip())
 
         logging.debug("Reading header ... DONE")
-        return {'name': name, 'pn_base': pn_base, 'revision': revision,
-                'details': details}
+        return {
+            "name": name,
+            "pn_base": pn_base,
+            "revision": revision,
+            "details": details,
+        }
+
 
 class AssemblyFileReader(_ComponentFileReader):
     def read(self, filepath, system):
@@ -322,7 +343,7 @@ class AssemblyFileReader(_ComponentFileReader):
         lines = self._get_lines(filepath)
 
         header = self._read_header(lines)
-        header['system_label'] = system.label
+        header["system_label"] = system.label
 
         assembly = Assembly(filepath, **header)
         self._read(assembly, lines)
@@ -349,8 +370,12 @@ class AssemblyFileReader(_ComponentFileReader):
         details = ascii(lines[5][1].strip())
 
         logging.debug("Reading header ... DONE")
-        return {'name': name, 'pn_base': pn_base, 'revision': revision,
-                'details': details}
+        return {
+            "name": name,
+            "pn_base": pn_base,
+            "revision": revision,
+            "details": details,
+        }
 
     def _read_quantity(self, lines):
         return int(lines[1][7])
@@ -358,7 +383,7 @@ class AssemblyFileReader(_ComponentFileReader):
     def _read_parts(self, lines, assembly, system):
         logging.debug("Reading parts ...")
 
-        firstline_index = self._find_line('Parts', lines) + 2
+        firstline_index = self._find_line("Parts", lines) + 2
         parts = {}
 
         for line in lines[firstline_index:]:
@@ -379,9 +404,9 @@ class AssemblyFileReader(_ComponentFileReader):
         pn = line[0]
         quantity = int(line[3])
 
-        if system.has_component(pn): # component already loaded
+        if system.has_component(pn):  # component already loaded
             component = system.get_component(pn)
-        else: # load component
+        else:  # load component
             filename = pn + ".csv"
             filepath = os.path.join(os.path.dirname(assembly.filepath), filename)
             if not os.path.exists(filepath):
@@ -403,15 +428,15 @@ class AssemblyFileReader(_ComponentFileReader):
 
         return component, quantity
 
-class SystemFileReader(object):
 
+class SystemFileReader(object):
     def read(self, basepath, system):
         system_dir = os.path.join(basepath, system.label)
         self._check_dir_structure(system_dir)
 
         components_dir = os.path.join(system_dir, COMPONENTS_DIR)
 
-        system.clear_components() # reset
+        system.clear_components()  # reset
 
         for file in self._find_components(components_dir, SYS_ASSY_PN):
             AssemblyFileReader().read(file, system)
@@ -441,7 +466,7 @@ class SystemFileReader(object):
             raise ValueError, "Directory 'pictures' is missing from %s" % system_dir
 
     def _check_unread_components(self, basepath, system):
-        filepath_getter = attrgetter('filepath')
+        filepath_getter = attrgetter("filepath")
 
         expected = map(filepath_getter, system._components.values())
         actual = glob.glob(os.path.join(basepath, COMPONENTS_DIR, "*.csv"))
@@ -498,35 +523,36 @@ class SystemFileReader(object):
 
         return components
 
+
 class MetadataReader(object):
     def read(self, basepath):
         filepath = os.path.join(basepath, CONFIG_FILE)
         if not os.path.exists(filepath):
-            raise IOError, 'No configuration file'
+            raise IOError, "No configuration file"
 
         parser = SafeConfigParser()
         parser.read(filepath)
 
-        year = int(parser.get('CostReport', 'year'))
-        car_number = int(parser.get('CostReport', 'carnumber'))
-        university = ascii(parser.get('CostReport', 'university'))
-        team_name = ascii(parser.get('CostReport', 'teamname'))
-        competition_name = ascii(parser.get('CostReport', 'competitionname'))
-        competition_abbrev = ascii(parser.get('CostReport', 'competitionabbrev'))
+        year = int(parser.get("CostReport", "year"))
+        car_number = int(parser.get("CostReport", "carnumber"))
+        university = ascii(parser.get("CostReport", "university"))
+        team_name = ascii(parser.get("CostReport", "teamname"))
+        competition_name = ascii(parser.get("CostReport", "competitionname"))
+        competition_abbrev = ascii(parser.get("CostReport", "competitionabbrev"))
         introduction = self._read_introduction(basepath)
 
         # Systems
-        system_labels = parser.get('CostReport', 'systems')
+        system_labels = parser.get("CostReport", "systems")
         system_labels = COMMA_SPLIT_PATTERN.findall(system_labels)
 
         systems = []
         for label in system_labels:
             if not parser.has_section(label):
-                raise ValueError, 'No section for system: %s' % label
+                raise ValueError, "No section for system: %s" % label
 
-            order = int(parser.get(label, 'order'))
-            name = parser.get(label, 'name')
-            colour = parser.get(label, 'colour')
+            order = int(parser.get(label, "order"))
+            name = parser.get(label, "name")
+            colour = parser.get(label, "colour")
             colour = COMMA_SPLIT_PATTERN.findall(colour)
             colour = map(int, colour)
             colour = tuple(colour)
@@ -534,17 +560,25 @@ class MetadataReader(object):
             system = System(order, label, name, colour)
             systems.append(system)
 
-        systems = sorted(systems) # Sort by letters
+        systems = sorted(systems)  # Sort by letters
 
         sae_parts = self._read_sae_parts(basepath, systems)
 
-        return Metadata(year, car_number, university, team_name,
-                        competition_name, competition_abbrev, introduction,
-                        sae_parts, systems)
+        return Metadata(
+            year,
+            car_number,
+            university,
+            team_name,
+            competition_name,
+            competition_abbrev,
+            introduction,
+            sae_parts,
+            systems,
+        )
 
     def _read_introduction(self, basepath):
         lines = []
-        with open(os.path.join(basepath, INTRODUCTION_FILE), 'r') as f:
+        with open(os.path.join(basepath, INTRODUCTION_FILE), "r") as f:
             for line in f.readlines():
                 lines.append(ascii(line.strip()))
         return lines
@@ -558,14 +592,14 @@ class MetadataReader(object):
         # Check file existence
         filepath = os.path.join(basepath, SAE_PARTS_FILE)
         if not os.path.exists(filepath):
-            raise IOError, 'No SAE common parts file'
+            raise IOError, "No SAE common parts file"
 
         # Look-up table for system labels
-        keys = map(attrgetter('label'), systems)
+        keys = map(attrgetter("label"), systems)
         systems_ref = dict(zip(keys, systems))
 
         # Read file
-        with open(filepath, 'r') as fp:
+        with open(filepath, "r") as fp:
             reader = csv.reader(fp)
 
             for row in reader:
@@ -577,13 +611,15 @@ class MetadataReader(object):
                 component_name = row[1].strip()
                 pn = row[2].strip()
                 if pn:
-                    if not (PART_PN.match(pn) or SYS_ASSY_PN.match(pn) or \
-                            SUB_ASSY_PN.match(pn)):
-                        raise ValueError, 'Part number for %s is invalid' % component_name
+                    if not (
+                        PART_PN.match(pn)
+                        or SYS_ASSY_PN.match(pn)
+                        or SUB_ASSY_PN.match(pn)
+                    ):
+                        raise ValueError, "Part number for %s is invalid" % component_name
                 else:
                     pn = None
 
                 sae_parts[system].append((component_name, pn))
 
         return sae_parts
-

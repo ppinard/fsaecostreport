@@ -26,6 +26,7 @@ __license__ = "GPL v3"
 
 # Globals and constants variables.
 
+
 class System(object):
     """
     The cost report has 8 systems.
@@ -64,7 +65,7 @@ class System(object):
         return self.name
 
     def __repr__(self):
-        return '<System(%s)>' % self.label
+        return "<System(%s)>" % self.label
 
     def __eq__(self, other):
         return self.label == other.label
@@ -126,14 +127,14 @@ class System(object):
         return hierarchy
 
 
-#BR = System("BR", "Brake System", "A", (153, 204, 255))
-#EN = System("EN", "Engine & Drivetrain", "B", (204, 255, 204))
-#FR = System("FR", "Frame & Body", "C", (255, 153, 204))
-#EL = System("EL", "Electronics, Controls & Wiring", "D", (255, 204, 153))
-#MS = System("MS", "Miscellaneous, Fit & Finish", "E", (204, 153, 255))
-#ST = System("ST", "Steering System", "F", (255, 153, 0))
-#SU = System("SU", "Suspension System", "G", (255, 255, 0))
-#WT = System("WT", "Wheels, Wheels Bearings & Tires", "H", (204, 255, 255))
+# BR = System("BR", "Brake System", "A", (153, 204, 255))
+# EN = System("EN", "Engine & Drivetrain", "B", (204, 255, 204))
+# FR = System("FR", "Frame & Body", "C", (255, 153, 204))
+# EL = System("EL", "Electronics, Controls & Wiring", "D", (255, 204, 153))
+# MS = System("MS", "Miscellaneous, Fit & Finish", "E", (204, 153, 255))
+# ST = System("ST", "Steering System", "F", (255, 153, 0))
+# SU = System("SU", "Suspension System", "G", (255, 255, 0))
+# WT = System("WT", "Wheels, Wheels Bearings & Tires", "H", (204, 255, 255))
 #
-#SYSTEMS = {'BR': BR, 'EN': EN, 'FR': FR, 'EL': EL,
+# SYSTEMS = {'BR': BR, 'EN': EN, 'FR': FR, 'EL': EL,
 #           'MS': MS, 'ST': ST, 'SU': SU, 'WT': WT}

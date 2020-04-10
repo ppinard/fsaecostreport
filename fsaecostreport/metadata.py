@@ -26,10 +26,20 @@ __license__ = "GPL v3"
 
 # Globals and constants variables.
 
+
 class Metadata(object):
-    def __init__(self, year, car_number, university, team_name,
-                 competition_name, competition_abbrev, introduction,
-                 sae_parts, systems):
+    def __init__(
+        self,
+        year,
+        car_number,
+        university,
+        team_name,
+        competition_name,
+        competition_abbrev,
+        introduction,
+        sae_parts,
+        systems,
+    ):
         self.year = year
         self.car_number = car_number
         self.university = university
@@ -44,5 +54,11 @@ class Metadata(object):
 
     @property
     def filename(self):
-        return str(self.car_number).zfill(3) + "_" + self.university + "_" + \
-                self.competition_abbrev + "_CR"
+        return (
+            str(self.car_number).zfill(3)
+            + "_"
+            + self.university
+            + "_"
+            + self.competition_abbrev
+            + "_CR"
+        )

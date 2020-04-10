@@ -23,14 +23,14 @@ from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 
 # Globals and constants variables.
 
-class Test(unittest.TestCase):
 
+class Test(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        self.sys_assy = 'TM-A1000-AA'
-        self.sub_assy = 'TM-A0101-AA'
-        self.part = 'TM-00102-BB'
+        self.sys_assy = "TM-A1000-AA"
+        self.sub_assy = "TM-A0101-AA"
+        self.part = "TM-00102-BB"
 
     def tearDown(self):
         unittest.TestCase.tearDown(self)
@@ -53,6 +53,7 @@ class Test(unittest.TestCase):
         self.assertFalse(SUB_ASSY_PN.match(self.part))
         self.assertTrue(PART_PN.match(self.part))
 
-if __name__ == '__main__': #pragma: no cover
+
+if __name__ == "__main__":  # pragma: no cover
     logging.getLogger().setLevel(logging.DEBUG)
     unittest.main()

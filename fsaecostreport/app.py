@@ -28,39 +28,73 @@ from operator import attrgetter
 # Local modules.
 from fsaecostreport.xlscsv import xlstocsv
 from fsaecostreport.reader import SystemFileReader, MetadataReader
-from fsaecostreport.writer import \
-    CostReportLaTeXWriter, eBOMWriter, FSGBOMWriter, FSGAppendixLaTeXWriter
+from fsaecostreport.writer import (
+    CostReportLaTeXWriter,
+    eBOMWriter,
+    FSGBOMWriter,
+    FSGAppendixLaTeXWriter,
+)
 
 # Globals and constants variables.
 
 logging.getLogger().setLevel(logging.DEBUG)
 
+
 def run():
     parser = OptionParser()
 
-    parser.add_option('-b', '--basepath', action="store",
-                      dest='basepath', default=os.curdir,
-                      help="Base path of the cost report (i.e. folder containing the systems) [default=current directory]")
+    parser.add_option(
+        "-b",
+        "--basepath",
+        action="store",
+        dest="basepath",
+        default=os.curdir,
+        help="Base path of the cost report (i.e. folder containing the systems) [default=current directory]",
+    )
 
-    parser.add_option('-x', '--xlsx2csv', action="store_true",
-                      dest='xlsx2csv', default=False,
-                      help="Convert the Excel spreadsheets in CSV files")
+    parser.add_option(
+        "-x",
+        "--xlsx2csv",
+        action="store_true",
+        dest="xlsx2csv",
+        default=False,
+        help="Convert the Excel spreadsheets in CSV files",
+    )
 
-    parser.add_option('-r', '--read', action="store_true",
-                      dest='read', default=False,
-                      help="Read the CSVs, drawings and pictures and check for errors")
+    parser.add_option(
+        "-r",
+        "--read",
+        action="store_true",
+        dest="read",
+        default=False,
+        help="Read the CSVs, drawings and pictures and check for errors",
+    )
 
-    parser.add_option('-w', '--write', action="store_true",
-                      dest='write', default=False,
-                      help="Read, process and write the cost report")
+    parser.add_option(
+        "-w",
+        "--write",
+        action="store_true",
+        dest="write",
+        default=False,
+        help="Read, process and write the cost report",
+    )
 
-    parser.add_option('-e', '--ebom', action="store_true",
-                      dest='ebom', default=False,
-                      help="Read, process and write the eBOM")
+    parser.add_option(
+        "-e",
+        "--ebom",
+        action="store_true",
+        dest="ebom",
+        default=False,
+        help="Read, process and write the eBOM",
+    )
 
-    parser.add_option('--fsg', action="store_true",
-                      dest='fsg', default=False,
-                      help="Read, process and write FSG related documents")
+    parser.add_option(
+        "--fsg",
+        action="store_true",
+        dest="fsg",
+        default=False,
+        help="Read, process and write FSG related documents",
+    )
 
     options, args = parser.parse_args()
 
@@ -75,7 +109,7 @@ def run():
 
     # systems
     values = metadata.systems
-    keys = map(attrgetter('label'), values)
+    keys = map(attrgetter("label"), values)
     available_systems = dict(zip(keys, values))
 
     systems = []
@@ -85,20 +119,23 @@ def run():
                 systems.append(available_systems[arg])
             except KeyError:
                 parser.error("Unknown system: %s" % arg)
-                parser.error("Possible systems: %s" % ','.join(available_systems.keys()))
+                parser.error(
+                    "Possible systems: %s" % ",".join(available_systems.keys())
+                )
     else:
         systems = available_systems.values()
-    logging.info("Looking through system(s): %s",
-                 ', '.join(map(attrgetter('label'), systems)))
+    logging.info(
+        "Looking through system(s): %s", ", ".join(map(attrgetter("label"), systems))
+    )
 
     metadata.systems = sorted(systems)
 
     if options.xlsx2csv:
         for system in metadata.systems:
             dir = os.path.join(basepath, system.label)
-            output_dir = os.path.join(dir, 'components')
+            output_dir = os.path.join(dir, "components")
 
-            for input_file in glob.glob(os.path.join(dir, '*.xls*')):
+            for input_file in glob.glob(os.path.join(dir, "*.xls*")):
                 logging.info("Converting %s..." % input_file)
                 xlstocsv(input_file, output_dir)
                 logging.info("Converting %s... DONE" % input_file)
@@ -129,5 +166,6 @@ def run():
         FSGAppendixLaTeXWriter().write(basepath, metadata)
         logging.info("Writing FSG... DONE")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run()

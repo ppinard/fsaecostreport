@@ -32,8 +32,8 @@ import xlrd
 
 # Globals and constants variables.
 
-class Comparator(object):
 
+class Comparator(object):
     def __init__(self, filepath1, filepath2, outfilepath):
         self._rows1 = self._read(filepath1)
         self._rows2 = self._read(filepath2)
@@ -42,17 +42,17 @@ class Comparator(object):
     def _read(self, filepath):
         ext = os.path.splitext(filepath)[1]
 
-        if ext == '.csv':
+        if ext == ".csv":
             return self._read_csv(filepath)
-        elif ext == '.xls':
+        elif ext == ".xls":
             return self._read_xls(filepath)
         else:
-            raise ValueError, 'Unknown extension: %s' % ext
+            raise ValueError, "Unknown extension: %s" % ext
 
     def _read_csv(self, filepath):
         logging.debug("Reading %s", filepath)
 
-        with open(filepath, 'r') as fp:
+        with open(filepath, "r") as fp:
             reader = csv.reader(fp)
             rows = list(reader)
 
@@ -72,7 +72,10 @@ class Comparator(object):
                 try:
                     row.append(str(sheet.cell(irow, icol).value))
                 except UnicodeEncodeError:
-                    raise ValueError, 'UnicodeEncodeError at row %i col %i' % (irow, icol)
+                    raise ValueError, "UnicodeEncodeError at row %i col %i" % (
+                        irow,
+                        icol,
+                    )
 
             rows.append(row)
 
@@ -89,30 +92,40 @@ class Comparator(object):
                 id = self._rows1[irow1][0]
             except:
                 print 'No matching row for "%s"' % row2[1]
-                id = ''
+                id = ""
 
             rows.append([id, row2[1]])
 
-        with open(self._outfilepath, 'w') as fp:
+        with open(self._outfilepath, "w") as fp:
             writer = csv.writer(fp)
             writer.writerows(rows)
+
+
 #
 def run():
-    desc = 'Compare two different cost tables'
+    desc = "Compare two different cost tables"
     parser = ArgumentParser(description=desc)
 
-    parser.add_argument('oldfilepath', metavar='OLD_FILEPATH',
-                        help='Location of old cost table')
-    parser.add_argument('newfilepath', metavar='NEW_FILEPATH',
-                        help='Location of new cost table')
-    parser.add_argument('-o', dest='outfilepath', required=True,
-                        metavar='OUT_FILEPATH', help='Output file')
+    parser.add_argument(
+        "oldfilepath", metavar="OLD_FILEPATH", help="Location of old cost table"
+    )
+    parser.add_argument(
+        "newfilepath", metavar="NEW_FILEPATH", help="Location of new cost table"
+    )
+    parser.add_argument(
+        "-o",
+        dest="outfilepath",
+        required=True,
+        metavar="OUT_FILEPATH",
+        help="Output file",
+    )
 
     args = parser.parse_args()
 
     comparator = Comparator(args.oldfilepath, args.newfilepath, args.outfilepath)
     comparator.compare()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG)
     run()

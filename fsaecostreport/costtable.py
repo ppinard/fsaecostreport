@@ -26,6 +26,7 @@ __license__ = "GPL v3"
 
 # Globals and constants variables.
 
+
 class _CostTableItem(object):
     def __init__(self, id, name, use, unitcost, quantity):
         self.id = id
@@ -41,6 +42,7 @@ class _CostTableItem(object):
     def subtotal(self):
         return self.quantity * self.unitcost
 
+
 class Material(_CostTableItem):
     def __init__(self, id, name, use, unitcost, size1, unit1, size2, unit2, quantity):
         _CostTableItem.__init__(self, id, name, use, unitcost, quantity)
@@ -50,9 +52,11 @@ class Material(_CostTableItem):
         self.size2 = size2
         self.unit2 = unit2
 
+
 class Process(_CostTableItem):
-    def __init__(self, id, name, use, unitcost, unit, quantity,
-                 multiplier_id, multiplier):
+    def __init__(
+        self, id, name, use, unitcost, unit, quantity, multiplier_id, multiplier
+    ):
         _CostTableItem.__init__(self, id, name, use, unitcost, quantity)
 
         self.unit = unit
@@ -66,6 +70,7 @@ class Process(_CostTableItem):
         else:
             return self.quantity * self.unitcost
 
+
 class Fastener(_CostTableItem):
     def __init__(self, id, name, use, unitcost, size1, unit1, size2, unit2, quantity):
         _CostTableItem.__init__(self, id, name, use, unitcost, quantity)
@@ -74,6 +79,7 @@ class Fastener(_CostTableItem):
         self.unit1 = unit1
         self.size2 = size2
         self.unit2 = unit2
+
 
 class Tooling(_CostTableItem):
     def __init__(self, id, name, use, unitcost, unit, quantity, pvf):
