@@ -9,7 +9,7 @@ import os.path
 import logging
 import glob
 import re
-from ConfigParser import SafeConfigParser
+from configparser import ConfigParser
 import unicodedata
 from operator import attrgetter, itemgetter
 
@@ -40,7 +40,7 @@ def ascii(unistr):
     Convert unicode to ascii.
     """
     try:
-        if isinstance(unistr, unicode):
+        if isinstance(unistr, str):
             ascii_chrs = []
 
             for char in unistr:
@@ -61,7 +61,7 @@ def ascii(unistr):
         else:
             return unistr
     except Exception as ex:
-        raise "Reading %s: %s" % (unistr, str(ex))
+        raise Exception("Reading %s: %s" % (unistr, str(ex)))
 
 
 class _ComponentFileReader(object):
@@ -84,18 +84,18 @@ class _ComponentFileReader(object):
 
     def _find_line(self, lookup, lines):
         firstcol_getter = itemgetter(0)
-        firstcol = map(firstcol_getter, lines)
+        firstcol = list(map(firstcol_getter, lines))
 
         return firstcol.index(lookup)
 
     def _assert_equal(self, a, b, context="", places=4):
         if round(abs(b - a), places) != 0:
-            raise AssertionError, context + ": %s != %s" % (a, b)
+            raise AssertionError(context + ": %s != %s" % (a, b))
 
     def _check_filename(self, filepath, pn):
         filename = os.path.splitext(os.path.basename(filepath))[0]
         if filename != pn:
-            raise AssertionError, "filename (%s) != part number (%s)" % (filename, pn)
+            raise AssertionError("filename (%s) != part number (%s)" % (filename, pn))
 
     def _read_materials(self, lines):
         logging.debug("Reading materials ...")
@@ -378,7 +378,7 @@ class AssemblyFileReader(_ComponentFileReader):
             component, quantity = self._read_part(line, assembly, system)
 
             if component in parts:
-                raise ValueError, "Duplicate of component (%s)" % component
+                raise ValueError("Duplicate of component (%s)" % component)
 
             parts[component] = quantity
 
@@ -395,14 +395,14 @@ class AssemblyFileReader(_ComponentFileReader):
             filename = pn + ".csv"
             filepath = os.path.join(os.path.dirname(assembly.filepath), filename)
             if not os.path.exists(filepath):
-                raise ValueError, "Missing component (%s)" % pn
+                raise ValueError("Missing component (%s)" % pn)
 
             if PART_PN.match(pn):
                 component = PartFileReader().read(filepath, system)
             elif SUB_ASSY_PN.match(pn):
                 component = AssemblyFileReader().read(filepath, system)
             else:
-                raise ValueError, "Unknown type of P/N (%s)" % pn
+                raise ValueError("Unknown type of P/N (%s)" % pn)
 
         component.parents.add(assembly)
 
@@ -442,13 +442,13 @@ class SystemFileReader(object):
         ls = os.listdir(system_dir)
 
         if not COMPONENTS_DIR in ls:
-            raise ValueError, "Directory 'components' is missing from %s" % system_dir
+            raise ValueError("Directory 'components' is missing from %s" % system_dir)
 
         if not DRAWINGS_DIR in ls:
-            raise ValueError, "Directory 'drawings' is missing from %s" % system_dir
+            raise ValueError("Directory 'drawings' is missing from %s" % system_dir)
 
         if not PICTURES_DIR in ls:
-            raise ValueError, "Directory 'pictures' is missing from %s" % system_dir
+            raise ValueError("Directory 'pictures' is missing from %s" % system_dir)
 
     def _check_unread_components(self, basepath, system):
         filepath_getter = attrgetter("filepath")
@@ -463,7 +463,7 @@ class SystemFileReader(object):
             for filepath in diff:
                 msg += "  - %s\n" % filepath
 
-            raise ValueError, msg
+            raise ValueError(msg)
 
     def _check_unread_drawings(self, basepath, system):
         expected = []
@@ -479,7 +479,7 @@ class SystemFileReader(object):
             for filepath in diff:
                 msg += "  - %s\n" % filepath
 
-            raise ValueError, msg
+            raise ValueError(msg)
 
     def _check_unread_pictures(self, basepath, system):
         expected = []
@@ -495,7 +495,7 @@ class SystemFileReader(object):
             for filepath in diff:
                 msg += "  - %s\n" % filepath
 
-            raise ValueError, msg
+            raise ValueError(msg)
 
     def _find_components(self, components_dir, pattern):
         components = []
@@ -513,9 +513,9 @@ class MetadataReader(object):
     def read(self, basepath):
         filepath = os.path.join(basepath, CONFIG_FILE)
         if not os.path.exists(filepath):
-            raise IOError, "No configuration file"
+            raise IOError("No configuration file")
 
-        parser = SafeConfigParser()
+        parser = ConfigParser()
         parser.read(filepath)
 
         year = int(parser.get("CostReport", "year"))
@@ -533,7 +533,7 @@ class MetadataReader(object):
         systems = []
         for label in system_labels:
             if not parser.has_section(label):
-                raise ValueError, "No section for system: %s" % label
+                raise ValueError("No section for system: %s" % label)
 
             order = int(parser.get(label, "order"))
             name = parser.get(label, "name")
@@ -577,7 +577,7 @@ class MetadataReader(object):
         # Check file existence
         filepath = os.path.join(basepath, SAE_PARTS_FILE)
         if not os.path.exists(filepath):
-            raise IOError, "No SAE common parts file"
+            raise IOError("No SAE common parts file")
 
         # Look-up table for system labels
         keys = map(attrgetter("label"), systems)
@@ -601,7 +601,9 @@ class MetadataReader(object):
                         or SYS_ASSY_PN.match(pn)
                         or SUB_ASSY_PN.match(pn)
                     ):
-                        raise ValueError, "Part number for %s is invalid" % component_name
+                        raise ValueError(
+                            "Part number for %s is invalid" % component_name
+                        )
                 else:
                     pn = None
 

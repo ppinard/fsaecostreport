@@ -4,6 +4,7 @@ System object for each system of the cost report
 """
 
 # Standard library modules.
+import functools
 
 # Third party modules.
 
@@ -12,6 +13,7 @@ System object for each system of the cost report
 # Globals and constants variables.
 
 
+@functools.total_ordering
 class System(object):
     """
     The cost report has 8 systems.
@@ -36,7 +38,7 @@ class System(object):
         self._order = order
 
         if len(label) != 2:
-            raise ValueError, "The label (%s) must be two characters." % label
+            raise ValueError("The label (%s) must be two characters." % label)
         self._label = label.upper()
 
         self._name = name
@@ -55,14 +57,11 @@ class System(object):
     def __eq__(self, other):
         return self.label == other.label
 
-    def __ne__(self, other):
-        return not self.label == other.label
-
     def __hash__(self):
         return hash(self.label)
 
-    def __cmp__(self, other):
-        return cmp(self._order, other._order)
+    def __lt__(self, other):
+        return self._order < other._order
 
     @property
     def label(self):
@@ -82,7 +81,7 @@ class System(object):
         Raises :class:`ValueError` if the component already exists in the system.
         """
         if component.pn in self._components:
-            raise ValueError, "Component (%s) is already in the system." % component
+            raise ValueError("Component (%s) is already in the system." % component)
         self._components[component.pn] = component
 
     def has_component(self, pn):

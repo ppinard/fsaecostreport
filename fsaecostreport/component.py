@@ -5,6 +5,7 @@ Main objects of the systems: Part and Assembly
 
 # Standard library modules.
 import operator
+import functools
 
 # Third party modules.
 
@@ -14,6 +15,7 @@ from fsaecostreport.pattern import SYS_ASSY_PN, SUB_ASSY_PN, PART_PN
 # Globals and constants variables.
 
 
+@functools.total_ordering
 class _Component(object):
     """
     Abstract class for parts and assemblies.
@@ -79,7 +81,7 @@ class _Component(object):
 
         # check
         if not self._validate_pn():
-            raise ValueError, "Incorrect P/N (%s)" % self.pn
+            raise ValueError("Incorrect P/N (%s)" % self.pn)
 
     def __str__(self):
         return self.name
@@ -90,47 +92,42 @@ class _Component(object):
     def __eq__(self, other):
         return self.pn == other.pn
 
-    def __ne__(self, other):
-        return not self.pn == other.pn
-
-    def __cmp__(self, other):
+    def __lt__(self, other):
         # system label
-        c = -1 * cmp(self._system_label, other._system_label)
-        if c != 0:
-            return c
+        if self._system_label != other._system_label:
+            return self._system_label > other._system_label
 
         # assembly or part number
         if self.pn_base[0] != other.pn_base[0]:
             if self.pn_base[0] == "A":
-                return 1
+                return False
             else:
-                return -1
+                return True
 
         # designation
         if self.pn_base[1] != other.pn_base[1]:
             if self.pn_base[1] == "0":
-                return -1
+                return True
             elif other.pn_base[2] == "0":
-                return 1
+                return False
             else:
-                return -1 * cmp(self.pn_base[1], other.pn_base[1])
+                return self.pn_base[1] > other.pn_base[1]
 
         # category
         if self.pn_base[2] != other.pn_base[2]:
             if self.pn_base[2] == "0":
-                return -1
+                return True
             elif other.pn_base[2] == "0":
-                return 1
+                return False
             else:
-                return -1 * cmp(self.pn_base[2], other.pn_base[2])
+                return self.pn_base[2] > other.pn_base[2]
 
         # counter
-        c = cmp(int(self.pn_base[3:5]), int(other.pn_base[3:5]))
-        if c != 0:
-            return -1 * c
+        if int(self.pn_base[3:5]) != int(other.pn_base[3:5]):
+            return int(self.pn_base[3:5]) > int(other.pn_base[3:5])
 
         # revision
-        return cmp(self.revision, other.revision)
+        return self.revision < other.revision
 
     def __hash__(self):
         return hash(self.partnumber)
@@ -170,7 +167,7 @@ class _Component(object):
         """
         cost = self.tablecost
 
-        for component, quantity in self.components.iteritems():
+        for component, quantity in self.components.items():
             cost += component.unitcost * quantity
 
         return cost

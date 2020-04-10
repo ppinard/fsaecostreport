@@ -173,7 +173,7 @@ class TestAssemblyReader(unittest.TestCase):
     def testcomponents(self):
         self.assertEqual(1, len(self.assy.components))
 
-        component = self.assy.components.keys()[0]
+        component = list(self.assy.components.keys())[0]
         self.assertEqual("Cup holder", component.name)
         self.assertEqual("00001", component.pn_base)
         self.assertEqual("AA", component.revision)
@@ -181,7 +181,7 @@ class TestAssemblyReader(unittest.TestCase):
         self.assertEqual("TM-00001-AA", component.partnumber)
         self.assertEqual("TM-00001-AA", component.pn)
 
-        quantity = self.assy.components.values()[0]
+        quantity = list(self.assy.components.values())[0]
         self.assertEqual(2, quantity)
 
     def testmaterials(self):
@@ -288,8 +288,8 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual("TM-A1000-AA", assy1.partnumber)
         self.assertEqual("TM-A1000-AA", assy1.pn)
         self.assertEqual(1, len(assy1.components))
-        self.assertEqual(assy2, assy1.components.keys()[0])
-        self.assertEqual(2, assy1.components.values()[0])
+        self.assertEqual(assy2, list(assy1.components.keys())[0])
+        self.assertEqual(2, list(assy1.components.values())[0])
         self.assertEqual(1, assy1.quantity)
         self.assertEqual(0, len(assy1.parents))
         self.assertEqual(1, assy1.quantity)
@@ -301,8 +301,8 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual("TM-A0001-AA", assy2.partnumber)
         self.assertEqual("TM-A0001-AA", assy2.pn)
         self.assertEqual(1, len(assy2.components))
-        self.assertEqual(part, assy2.components.keys()[0])
-        self.assertEqual(2, assy2.components.values()[0])
+        self.assertEqual(part, list(assy2.components.keys())[0])
+        self.assertEqual(2, list(assy2.components.values())[0])
         self.assertEqual(1, len(assy2.parents))
         self.assertEqual(assy1, list(assy2.parents)[0])
         self.assertEqual(2, assy2.quantity)
@@ -314,8 +314,8 @@ class TestSystemReader(unittest.TestCase):
         self.assertEqual("TM-A0002-AA", assy3.partnumber)
         self.assertEqual("TM-A0002-AA", assy3.pn)
         self.assertEqual(1, len(assy3.components))
-        self.assertEqual(part, assy3.components.keys()[0])
-        self.assertEqual(3, assy3.components.values()[0])
+        self.assertEqual(part, list(assy3.components.keys())[0])
+        self.assertEqual(3, list(assy3.components.values())[0])
         self.assertEqual(1, assy3.quantity)
         self.assertEqual(0, len(assy3.parents))
         self.assertEqual(1, assy3.quantity)
