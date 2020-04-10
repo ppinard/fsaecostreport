@@ -11,6 +11,6 @@ import re
 
 # Globals and constants variables.
 
-PART_PN = re.compile("([A-Z][A-Z])\-(00\d\d\d)\-([A-Z][A-Z])")
-SUB_ASSY_PN = re.compile("([A-Z][A-Z])\-(A0\d\d\d)\-([A-Z][A-Z])")
-SYS_ASSY_PN = re.compile("([A-Z][A-Z])\-(A\d000)\-([A-Z][A-Z])")
+PART_PN = re.compile(r"([A-Z][A-Z])\-(00\d\d\d)\-([A-Z][A-Z])")
+SUB_ASSY_PN = re.compile(r"([A-Z][A-Z])\-(A0\d\d\d)\-([A-Z][A-Z])")
+SYS_ASSY_PN = re.compile(r"([A-Z][A-Z])\-(A\d000)\-([A-Z][A-Z])")
