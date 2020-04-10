@@ -1,45 +1,62 @@
 #!/usr/bin/env python
 
-# Script information for the file.
-__author__ = "Philippe T. Pinard"
-__email__ = "philippe.pinard@gmail.com"
-__version__ = "0.1"
-__copyright__ = "Copyright (c) 2013 Philippe T. Pinard"
-__license__ = "GPL v3"
-
 # Standard library modules.
+from pathlib import Path
 
 # Third party modules.
-from cx_Freeze import setup, Executable
-import matplotlib
+from setuptools import setup, find_packages
 
 # Local modules.
+import versioneer
 
 # Globals and constants variables.
+BASEDIR = Path(__file__).parent.resolve()
 
-# Dependencies are automatically detected, but it might need fine tuning.
-build_exe_options = {"excludes": ["Tkinter", "wx", "scipy", 'PIL'],
-                     "includes": ['encodings.ascii']}
+with open(BASEDIR.joinpath('README.md'), 'r') as fp:
+    LONG_DESCRIPTION = fp.read()
 
-setup(name="fsaecostreport",
-      version="0.5.2",
-      url='http://fsae.mcgill.ca',
-      description="Generator of the FSAE Cost Report",
-      author="Philippe T. Pinard",
-      author_email="philippe.pinard@gmail.com",
-      license="Private",
-      classifiers=['Development Status :: 5 - Production/Stable',
-                   'Environment :: Console',
-                   'Intended Audience :: Education',
-                   'License :: Other/Proprietary License',
-                   'Natural Language :: English',
-                   'Operating System :: OS Independent',
-                   'Programming Language :: Python'],
+PACKAGES = find_packages()
 
-      packages=['fsaecostreport'],
-      package_dir={'fsaecostreport': 'src/fsaecostreport'},
+with open(BASEDIR.joinpath('requirements.txt'), 'r') as fp:
+    INSTALL_REQUIRES = fp.read().splitlines()
 
-      options={"build_exe": build_exe_options},
-      executables=[Executable("src/fsaecostreport/app.py")]
+EXTRAS_REQUIRE = {}
+with open(BASEDIR.joinpath('requirements-dev.txt'), 'r') as fp:
+    EXTRAS_REQUIRE['dev'] = fp.read().splitlines()
+with open(BASEDIR.joinpath('requirements-test.txt'), 'r') as fp:
+    EXTRAS_REQUIRE['test'] = fp.read().splitlines()
+
+CMDCLASS = versioneer.get_cmdclass()
+
+ENTRY_POINTS = {}
+
+setup(
+    name='fsaecostreport',
+    version=versioneer.get_version(),
+    url='https://github.com/ppinard/fsaecostreport',
+    author="Philippe Pinard",
+    author_email='philippe.pinard@gmail.com',
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7',
+    ],
+    description="Generator of the FSAE Cost Report",
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
+    license="MIT license",
+
+    packages=PACKAGES,
+    include_package_data=True,
+
+    install_requires=INSTALL_REQUIRES,
+    extras_require=EXTRAS_REQUIRE,
+
+    cmdclass=CMDCLASS,
+
+    entry_points=ENTRY_POINTS,
 )
 

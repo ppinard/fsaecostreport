@@ -1,0 +1,4 @@
+include versioneer.py
+include fsaecostreport/_version.py
+recursive-include tests *.py
+include fsaecostreport/_version.py

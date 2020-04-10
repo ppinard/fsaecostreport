@@ -1,6 +1,0 @@
-syntax: glob
-
-src/fsaecostreport/testdata/*.tex
-src/fsaecostreport/testdata/*.out
-build/
-dist/
