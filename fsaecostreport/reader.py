@@ -1,22 +1,7 @@
 #!/usr/bin/env python
 """
-================================================================================
-:mod:`reader` -- File readers for systems, parts, assemblies and metadata
-================================================================================
-
-.. module:: reader
-   :synopsis: File readers for systems, parts, assemblies and metadata
-
-.. inheritance-diagram:: fsaecostreport.reader
-
+File readers for systems, parts, assemblies and metadata
 """
-
-# Script information for the file.
-__author__ = "Philippe T. Pinard"
-__email__ = "philippe.pinard@gmail.com"
-__version__ = "0.1"
-__copyright__ = "Copyright (c) 2011 Philippe T. Pinard"
-__license__ = "GPL v3"
 
 # Standard library modules.
 import csv

@@ -1,20 +1,7 @@
 #!/usr/bin/env python
 """
-================================================================================
-:mod:`latex` -- Utilities used to create LaTeX output
-================================================================================
-
-.. module:: latex
-   :synopsis: Utilities used to create LaTeX output
-
+Utilities used to create LaTeX output
 """
-
-# Script information for the file.
-__author__ = "Philippe T. Pinard"
-__email__ = "philippe.pinard@gmail.com"
-__version__ = "0.1"
-__copyright__ = "Copyright (c) 2011 Philippe T. Pinard"
-__license__ = "GPL v3"
 
 # Standard library modules.
 import os

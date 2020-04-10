@@ -1,22 +1,7 @@
 #!/usr/bin/env python
 """
-================================================================================
-:mod:`costtable` -- Items in the cost tables: material, process, etc.
-================================================================================
-
-.. module:: costtable
-   :synopsis: Items in the cost tables: material, process, etc.
-
-.. inheritance-diagram:: fsaecostreport.costtable
-
+Items in the cost tables: material, process, etc.
 """
-
-# Script information for the file.
-__author__ = "Philippe T. Pinard"
-__email__ = "philippe.pinard@gmail.com"
-__version__ = "0.1"
-__copyright__ = "Copyright (c) 2011 Philippe T. Pinard"
-__license__ = "GPL v3"
 
 # Standard library modules.
 

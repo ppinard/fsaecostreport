@@ -1,20 +1,7 @@
 #!/usr/bin/env python
 """
-================================================================================
-:mod:`xlscsv` -- Converter of XLS/XLSX files to CSV files
-================================================================================
-
-.. module:: xlscsv
-   :synopsis: Converter of XLS/XLSX files to CSV files
-
+Converter of XLS/XLSX files to CSV files
 """
-
-# Script information for the file.
-__author__ = "Philippe T. Pinard"
-__email__ = "philippe.pinard@gmail.com"
-__version__ = "0.1"
-__copyright__ = "Copyright (c) 2011 Philippe T. Pinard"
-__license__ = "GPL v3"
 
 # Standard library modules.
 import re
